@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopNest - Demo E-Commerce Store</title>
+<style>
+:root{--brand:#f97316;--brand-dark:#ea6b0e;--ink:#111827;--muted:#6b7280;--bg:#f3f4f6;--surface:#fff;--border:#e5e7eb;--success:#16a34a;--danger:#dc2626;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);}
+.qa-banner{background:#7c2d12;color:#fff;text-align:center;padding:6px;font-size:11px;font-weight:800;letter-spacing:.06em;position:sticky;top:0;z-index:1000;}
+/* Header */
+.site-header{background:var(--ink);position:sticky;top:26px;z-index:900;}
+.header-top{display:flex;align-items:center;padding:0 24px;height:64px;gap:16px;max-width:1400px;margin:0 auto;}
+.logo{font-size:22px;font-weight:800;color:#fff;cursor:pointer;letter-spacing:-.5px;}
+.logo span{color:var(--brand);}
+.search-wrap{flex:1;max-width:500px;position:relative;}
+.search-wrap input{width:100%;padding:10px 16px;border:none;border-radius:8px;font-size:14px;outline:none;}
+.search-wrap button{position:absolute;right:0;top:0;bottom:0;padding:0 16px;background:var(--brand);border:none;border-radius:0 8px 8px 0;color:#fff;cursor:pointer;font-size:14px;}
+.header-icons{margin-left:auto;display:flex;gap:16px;align-items:center;}
+.header-icon{color:#fff;cursor:pointer;font-size:20px;position:relative;text-decoration:none;}
+.cart-badge{position:absolute;top:-8px;right:-8px;background:var(--brand);color:#fff;font-size:10px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.header-nav{background:#1f2937;border-top:1px solid #374151;}
+.nav-inner{max-width:1400px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:44px;gap:0;}
+.nav-inner a{padding:0 16px;color:#d1d5db;font-size:13px;font-weight:500;height:44px;display:flex;align-items:center;text-decoration:none;cursor:pointer;position:relative;}
+.nav-inner a:hover,.nav-inner a.active{color:var(--brand);}
+.dropdown{position:relative;}
+.dropdown-menu{display:none;position:absolute;top:100%;left:0;background:var(--surface);border:1px solid var(--border);border-radius:0 0 8px 8px;min-width:200px;box-shadow:0 8px 20px rgba(0,0,0,.15);z-index:999;}
+.dropdown:hover .dropdown-menu{display:block;}
+.dropdown-menu a{display:block;padding:10px 16px;font-size:13px;color:var(--ink);text-decoration:none;}
+.dropdown-menu a:hover{background:var(--bg);color:var(--brand);}
+/* Layout */
+.page-section{display:none;max-width:1400px;margin:0 auto;padding:24px;}
+.page-section.active{display:block;}
+/* Product grid */
+.filter-row{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap;}
+.filter-select{padding:8px 12px;border:1px solid var(--border);border-radius:6px;background:var(--surface);font-size:13px;cursor:pointer;outline:none;}
+.results-count{color:var(--muted);font-size:13px;margin-left:auto;}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;}
+.product-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:box-shadow .15s;cursor:pointer;}
+.product-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.1);}
+.product-image{height:200px;display:flex;align-items:center;justify-content:center;font-size:64px;background:linear-gradient(135deg,#fff7ed,#fef3c7);}
+.product-info{padding:14px;}
+.product-brand{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
+.product-name{font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.3;}
+.product-rating{display:flex;gap:4px;align-items:center;margin-bottom:8px;}
+.stars{color:#f59e0b;font-size:13px;}
+.rating-count{font-size:12px;color:var(--muted);}
+.product-price{font-size:20px;font-weight:800;color:var(--brand);}
+.product-old-price{font-size:13px;color:var(--muted);text-decoration:line-through;margin-left:6px;}
+.product-actions{padding:12px 14px;border-top:1px solid var(--border);display:flex;gap:8px;}
+/* Buttons */
+.btn{padding:9px 18px;border-radius:7px;border:none;cursor:pointer;font-size:13px;font-weight:600;transition:.15s;font-family:inherit;}
+.btn-brand{background:var(--brand);color:#fff;}
+.btn-brand:hover{background:var(--brand-dark);}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--ink);}
+.btn-outline:hover{border-color:var(--brand);color:var(--brand);}
+.btn-sm{padding:6px 12px;font-size:12px;}
+/* Product detail */
+.product-detail-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:40px;}
+.product-detail-image{border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#fff7ed,#fef3c7);height:400px;display:flex;align-items:center;justify-content:center;font-size:120px;}
+.product-detail-info{}
+.detail-brand{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;}
+.detail-title{font-size:28px;font-weight:800;margin-bottom:12px;line-height:1.2;}
+.detail-rating{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
+.detail-price{font-size:36px;font-weight:800;color:var(--brand);margin-bottom:4px;}
+.detail-old{font-size:16px;color:var(--muted);text-decoration:line-through;margin-bottom:16px;}
+.detail-desc{font-size:15px;line-height:1.7;color:#374151;margin-bottom:20px;}
+.option-label{font-size:13px;font-weight:600;margin-bottom:8px;}
+.option-row{display:flex;gap:8px;margin-bottom:16px;}
+.option-btn{padding:6px 14px;border:2px solid var(--border);border-radius:6px;cursor:pointer;font-size:13px;background:var(--surface);}
+.option-btn.selected{border-color:var(--brand);background:#fff7ed;}
+.qty-control{display:flex;align-items:center;gap:0;margin-bottom:20px;}
+.qty-btn{width:36px;height:36px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.qty-input{width:48px;height:36px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);border-left:none;border-right:none;text-align:center;font-size:14px;font-weight:600;}
+.action-row{display:flex;gap:12px;}
+/* Cart */
+.cart-layout{display:grid;grid-template-columns:1fr 340px;gap:28px;}
+.cart-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;gap:16px;margin-bottom:12px;}
+.cart-item-img{width:80px;height:80px;background:linear-gradient(135deg,#fff7ed,#fef3c7);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-size:15px;font-weight:700;margin-bottom:4px;}
+.cart-item-meta{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.cart-item-price{font-size:16px;font-weight:700;color:var(--brand);}
+.cart-item-remove{color:var(--danger);font-size:12px;cursor:pointer;text-decoration:none;border:none;background:none;font-family:inherit;}
+.cart-item-remove:hover{text-decoration:underline;}
+.order-summary{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;height:fit-content;}
+.summary-title{font-size:16px;font-weight:700;margin-bottom:16px;}
+.summary-row{display:flex;justify-content:space-between;margin-bottom:10px;font-size:14px;}
+.summary-row.total{font-size:16px;font-weight:700;border-top:1px solid var(--border);padding-top:10px;margin-top:4px;}
+.promo-input{display:flex;gap:8px;margin-bottom:16px;}
+.promo-input input{flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;outline:none;}
+/* Form styles */
+.form-group{margin-bottom:14px;}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;}
+.form-input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:7px;font-size:14px;outline:none;font-family:inherit;}
+.form-input:focus{border-color:var(--brand);box-shadow:0 0 0 2px rgba(249,115,22,.1);}
+.form-input.error{border-color:var(--danger);}
+.error-msg{font-size:11px;color:var(--danger);margin-top:3px;display:none;}
+.error-msg.show{display:block;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.alert{padding:12px 16px;border-radius:8px;margin:12px 0;font-size:14px;display:none;}
+.alert.show{display:block;}
+.alert-success{background:#dcfce7;color:#16a34a;border:1px solid #bbf7d0;}
+.alert-danger{background:#fee2e2;color:#dc2626;border:1px solid #fecaca;}
+/* Forum - accordion style for ecommerce */
+.support-category{margin-bottom:16px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.support-cat-header{background:var(--surface);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-weight:700;}
+.support-cat-header:hover{background:#f9fafb;}
+.support-cat-body{display:none;border-top:1px solid var(--border);}
+.support-cat-body.open{display:block;}
+.support-thread{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;}
+.support-thread:hover{background:#f9fafb;}
+.support-thread:last-child{border-bottom:none;}
+.support-thread-icon{font-size:20px;}
+.support-thread-meta{flex:1;}
+.support-thread-title{font-size:14px;font-weight:600;}
+.support-thread-sub{font-size:12px;color:var(--muted);}
+.support-thread-badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:600;}
+.badge-open{background:#fef3c7;color:#d97706;}
+.badge-solved{background:#dcfce7;color:#16a34a;}
+.support-reply{padding:20px;border-bottom:1px solid var(--border);display:flex;gap:14px;background:var(--surface);}
+.support-ava{width:36px;height:36px;border-radius:6px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+/* Checkout wizard */
+.checkout-steps{display:flex;margin-bottom:28px;border-bottom:1px solid var(--border);}
+.checkout-step{flex:1;text-align:center;padding:14px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;}
+.checkout-step.active{color:var(--brand);border-bottom:3px solid var(--brand);margin-bottom:-1px;}
+.checkout-step.done{color:var(--success);}
+.checkout-panel{display:none;}
+.checkout-panel.active{display:block;}
+.section-heading{font-size:18px;font-weight:700;margin-bottom:20px;}
+/* Resources */
+.res-table{width:100%;border-collapse:collapse;}
+.res-table th{background:var(--bg);padding:10px 16px;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--border);}
+.res-table td{padding:10px 16px;border-bottom:1px solid var(--border);font-size:13px;}
+.res-table td a{color:#2563eb;text-decoration:none;}
+.res-table td a:hover{text-decoration:underline;}
+.status-ok{color:var(--success);font-weight:700;font-size:11px;}
+.status-broken{color:var(--danger);font-weight:700;font-size:11px;}
+footer{background:var(--ink);color:#9ca3af;padding:32px 24px;margin-top:48px;}
+footer .footer-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+footer h4{color:#fff;font-size:13px;font-weight:700;margin-bottom:12px;}
+footer a{display:block;color:#9ca3af;text-decoration:none;font-size:13px;margin-bottom:6px;cursor:pointer;}
+footer a:hover{color:var(--brand);}
+.footer-bottom{max-width:1400px;margin:24px auto 0;padding-top:20px;border-top:1px solid #374151;display:flex;justify-content:space-between;font-size:12px;}
+@media(max-width:900px){.product-detail-layout,.cart-layout{grid-template-columns:1fr;}.footer-grid{grid-template-columns:1fr 1fr;}.product-grid{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<div class="qa-banner">⚠️ This is a QA TEST WEBSITE - NOT FOR PRODUCTION USE ⚠️</div>
+<header class="site-header">
+  <div class="header-top">
+    <span class="logo" onclick="showPage('home')">Shop<span>Nest</span></span>
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="Search products, brands and categories..." onkeydown="if(event.key==='Enter')searchProducts()">
+      <button onclick="searchProducts()">🔍</button>
+    </div>
+    <div class="header-icons">
+      <a class="header-icon" onclick="showPage('wishlist')" title="Wishlist">♡</a>
+      <a class="header-icon" onclick="showPage('cart')" title="Cart">
+        🛒<span class="cart-badge" id="cart-badge">0</span>
+      </a>
+      <a class="header-icon" onclick="showPage('account')" title="Account">👤</a>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <div class="nav-inner">
+      <a onclick="showPage('home')" class="active">Home</a>
+      <div class="dropdown">
+        <a onclick="showPage('products')">Electronics ▾</a>
+        <div class="dropdown-menu">
+          <a onclick="filterCategory('Laptop')">Laptops</a>
+          <a onclick="filterCategory('Phone')">Phones</a>
+          <a onclick="filterCategory('Headphones')">Headphones</a>
+          <a onclick="filterCategory('Camera')">Cameras</a>
+          <a href="/electronics/smart-home.html">Smart Home</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a onclick="showPage('products')">Fashion ▾</a>
+        <div class="dropdown-menu">
+          <a href="/fashion/mens.html">Men's</a>
+          <a href="/fashion/womens.html">Women's</a>
+          <a href="/fashion/kids.html">Kids</a>
+        </div>
+      </div>
+      <a onclick="showPage('products')">Home &amp; Garden</a>
+      <a onclick="showPage('products')">Sports</a>
+      <a onclick="showPage('support-forum')">Support</a>
+      <a onclick="showPage('resources')">Resources</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page-section active">
+  <div style="background:linear-gradient(135deg,#111827,#1f2937);border-radius:16px;padding:48px 40px;margin-bottom:28px;color:#fff;display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <div style="font-size:12px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;">End of Year Sale</div>
+      <h1 style="font-size:40px;font-weight:800;line-height:1.1;margin-bottom:12px;">Up to 50% off<br>top tech brands</h1>
+      <p style="font-size:16px;opacity:.7;margin-bottom:24px;">Limited time deals on laptops, phones, and more.</p>
+      <button class="btn btn-brand" style="font-size:15px;padding:12px 28px;" onclick="showPage('products')">Shop the Sale</button>
+    </div>
+    <div style="font-size:120px;">🛍️</div>
+  </div>
+  <div style="font-size:20px;font-weight:800;margin-bottom:16px;">Featured Products</div>
+  <div class="product-grid" id="featured-grid"></div>
+</div>
+
+<!-- PRODUCTS PAGE -->
+<div id="page-products" class="page-section">
+  <div style="font-size:22px;font-weight:800;margin-bottom:16px;" id="products-heading">All Products</div>
+  <div class="filter-row">
+    <select class="filter-select" id="sort-select" onchange="applyFilters()">
+      <option value="default">Sort: Featured</option>
+      <option value="price-asc">Price: Low to High</option>
+      <option value="price-desc">Price: High to Low</option>
+      <option value="rating">Top Rated</option>
+    </select>
+    <select class="filter-select" id="cat-select" onchange="applyFilters()">
+      <option value="">All Categories</option>
+      <option value="Laptop">Laptops</option>
+      <option value="Phone">Phones</option>
+      <option value="Headphones">Headphones</option>
+      <option value="Camera">Cameras</option>
+    </select>
+    <span class="results-count" id="results-count"></span>
+  </div>
+  <div class="product-grid" id="products-grid"></div>
+</div>
+
+<!-- PRODUCT DETAIL PAGE -->
+<div id="page-product-detail" class="page-section">
+  <div style="margin-bottom:16px;">
+    <a onclick="showPage('products')" style="color:var(--muted);font-size:13px;cursor:pointer;">Products</a>
+    <span style="color:var(--muted);font-size:13px;"> › </span>
+    <span id="detail-breadcrumb" style="font-size:13px;font-weight:600;"></span>
+  </div>
+  <div id="product-detail-content"></div>
+</div>
+
+<!-- CART PAGE -->
+<div id="page-cart" class="page-section">
+  <div style="font-size:22px;font-weight:800;margin-bottom:20px;">Shopping Cart (<span id="cart-count">0</span> items)</div>
+  <div class="cart-layout">
+    <div id="cart-items"></div>
+    <div class="order-summary">
+      <div class="summary-title">Order Summary</div>
+      <div class="summary-row"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+      <div class="summary-row"><span>Shipping</span><span id="cart-shipping">$9.99</span></div>
+      <div class="summary-row"><span>Tax (8%)</span><span id="cart-tax">$0.00</span></div>
+      <div class="summary-row total"><span>Total</span><span id="cart-total">$0.00</span></div>
+      <div class="promo-input">
+        <input type="text" placeholder="Promo code" id="promo-code">
+        <button class="btn btn-outline btn-sm" onclick="applyPromo()">Apply</button>
+      </div>
+      <div class="alert alert-success" id="promo-success" style="font-size:13px;">Code SAVE10 applied! -10% discount</div>
+      <div class="alert alert-danger" id="promo-fail" style="font-size:13px;">Invalid promo code.</div>
+      <button class="btn btn-brand" style="width:100%;font-size:15px;padding:12px;" onclick="showPage('checkout')">Proceed to Checkout</button>
+      <button class="btn btn-outline" style="width:100%;margin-top:8px;" onclick="showPage('products')">Continue Shopping</button>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT PAGE (multi-step) -->
+<div id="page-checkout" class="page-section">
+  <div style="font-size:22px;font-weight:800;margin-bottom:20px;">Checkout</div>
+  <div style="max-width:680px;">
+    <div class="checkout-steps">
+      <div class="checkout-step active" id="cs1">📦 Shipping</div>
+      <div class="checkout-step" id="cs2">💳 Payment</div>
+      <div class="checkout-step" id="cs3">✅ Confirm</div>
+    </div>
+    <!-- Step 1: Shipping -->
+    <div class="checkout-panel active" id="cp1">
+      <div class="section-heading">Shipping Address</div>
+      <div class="form-row-2">
+        <div class="form-group"><label class="form-label">First Name *</label><input class="form-input" id="sh-fname" type="text" placeholder="Jane"><div class="error-msg" id="err-sh-fname">Required.</div></div>
+        <div class="form-group"><label class="form-label">Last Name *</label><input class="form-input" id="sh-lname" type="text" placeholder="Doe"><div class="error-msg" id="err-sh-lname">Required.</div></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="sh-email" type="email" placeholder="jane@example.com"><div class="error-msg" id="err-sh-email">Valid email required.</div></div>
+      <div class="form-group"><label class="form-label">Address Line 1 *</label><input class="form-input" id="sh-addr1" type="text" placeholder="123 Main St"><div class="error-msg" id="err-sh-addr1">Required.</div></div>
+      <div class="form-group"><label class="form-label">Address Line 2</label><input class="form-input" type="text" placeholder="Apt, Suite (optional)"></div>
+      <div class="form-row-2">
+        <div class="form-group"><label class="form-label">City *</label><input class="form-input" id="sh-city" type="text" placeholder="New York"><div class="error-msg" id="err-sh-city">Required.</div></div>
+        <div class="form-group"><label class="form-label">ZIP Code *</label><input class="form-input" id="sh-zip" type="text" placeholder="10001"><div class="error-msg" id="err-sh-zip">Valid ZIP required.</div></div>
+      </div>
+      <div class="form-group"><label class="form-label">Shipping Method</label>
+        <select class="form-input"><option>Standard (3-5 days) — $9.99</option><option>Express (1-2 days) — $24.99</option><option>Overnight — $39.99</option></select>
+      </div>
+      <button class="btn btn-brand" onclick="checkoutNext(1)">Continue to Payment →</button>
+    </div>
+    <!-- Step 2: Payment -->
+    <div class="checkout-panel" id="cp2">
+      <div class="section-heading">Payment Information</div>
+      <div class="form-group"><label class="form-label">Card Number *</label><input class="form-input" id="pay-card" type="text" placeholder="1234 5678 9012 3456" maxlength="19"><div class="error-msg" id="err-pay-card">Valid card number required.</div></div>
+      <div class="form-row-2">
+        <div class="form-group"><label class="form-label">Expiry *</label><input class="form-input" id="pay-exp" type="text" placeholder="MM/YY"><div class="error-msg" id="err-pay-exp">Required.</div></div>
+        <div class="form-group"><label class="form-label">CVV *</label><input class="form-input" id="pay-cvv" type="text" placeholder="123" maxlength="4"><div class="error-msg" id="err-pay-cvv">Required.</div></div>
+      </div>
+      <div class="form-group"><label class="form-label">Name on Card *</label><input class="form-input" id="pay-name" type="text" placeholder="Jane Doe"><div class="error-msg" id="err-pay-name">Required.</div></div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-outline" onclick="checkoutBack(2)">← Back</button>
+        <button class="btn btn-brand" onclick="checkoutNext(2)">Review Order →</button>
+      </div>
+    </div>
+    <!-- Step 3: Confirm -->
+    <div class="checkout-panel" id="cp3">
+      <div class="section-heading">Review & Place Order</div>
+      <div id="order-review" style="background:var(--bg);border-radius:10px;padding:20px;margin-bottom:20px;font-size:14px;line-height:1.8;"></div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-outline" onclick="checkoutBack(3)">← Back</button>
+        <button class="btn btn-brand" onclick="placeOrder()">Place Order ($<span id="order-final"></span>)</button>
+      </div>
+      <div class="alert alert-success" id="order-success">🎉 Order placed! Your order #<strong id="order-num"></strong> is confirmed. You'll receive an email shortly.</div>
+      <div class="alert alert-danger" id="order-fail">Payment declined. Please check your card details. (?fail=true simulation)</div>
+      <button class="btn btn-outline" style="margin-top:8px;" onclick="orderFail()">Test: Payment Failure (?fail=true)</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUPPORT FORUM -->
+<div id="page-support-forum" class="page-section">
+  <div style="font-size:22px;font-weight:800;margin-bottom:6px;">Customer Support Forum</div>
+  <div style="color:var(--muted);font-size:14px;margin-bottom:20px;">Browse common issues or start a new support ticket</div>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:16px;gap:10px;">
+    <input type="text" class="form-input" style="max-width:280px;" placeholder="Search topics..." id="forum-search">
+    <button class="btn btn-brand" onclick="showPage('new-support-thread')">+ New Ticket</button>
+  </div>
+  <div id="support-categories"></div>
+</div>
+
+<!-- SUPPORT THREAD DETAIL -->
+<div id="page-support-thread" class="page-section">
+  <button class="btn btn-outline" style="margin-bottom:16px;" onclick="showPage('support-forum')">← Back to Support</button>
+  <div id="support-thread-view"></div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:16px;">
+    <div style="font-size:14px;font-weight:700;margin-bottom:12px;">Post a Reply</div>
+    <div class="form-group"><label class="form-label">Message *</label><textarea class="form-input" id="sf-reply" rows="4" placeholder="Describe your issue or provide more details..."></textarea><div class="error-msg" id="err-sf-reply">Message required.</div></div>
+    <button class="btn btn-brand" onclick="postSupportReply()">Submit Reply</button>
+    <div class="alert alert-success" id="sf-reply-ok">Reply submitted!</div>
+  </div>
+</div>
+
+<!-- NEW SUPPORT TICKET -->
+<div id="page-new-support-thread" class="page-section">
+  <button class="btn btn-outline" style="margin-bottom:16px;" onclick="showPage('support-forum')">← Back</button>
+  <div style="max-width:600px;">
+    <div style="font-size:20px;font-weight:700;margin-bottom:20px;">Open a New Support Ticket</div>
+    <div class="form-group"><label class="form-label">Order Number (if applicable)</label><input class="form-input" id="st-order" type="text" placeholder="e.g. SN-20241015-4872"></div>
+    <div class="form-group"><label class="form-label">Category *</label><select class="form-input" id="st-cat"><option>Order Issue</option><option>Returns &amp; Refunds</option><option>Product Defect</option><option>Shipping Problem</option><option>Payment Issue</option></select></div>
+    <div class="form-group"><label class="form-label">Subject *</label><input class="form-input" id="st-title" type="text" placeholder="Brief description of your issue"><div class="error-msg" id="err-st-title">Subject required.</div></div>
+    <div class="form-group"><label class="form-label">Details *</label><textarea class="form-input" id="st-body" rows="5" placeholder="Please provide as much detail as possible..."></textarea><div class="error-msg" id="err-st-body">Details required.</div></div>
+    <div class="form-group"><label class="form-label">Your Email *</label><input class="form-input" id="st-email" type="email" placeholder="we'll reply here"><div class="error-msg" id="err-st-email">Valid email required.</div></div>
+    <button class="btn btn-brand" onclick="submitSupportTicket()">Submit Ticket</button>
+    <div class="alert alert-success" id="st-ok">Ticket submitted! Reference #<strong id="ticket-num"></strong>. We'll respond in 24h.</div>
+  </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div id="page-contact" class="page-section">
+  <div style="max-width:560px;">
+    <div style="font-size:22px;font-weight:800;margin-bottom:6px;">Contact Us</div>
+    <div style="color:var(--muted);font-size:14px;margin-bottom:24px;">Questions about orders, products, or partnerships? We're here.</div>
+    <div class="form-group"><label class="form-label">Full Name *</label><input class="form-input" id="ct-name" type="text" placeholder="Your name"><div class="error-msg" id="err-ct-name">Required.</div></div>
+    <div class="form-group"><label class="form-label">Email *</label><input class="form-input" id="ct-email" type="email" placeholder="your@email.com"><div class="error-msg" id="err-ct-email">Valid email required.</div></div>
+    <div class="form-group"><label class="form-label">Topic</label><select class="form-input"><option>General Inquiry</option><option>Order Issue</option><option>Press/Media</option><option>Partnership</option></select></div>
+    <div class="form-group"><label class="form-label">Message *</label><textarea class="form-input" id="ct-msg" rows="4" placeholder="How can we help?"></textarea><div class="error-msg" id="err-ct-msg">Required.</div></div>
+    <button class="btn btn-brand" onclick="submitContact()">Send Message</button>
+    <button class="btn btn-outline" style="margin-left:8px;" onclick="submitContactFail()">Test Failure</button>
+    <div class="alert alert-success" id="ct-ok">Message received! Our team will get back to you within 24 hours.</div>
+    <div class="alert alert-danger" id="ct-fail">Failed to send. Server error. (Simulated ?fail=true)</div>
+  </div>
+</div>
+
+<!-- RESOURCES PAGE -->
+<div id="page-resources" class="page-section">
+  <div style="font-size:22px;font-weight:800;margin-bottom:6px;">Seller &amp; Partner Resources</div>
+  <div style="color:var(--muted);margin-bottom:24px;font-size:14px;">Links for sellers, affiliates, and developers working with ShopNest</div>
+  <table class="res-table" style="background:var(--surface);border-radius:10px;overflow:hidden;border:1px solid var(--border);">
+    <thead><tr><th>Resource</th><th>URL</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Seller Dashboard</td><td><a href="/seller/dashboard.html">/seller/dashboard.html</a></td><td class="status-broken">404</td></tr>
+      <tr><td>Product Upload Guide</td><td><a href="/docs/product-upload.html">/docs/product-upload.html</a></td><td class="status-broken">404</td></tr>
+      <tr><td>Affiliate Program</td><td><a href="https://example.com/shopnest-affiliate" target="_blank">example.com/shopnest-affiliate</a></td><td class="status-broken">DEAD</td></tr>
+      <tr><td>Home Page</td><td><a onclick="showPage('home')">/ (Home)</a></td><td class="status-ok">OK</td></tr>
+      <tr><td>W3C Validator</td><td><a href="https://validator.w3.org" target="_blank">validator.w3.org</a></td><td class="status-ok">OK</td></tr>
+      <tr><td>ShopNest API v2</td><td><a href="/api/v2/docs.html">/api/v2/docs.html</a></td><td class="status-broken">404</td></tr>
+      <tr><td>Returns Policy</td><td><a href="/legal/returns-policy.html">/legal/returns-policy.html</a></td><td class="status-broken">404</td></tr>
+      <tr><td>Contact Page</td><td><a onclick="showPage('contact')">Contact</a></td><td class="status-ok">OK</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ACCOUNT PAGE -->
+<div id="page-account" class="page-section">
+  <div style="max-width:440px;margin:0 auto;">
+    <div style="font-size:22px;font-weight:800;margin-bottom:20px;">My Account</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px;">
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="ac-email" type="email" placeholder="your@email.com"><div class="error-msg" id="err-ac-email">Valid email required.</div></div>
+      <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="ac-pass" type="password" placeholder="Your password"><div class="error-msg" id="err-ac-pass">Password required.</div></div>
+      <button class="btn btn-brand" style="width:100%;" onclick="doLogin()">Sign In</button>
+      <div class="alert alert-success" id="login-ok">Welcome back!</div>
+      <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--muted);">New customer? <a href="/register.html" style="color:var(--brand);">Create an account</a></div>
+    </div>
+  </div>
+</div>
+
+<div id="page-wishlist" class="page-section">
+  <div style="font-size:22px;font-weight:800;margin-bottom:20px;">Wishlist</div>
+  <div style="color:var(--muted);text-align:center;padding:60px 0;font-size:16px;">❤️ Your wishlist is empty. <a onclick="showPage('products')" style="color:var(--brand);cursor:pointer;">Browse products</a></div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div><h4>ShopNest</h4><a onclick="showPage('home')">Home</a><a onclick="showPage('products')">Products</a><a onclick="showPage('support-forum')">Support</a><a onclick="showPage('contact')">Contact</a></div>
+    <div><h4>Categories</h4><a onclick="showPage('products')">Electronics</a><a onclick="showPage('products')">Fashion</a><a onclick="showPage('products')">Home &amp; Garden</a><a onclick="showPage('products')">Sports</a></div>
+    <div><h4>Sellers</h4><a href="/seller/register.html">Sell on ShopNest</a><a href="/seller/dashboard.html">Seller Dashboard</a><a onclick="showPage('resources')">Resources</a><a href="/affiliate.html">Affiliate Program</a></div>
+    <div><h4>Legal</h4><a href="/privacy.html">Privacy Policy</a><a href="/terms.html">Terms of Service</a><a href="/cookies.html">Cookie Policy</a><a href="/legal/returns.html">Returns Policy</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2024 ShopNest Demo — QA Test Environment</span><span>NOT FOR PRODUCTION</span></div>
+</footer>
+
+<script>
+const PRODUCTS=[
+  {id:1,name:"ProBook Elite 14",brand:"TechPro",category:"Laptop",price:1299,oldPrice:1599,rating:4.7,reviews:312,emoji:"💻",desc:"Ultra-thin 14-inch laptop with Intel Core i7, 16GB RAM, and 512GB SSD. Perfect for professionals who need power on the go."},
+  {id:2,name:"SnapShot S22 Pro",brand:"Galaxy",category:"Phone",price:899,oldPrice:1099,rating:4.8,reviews:841,emoji:"📱",desc:"Flagship smartphone with 200MP camera, 120Hz AMOLED display, and 5000mAh battery."},
+  {id:3,name:"AudioMax Pro X",brand:"SoundCraft",category:"Headphones",price:349,oldPrice:449,rating:4.6,reviews:527,emoji:"🎧",desc:"Over-ear noise cancelling headphones with 40hr battery life and studio-quality sound."},
+  {id:4,name:"LensMaster 4K",brand:"PhotoPro",category:"Camera",price:2199,oldPrice:2499,rating:4.9,reviews:184,emoji:"📷",desc:"Professional mirrorless camera with 61MP sensor, dual card slots, and 10fps burst."},
+  {id:5,name:"UltraBook 15S",brand:"TechPro",category:"Laptop",price:799,oldPrice:999,rating:4.4,reviews:298,emoji:"💻",desc:"Budget-friendly 15-inch laptop with Ryzen 5, 8GB RAM, and 256GB SSD."},
+  {id:6,name:"BudPro True",brand:"SoundCraft",category:"Headphones",price:149,oldPrice:199,rating:4.5,reviews:1204,emoji:"🎵",desc:"True wireless earbuds with active noise cancellation and 28hr total battery."},
+];
+let CART=[];
+let SUPPORT_THREADS=[
+  {id:1,category:"Order Issue",title:"Package delivered to wrong address",author:"customer_jane",status:"open",body:"My order #SN-20241012-3892 was marked as delivered but I never received it. The tracking shows it was delivered to a different block.",replies:[
+    {name:"support_agent",body:"Hi Jane! I've escalated this to our logistics team. We'll have an update within 24 hours.",time:"3h ago",agent:true},
+  ],time:"6h ago"},
+  {id:2,category:"Returns & Refunds",title:"How do I return a defective item?",author:"tech_buyer_99",status:"solved",body:"I received a laptop with a cracked screen. What is the return process?",replies:[
+    {name:"support_agent",body:"Hi! For defective items, please go to Orders > Return Item and select 'Defective Product'. We'll arrange a free pickup.",time:"2d ago",agent:true},
+    {name:"tech_buyer_99",body:"Thank you! Submitted the return. All sorted.",time:"1d ago",agent:false},
+  ],time:"3d ago"},
+  {id:3,category:"Payment Issue",title:"Charged twice for same order",author:"frustrated_shopper",status:"open",body:"I was charged twice for order #SN-20241018-5521. Please help!",replies:[],time:"1h ago"},
+];
+let activeSupportThread=1;
+let activeProductId=1;
+let checkoutShipping={};
+
+function showPage(page){
+  document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById('page-'+page);
+  if(el){el.classList.add('active');window.scrollTo(0,0);}
+  if(page==='home')renderHome();
+  if(page==='products')renderProducts();
+  if(page==='cart')renderCart();
+  if(page==='support-forum')renderSupportForum();
+  if(page==='support-thread')renderSupportThread();
+  if(page==='product-detail')renderProductDetail();
+  updateCartBadge();
+}
+function renderHome(){
+  const g=document.getElementById('featured-grid');
+  if(!g)return;
+  g.innerHTML=PRODUCTS.slice(0,4).map(p=>productCardHTML(p)).join('');
+}
+function renderProducts(filter=''){
+  const g=document.getElementById('products-grid');
+  if(!g)return;
+  let items=[...PRODUCTS];
+  const cat=document.getElementById('cat-select')?document.getElementById('cat-select').value:'';
+  const sort=document.getElementById('sort-select')?document.getElementById('sort-select').value:'default';
+  if(cat)items=items.filter(p=>p.category===cat);
+  if(filter)items=items.filter(p=>p.name.toLowerCase().includes(filter)||p.brand.toLowerCase().includes(filter));
+  if(sort==='price-asc')items.sort((a,b)=>a.price-b.price);
+  if(sort==='price-desc')items.sort((a,b)=>b.price-a.price);
+  if(sort==='rating')items.sort((a,b)=>b.rating-a.rating);
+  g.innerHTML=items.map(p=>productCardHTML(p)).join('');
+  const rc=document.getElementById('results-count');
+  if(rc)rc.textContent=`${items.length} products`;
+}
+function productCardHTML(p){
+  return `<div class="product-card">
+    <div class="product-image">${p.emoji}</div>
+    <div class="product-info">
+      <div class="product-brand">${p.brand}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-rating"><span class="stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</span><span class="rating-count">${p.rating} (${p.reviews})</span></div>
+      <div><span class="product-price">$${p.price}</span><span class="product-old-price">$${p.oldPrice}</span></div>
+    </div>
+    <div class="product-actions">
+      <button class="btn btn-brand btn-sm" style="flex:1;" onclick="addToCart(${p.id})">Add to Cart</button>
+      <button class="btn btn-outline btn-sm" onclick="openProduct(${p.id})">View</button>
+    </div>
+  </div>`;
+}
+function filterCategory(cat){
+  showPage('products');
+  const sel=document.getElementById('cat-select');
+  if(sel){sel.value=cat;applyFilters();}
+}
+function applyFilters(){renderProducts();}
+function searchProducts(){
+  const q=document.getElementById('search-input').value.trim();
+  if(q){showPage('products');renderProducts(q);}
+}
+function openProduct(id){activeProductId=id;showPage('product-detail');}
+function renderProductDetail(){
+  const p=PRODUCTS.find(x=>x.id===activeProductId);if(!p)return;
+  const bc=document.getElementById('detail-breadcrumb');
+  if(bc)bc.textContent=p.name;
+  document.getElementById('product-detail-content').innerHTML=`
+    <div class="product-detail-layout">
+      <div class="product-detail-image">${p.emoji}</div>
+      <div class="product-detail-info">
+        <div class="detail-brand">${p.brand} · ${p.category}</div>
+        <h1 class="detail-title">${p.name}</h1>
+        <div class="detail-rating"><span class="stars">${'★'.repeat(Math.floor(p.rating))}</span><span style="font-weight:600;">${p.rating}</span><span style="color:var(--muted);font-size:13px;">(${p.reviews} reviews)</span></div>
+        <div class="detail-price">$${p.price}</div>
+        <div class="detail-old">Was $${p.oldPrice} — Save $${p.oldPrice-p.price}</div>
+        <p class="detail-desc">${p.desc}</p>
+        <div class="option-label">Color</div>
+        <div class="option-row">
+          <div class="option-btn selected" onclick="selectOption(this)">Space Grey</div>
+          <div class="option-btn" onclick="selectOption(this)">Silver</div>
+          <div class="option-btn" onclick="selectOption(this)">Midnight Black</div>
+        </div>
+        <div class="option-label">Qty</div>
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input class="qty-input" type="number" value="1" min="1" id="qty-input">
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <div class="action-row">
+          <button class="btn btn-brand" style="flex:1;padding:12px;" onclick="addToCart(${p.id})">Add to Cart 🛒</button>
+          <button class="btn btn-outline" style="padding:12px 16px;">♡</button>
+        </div>
+        <div class="alert alert-success" id="add-to-cart-ok" style="margin-top:12px;">Added to cart!</div>
+      </div>
+    </div>`;
+}
+function selectOption(el){document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');}
+function changeQty(d){const i=document.getElementById('qty-input');if(i)i.value=Math.max(1,parseInt(i.value||1)+d);}
+function addToCart(id){
+  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+  const existing=CART.find(x=>x.id===id);
+  if(existing)existing.qty++;
+  else CART.push({...p,qty:1});
+  updateCartBadge();
+  const ok=document.getElementById('add-to-cart-ok');
+  if(ok){ok.classList.add('show');setTimeout(()=>ok.classList.remove('show'),2000);}
+}
+function updateCartBadge(){
+  const total=CART.reduce((s,i)=>s+i.qty,0);
+  const badge=document.getElementById('cart-badge');
+  if(badge)badge.textContent=total;
+}
+function renderCart(){
+  const cc=document.getElementById('cart-count');if(cc)cc.textContent=CART.reduce((s,i)=>s+i.qty,0);
+  const container=document.getElementById('cart-items');
+  if(!container)return;
+  if(CART.length===0){container.innerHTML='<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:60px;text-align:center;color:var(--muted);">Your cart is empty.<br><br><button class="btn btn-brand" onclick="showPage(\'products\')">Start Shopping</button></div>';updateCartTotals();return;}
+  container.innerHTML=CART.map(item=>`<div class="cart-item">
+    <div class="cart-item-img">${item.emoji}</div>
+    <div class="cart-item-info">
+      <div class="cart-item-name">${item.name}</div>
+      <div class="cart-item-meta">${item.brand} · ${item.category}</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:8px;">
+        <div class="qty-control"><button class="qty-btn" onclick="changeCartQty(${item.id},-1)">−</button><input class="qty-input" type="number" value="${item.qty}" style="width:40px;height:32px;font-size:13px;" onchange="setCartQty(${item.id},this.value)"><button class="qty-btn" onclick="changeCartQty(${item.id},1)">+</button></div>
+        <span class="cart-item-price">$${(item.price*item.qty).toFixed(2)}</span>
+        <button class="cart-item-remove" onclick="removeFromCart(${item.id})">Remove</button>
+      </div>
+    </div>
+  </div>`).join('');
+  updateCartTotals();
+}
+function changeCartQty(id,d){const i=CART.find(x=>x.id===id);if(!i)return;i.qty=Math.max(1,i.qty+d);renderCart();}
+function setCartQty(id,v){const i=CART.find(x=>x.id===id);if(!i)return;i.qty=Math.max(1,parseInt(v)||1);renderCart();}
+function removeFromCart(id){CART=CART.filter(x=>x.id!==id);renderCart();updateCartBadge();}
+function updateCartTotals(){
+  const sub=CART.reduce((s,i)=>s+i.price*i.qty,0);
+  const ship=sub>0?9.99:0;
+  const tax=sub*0.08;
+  const total=sub+ship+tax;
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('cart-subtotal','$'+sub.toFixed(2));
+  set('cart-shipping',ship>0?'$'+ship.toFixed(2):'Free');
+  set('cart-tax','$'+tax.toFixed(2));
+  set('cart-total','$'+total.toFixed(2));
+  const ot=document.getElementById('order-final');if(ot)ot.textContent=total.toFixed(2);
+}
+function applyPromo(){
+  const code=document.getElementById('promo-code').value.trim().toUpperCase();
+  if(code==='SAVE10'){document.getElementById('promo-success').classList.add('show');document.getElementById('promo-fail').classList.remove('show');}
+  else{document.getElementById('promo-fail').classList.add('show');document.getElementById('promo-success').classList.remove('show');}
+}
+function checkoutNext(step){
+  if(step===1){
+    const fields=[['sh-fname','err-sh-fname',v=>v.length>0],['sh-lname','err-sh-lname',v=>v.length>0],['sh-email','err-sh-email',v=>v.includes('@')],['sh-addr1','err-sh-addr1',v=>v.length>0],['sh-city','err-sh-city',v=>v.length>0],['sh-zip','err-sh-zip',v=>v.length>=4]];
+    let ok=true;fields.forEach(([id,eid,test])=>{const v=document.getElementById(id).value.trim();if(!test(v)){document.getElementById(eid).classList.add('show');ok=false;}else document.getElementById(eid).classList.remove('show');});
+    if(!ok)return;
+    checkoutShipping={name:document.getElementById('sh-fname').value+' '+document.getElementById('sh-lname').value,email:document.getElementById('sh-email').value,addr:document.getElementById('sh-addr1').value+', '+document.getElementById('sh-city').value+' '+document.getElementById('sh-zip').value};
+  }
+  if(step===2){
+    const fields=[['pay-card','err-pay-card',v=>v.replace(/\s/g,'').length>=15],['pay-exp','err-pay-exp',v=>v.length>0],['pay-cvv','err-pay-cvv',v=>v.length>=3],['pay-name','err-pay-name',v=>v.length>0]];
+    let ok=true;fields.forEach(([id,eid,test])=>{const v=document.getElementById(id).value.trim();if(!test(v)){document.getElementById(eid).classList.add('show');ok=false;}else document.getElementById(eid).classList.remove('show');});
+    if(!ok)return;
+    const rev=document.getElementById('order-review');
+    const sub=CART.reduce((s,i)=>s+i.price*i.qty,0);
+    if(rev)rev.innerHTML=`<strong>Ship to:</strong> ${checkoutShipping.name}<br>${checkoutShipping.addr}<br><br><strong>Items:</strong><br>${CART.map(i=>`${i.name} × ${i.qty} — $${(i.price*i.qty).toFixed(2)}`).join('<br>')}<br><br><strong>Total: $${(sub+9.99+sub*0.08).toFixed(2)}</strong>`;
+    updateCartTotals();
+  }
+  document.getElementById('cp'+step).classList.remove('active');
+  document.getElementById('cp'+(step+1)).classList.add('active');
+  document.getElementById('cs'+step).classList.remove('active');document.getElementById('cs'+step).classList.add('done');
+  document.getElementById('cs'+(step+1)).classList.add('active');
+}
+function checkoutBack(step){
+  document.getElementById('cp'+step).classList.remove('active');
+  document.getElementById('cp'+(step-1)).classList.add('active');
+  document.getElementById('cs'+step).classList.remove('active');
+  document.getElementById('cs'+(step-1)).classList.remove('done');document.getElementById('cs'+(step-1)).classList.add('active');
+}
+function placeOrder(){
+  const num='SN-'+Date.now().toString().slice(-8);
+  document.getElementById('order-num').textContent=num;
+  document.getElementById('order-fail').classList.remove('show');
+  document.getElementById('order-success').classList.add('show');
+  CART=[];updateCartBadge();
+}
+function orderFail(){document.getElementById('order-success').classList.remove('show');document.getElementById('order-fail').classList.add('show');}
+function renderSupportForum(){
+  const cats=['Order Issue','Returns & Refunds','Payment Issue','Product Defect'];
+  const el=document.getElementById('support-categories');if(!el)return;
+  el.innerHTML=cats.map(cat=>{
+    const threads=SUPPORT_THREADS.filter(t=>t.category===cat);
+    if(threads.length===0)return'';
+    return`<div class="support-category">
+      <div class="support-cat-header" onclick="toggleCat(this)">${cat} <span>(${threads.length})</span><span>▾</span></div>
+      <div class="support-cat-body open">
+        ${threads.map(t=>`<div class="support-thread" onclick="openSupportThread(${t.id})">
+          <div class="support-thread-icon">${t.status==='solved'?'✅':'❓'}</div>
+          <div class="support-thread-meta"><div class="support-thread-title">${t.title}</div><div class="support-thread-sub">by ${t.author} · ${t.time} · ${t.replies.length} replies</div></div>
+          <span class="support-thread-badge ${t.status==='solved'?'badge-solved':'badge-open'}">${t.status}</span>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+function toggleCat(header){const body=header.nextElementSibling;body.classList.toggle('open');}
+function openSupportThread(id){activeSupportThread=id;showPage('support-thread');}
+function renderSupportThread(){
+  const t=SUPPORT_THREADS.find(x=>x.id===activeSupportThread);if(!t)return;
+  document.getElementById('support-thread-view').innerHTML=`<div class="thread-view" style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+    <div style="padding:20px 24px;background:linear-gradient(to right,#111827,#1f2937);color:#fff;">
+      <div style="font-size:11px;font-weight:700;color:var(--brand);text-transform:uppercase;margin-bottom:6px;">${t.category}</div>
+      <h2 style="font-size:20px;font-weight:800;">${t.title}</h2>
+      <div style="font-size:13px;opacity:.7;margin-top:6px;">by ${t.author} · ${t.time}</div>
+    </div>
+    <div style="padding:20px 24px;border-bottom:1px solid var(--border);">${t.body}</div>
+    ${t.replies.map(r=>`<div class="support-reply">
+      <div class="support-ava" style="${r.agent?'background:#16a34a':''}">${r.name[0].toUpperCase()}</div>
+      <div><div style="font-size:13px;font-weight:700;">${r.name} ${r.agent?'<span style="font-size:11px;background:#dcfce7;color:#16a34a;padding:1px 6px;border-radius:3px;">Support</span>':''}</div><div style="font-size:12px;color:var(--muted);">${r.time}</div><div style="font-size:14px;margin-top:6px;">${r.body}</div></div>
+    </div>`).join('')}
+  </div>`;
+}
+function postSupportReply(){
+  const body=document.getElementById('sf-reply').value.trim();
+  if(!body){document.getElementById('err-sf-reply').classList.add('show');return;}
+  document.getElementById('err-sf-reply').classList.remove('show');
+  const t=SUPPORT_THREADS.find(x=>x.id===activeSupportThread);
+  t.replies.push({name:'you',body,time:'just now',agent:false});
+  document.getElementById('sf-reply').value='';
+  renderSupportThread();
+  const ok=document.getElementById('sf-reply-ok');ok.classList.add('show');setTimeout(()=>ok.classList.remove('show'),3000);
+}
+function submitSupportTicket(){
+  let ok=true;
+  const check=(id,eid,test)=>{const v=document.getElementById(id).value.trim();if(!test(v)){document.getElementById(eid).classList.add('show');ok=false;}else document.getElementById(eid).classList.remove('show');};
+  check('st-title','err-st-title',v=>v.length>0);
+  check('st-body','err-st-body',v=>v.length>0);
+  check('st-email','err-st-email',v=>v.includes('@'));
+  if(!ok)return;
+  const num='TKT-'+Math.floor(Math.random()*90000+10000);
+  SUPPORT_THREADS.unshift({id:Date.now(),category:document.getElementById('st-cat').value,title:document.getElementById('st-title').value,author:'you',status:'open',body:document.getElementById('st-body').value,replies:[],time:'just now'});
+  document.getElementById('ticket-num').textContent=num;
+  document.getElementById('st-ok').classList.add('show');
+  setTimeout(()=>{document.getElementById('st-ok').classList.remove('show');showPage('support-forum');},3000);
+}
+function submitContact(){
+  let ok=true;
+  const check=(id,eid,test)=>{const v=document.getElementById(id).value.trim();if(!test(v)){document.getElementById(eid).classList.add('show');ok=false;}else document.getElementById(eid).classList.remove('show');};
+  check('ct-name','err-ct-name',v=>v.length>0);
+  check('ct-email','err-ct-email',v=>v.includes('@'));
+  check('ct-msg','err-ct-msg',v=>v.length>0);
+  if(!ok)return;
+  document.getElementById('ct-fail').classList.remove('show');document.getElementById('ct-ok').classList.add('show');
+}
+function submitContactFail(){document.getElementById('ct-ok').classList.remove('show');document.getElementById('ct-fail').classList.add('show');}
+function doLogin(){
+  const email=document.getElementById('ac-email').value;
+  const pass=document.getElementById('ac-pass').value;
+  if(!email.includes('@')){document.getElementById('err-ac-email').classList.add('show');return;}
+  document.getElementById('err-ac-email').classList.remove('show');
+  if(!pass){document.getElementById('err-ac-pass').classList.add('show');return;}
+  document.getElementById('err-ac-pass').classList.remove('show');
+  document.getElementById('login-ok').classList.add('show');
+}
+renderHome();renderProducts();
+</script>
+</body>
+</html>

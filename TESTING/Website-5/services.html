@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS • Services | Digital Agency</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">NEXUS</a>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="dropdown">
+          <a href="services.html">Services ▾</a>
+          <div class="dropdown-content">
+            <a href="services.html">All Services</a>
+            <a href="/services-old.html">Legacy Services (2023)</a>
+            <a href="services.html#web">Web Development</a>
+          </div>
+        </li>
+        <li><a href="portfolio.html">Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <button id="login-btn" class="btn btn-ghost">Client Login</button>
+        <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SERVICES HERO -->
+  <section class="hero" style="min-height:65vh; align-items:center; padding-top:7rem;">
+    <div class="container" style="text-align:center; max-width:780px;">
+      <div class="badge" style="margin-bottom:1rem;">WHAT WE DO BEST</div>
+      <h1 style="margin-bottom:1.25rem;">End-to-end capabilities<br>for ambitious teams.</h1>
+      <p style="font-size:1.2rem; max-width:620px; margin:0 auto 2rem;">From 0→1 product launches to scaling design systems and growth infrastructure, we partner at every stage.</p>
+      <a href="#inquiry" class="btn btn-primary">Start a project inquiry</a>
+    </div>
+  </section>
+
+  <!-- SERVICE CATEGORIES -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        <!-- Service 1 -->
+        <div id="web" class="card service-card">
+          <div class="service-icon">🌐</div>
+          <h3>Digital Product Design</h3>
+          <p>Strategy, UX research, interaction design, and design systems. We create interfaces that feel inevitable.</p>
+          <ul style="text-align:left; margin:1.5rem 0; padding-left:1.25rem; color:#94a3b8; font-size:0.95rem;">
+            <li>Product strategy workshops</li>
+            <li>UX research &amp; testing</li>
+            <li>Design systems &amp; tokens</li>
+            <li>Accessibility audits (WCAG 2.2)</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline" style="width:100%;">Discuss your project</a>
+        </div>
+        
+        <!-- Service 2 -->
+        <div class="card service-card">
+          <div class="service-icon">🛠️</div>
+          <h3>Engineering &amp; Development</h3>
+          <p>High-performance web applications, APIs, and frontend architecture built for scale and maintainability.</p>
+          <ul style="text-align:left; margin:1.5rem 0; padding-left:1.25rem; color:#94a3b8; font-size:0.95rem;">
+            <li>Next.js / React / TypeScript</li>
+            <li>Headless CMS &amp; content platforms</li>
+            <li>API design &amp; backend services</li>
+            <li>Performance &amp; Core Web Vitals</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline" style="width:100%;">Talk to engineering</a>
+        </div>
+        
+        <!-- Service 3 - broken icon image -->
+        <div class="card service-card">
+          <!-- BROKEN IMAGE #6 for service icon -->
+          <img src="https://example.com/broken-image.jpg" alt="Growth icon" style="width:72px; height:72px; margin:0 auto 1.5rem; display:block; border-radius:9999px;">
+          <h3>Growth &amp; Experimentation</h3>
+          <p>Data-informed growth loops, conversion rate optimization, and analytics infrastructure that drives real revenue.</p>
+          <ul style="text-align:left; margin:1.5rem 0; padding-left:1.25rem; color:#94a3b8; font-size:0.95rem;">
+            <li>Experimentation frameworks</li>
+            <li>Analytics &amp; instrumentation</li>
+            <li>Conversion rate optimization</li>
+            <li>Retention &amp; activation playbooks</li>
+          </ul>
+          <!-- Broken link inside card -->
+          <a href="/portfolio-details-999.html" class="btn btn-outline" style="width:100%;">See growth case studies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT INQUIRY FORM -->
+  <section id="inquiry" class="section" style="background:var(--dark-2);">
+    <div class="container" style="max-width:820px;">
+      <div class="section-header">
+        <h2>Start a project with us</h2>
+        <p>Tell us about your goals. We'll respond within 48 hours with next steps and a proposed scope.</p>
+      </div>
+      
+      <!-- Project Inquiry Form - intentional issues for testing -->
+      <form id="project-inquiry-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inq-name">Full Name *</label>
+            <input type="text" id="inq-name" name="fullName" placeholder="Alex Rivera" required>
+          </div>
+          <div class="form-group">
+            <label for="inq-email">Work Email *</label>
+            <!-- Missing name attribute intentionally -->
+            <input type="email" id="inq-email" placeholder="alex@yourcompany.com" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inq-company">Company / Organization</label>
+            <input type="text" id="inq-company" name="company" placeholder="Acme Corp">
+          </div>
+          <div class="form-group">
+            <label for="inq-budget">Estimated Budget</label>
+            <select id="inq-budget" name="budget">
+              <option value="">Select range...</option>
+              <option value="50-100k">$50k – $100k</option>
+              <option value="100-250k">$100k – $250k</option>
+              <option value="250k+">$250k+</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="inq-service">Primary Service Interest</label>
+          <select id="inq-service" name="service">
+            <option value="">Please select...</option>
+            <option value="design">Product Design &amp; Strategy</option>
+            <option value="engineering">Engineering &amp; Development</option>
+            <option value="growth">Growth Systems</option>
+            <option value="all">Full Partnership</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="inq-message">Project Description *</label>
+          <textarea id="inq-message" name="message" placeholder="Tell us about your goals, timeline, and any specific challenges..." required></textarea>
+        </div>
+        
+        <!-- Intentional missing required on a field + wrong input type simulation -->
+        <div class="form-group">
+          <label>How did you hear about us? (optional)</label>
+          <input type="text" placeholder="Referral, conference, etc." style="width:100%;">
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" style="padding-left:3rem; padding-right:3rem;">Submit Inquiry</button>
+        </div>
+        
+        <div class="success-message"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid container">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:1rem;">NEXUS</div>
+        <p style="font-size:0.9rem; max-width:260px;">Strategic digital agency crafting exceptional products since 2018.</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#team">Team</a></li>
+          <li><a href="/undefined-route">Careers</a></li>
+          <li><a href="contact.html">Press</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Work</h4>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="portfolio.html">Case Studies</a></li>
+          <li><a href="http://localhost:9999/missing">Process</a></li>
+          <li><a href="services.html">Capabilities</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#twitter">Twitter / X</a></li>
+          <li><a href="#linkedin">LinkedIn</a></li>
+          <li><a href="broken-link-contactus.html">Support Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom container">
+      <div>© 2026 NEXUS Digital. All rights reserved.</div>
+      <div style="display:flex; gap:1.5rem;">
+        <a href="#">Privacy</a>
+        <a href="#">Legal</a>
+        <a href="#">Status</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2 style="margin-bottom:0.5rem;">Client Portal</h2>
+      <p style="color:#94a3b8; margin-bottom:2rem;">Sign in to access project dashboards and files.</p>
+      
+      <form>
+        <div class="form-group">
+          <label for="login-email">Work Email</label>
+          <input type="email" id="login-email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
+        </div>
+        <div class="success-message" style="margin-top:1rem;"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vertex Creative Agency</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#1a1a2e;--accent:#e94560;--accent2:#0f3460;--light:#f8f9fa;
+  --text:#2d2d2d;--muted:#6c757d;--border:#dee2e6;--white:#fff;
+  --success:#28a745;--danger:#dc3545;--warn:#ffc107;
+  --radius:6px;--shadow:0 2px 12px rgba(0,0,0,.1);
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+
+/* QA Banner */
+.qa-banner{background:#1a1a2e;color:#ffd700;text-align:center;padding:8px;font-size:12px;font-weight:700;letter-spacing:.5px;position:sticky;top:0;z-index:1000}
+
+/* Header */
+header{background:var(--brand);color:#fff;position:sticky;top:32px;z-index:999;box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px}
+.logo{font-size:22px;font-weight:800;color:#fff;cursor:pointer;letter-spacing:-0.5px}
+.logo span{color:var(--accent)}
+nav{display:flex;align-items:center;gap:4px}
+nav a,.nav-btn{color:rgba(255,255,255,.85);text-decoration:none;padding:8px 14px;border-radius:var(--radius);font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;border:none;background:none}
+nav a:hover,.nav-btn:hover,.nav-item:hover>a{color:#fff;background:rgba(255,255,255,.1)}
+.nav-dropdown{position:relative}
+.nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;background:var(--accent2);min-width:220px;border-radius:var(--radius);box-shadow:0 8px 32px rgba(0,0,0,.3);padding:8px 0;z-index:100}
+.nav-dropdown:hover .nav-dropdown-menu{display:block}
+.nav-dropdown-menu a{display:block;padding:10px 20px;color:rgba(255,255,255,.85);font-size:13px;text-decoration:none}
+.nav-dropdown-menu a:hover{background:rgba(255,255,255,.1);color:#fff}
+.nav-dropdown-menu .divider{border-top:1px solid rgba(255,255,255,.1);margin:4px 0}
+.btn-header{background:var(--accent);color:#fff!important;padding:8px 18px!important;border-radius:20px!important}
+.btn-header:hover{background:#c73652!important}
+
+/* Pages */
+.page{display:none}
+.page.active{display:block}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,var(--brand) 0%,var(--accent2) 60%,#16213e 100%);color:#fff;padding:100px 24px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-content{position:relative;max-width:700px;margin:0 auto}
+.hero-tag{display:inline-block;background:var(--accent);color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:20px;text-transform:uppercase}
+.hero h1{font-size:52px;font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-1px}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:18px;opacity:.85;margin-bottom:36px;line-height:1.7}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{padding:12px 28px;border-radius:var(--radius);font-weight:600;font-size:14px;cursor:pointer;border:none;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#c73652;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}
+.btn-outline:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.btn-dark{background:var(--brand);color:#fff}
+.btn-dark:hover{background:#2a2a4e}
+.btn-sm{padding:8px 18px;font-size:13px}
+
+/* Stats bar */
+.stats-bar{background:var(--accent2);color:#fff;padding:24px}
+.stats-bar-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center}
+.stat-num{font-size:32px;font-weight:900;color:var(--accent)}
+.stat-label{font-size:13px;opacity:.7;margin-top:4px}
+
+/* Services grid */
+.section{padding:72px 24px;max-width:1200px;margin:0 auto}
+.section-label{color:var(--accent);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.section-title{font-size:36px;font-weight:800;margin-bottom:16px;letter-spacing:-.5px}
+.section-sub{color:var(--muted);font-size:16px;max-width:600px;line-height:1.7}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.service-card{border:1px solid var(--border);border-radius:12px;padding:32px;transition:all .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);transform:scaleX(0);transition:.3s}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1);border-color:transparent}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#c73652);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px}
+.service-card h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.service-card p{color:var(--muted);font-size:14px;line-height:1.7}
+.service-price{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--accent);font-weight:600}
+
+/* Case studies */
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.case-card{border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.case-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:#fff}
+.case-body{padding:20px}
+.case-tag{display:inline-block;background:var(--light);color:var(--accent);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.case-body h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.case-body p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* Team */
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px}
+.team-card{text-align:center;padding:24px 16px;border-radius:12px;border:1px solid var(--border)}
+.team-avatar{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;margin:0 auto 16px}
+.team-card h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.team-card .role{font-size:13px;color:var(--accent);font-weight:600}
+.team-card .bio{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* Contact */
+.contact-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-info h2{font-size:32px;font-weight:800;margin-bottom:20px}
+.contact-info p{color:var(--muted);line-height:1.8;margin-bottom:24px}
+.contact-item{display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}
+.contact-icon{width:40px;height:40px;border-radius:10px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;color:#fff}
+.contact-text strong{display:block;font-size:14px;margin-bottom:2px}
+.contact-text span{font-size:13px;color:var(--muted)}
+
+/* Lead gen form */
+.lead-form{background:var(--light);border-radius:16px;padding:36px}
+.lead-form h3{font-size:22px;font-weight:700;margin-bottom:8px}
+.lead-form p{color:var(--muted);font-size:14px;margin-bottom:24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--text)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius);font-size:14px;font-family:inherit;transition:.2s;background:#fff}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(233,69,96,.1)}
+.form-group.error input,.form-group.error select,.form-group.error textarea{border-color:var(--danger)}
+.form-error{color:var(--danger);font-size:12px;margin-top:4px}
+.form-success{background:#d4edda;border:1px solid #c3e6cb;color:#155724;padding:16px;border-radius:var(--radius);margin-bottom:16px;display:none}
+.form-fail-msg{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24;padding:16px;border-radius:var(--radius);margin-bottom:16px;display:none}
+.checkboxes{display:flex;flex-direction:column;gap:8px}
+.checkbox-item{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer}
+.checkbox-item input{width:auto}
+
+/* Services page */
+.services-hero{background:linear-gradient(135deg,var(--accent2),var(--brand));color:#fff;padding:64px 24px;text-align:center}
+.services-hero h1{font-size:40px;font-weight:800;margin-bottom:16px}
+.services-hero p{font-size:16px;opacity:.8;max-width:600px;margin:0 auto}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.pricing-card{border:2px solid var(--border);border-radius:16px;padding:36px 28px;text-align:center;position:relative;transition:.3s}
+.pricing-card.featured{border-color:var(--accent);background:linear-gradient(135deg,rgba(233,69,96,.03),rgba(233,69,96,.07))}
+.pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:4px 16px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap}
+.pricing-name{font-size:18px;font-weight:700;margin-bottom:8px}
+.pricing-price{font-size:42px;font-weight:900;color:var(--accent);margin:16px 0 4px}
+.pricing-price sup{font-size:20px;font-weight:700;vertical-align:super}
+.pricing-period{font-size:13px;color:var(--muted);margin-bottom:24px}
+.pricing-features{list-style:none;text-align:left;margin-bottom:28px}
+.pricing-features li{padding:8px 0;font-size:14px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center}
+.pricing-features li:last-child{border:none}
+.check-icon{color:var(--success);font-weight:700}
+.x-icon{color:var(--muted)}
+
+/* Process steps */
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;position:relative}
+.process-steps::before{content:'';position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:var(--border)}
+.process-step{text-align:center;padding:0 16px;position:relative}
+.step-num{width:72px;height:72px;border-radius:50%;background:var(--brand);color:#fff;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:3px solid var(--accent);position:relative;z-index:1}
+.step-active .step-num{background:var(--accent)}
+.process-step h4{font-size:15px;font-weight:700;margin-bottom:8px}
+.process-step p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* Forum - Tag board style */
+.forum-page{max-width:1200px;margin:0 auto;padding:40px 24px;display:grid;grid-template-columns:240px 1fr;gap:32px;align-items:start}
+.forum-sidebar-nav{background:var(--light);border-radius:12px;padding:20px;position:sticky;top:110px}
+.forum-sidebar-nav h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px}
+.tag-list{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.tag-item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:500;transition:.2s}
+.tag-item:hover,.tag-item.active{background:#fff;box-shadow:var(--shadow)}
+.tag-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.tag-count{background:var(--border);border-radius:20px;padding:2px 8px;font-size:11px;color:var(--muted)}
+.forum-main{}
+.forum-header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.forum-header-row h2{font-size:22px;font-weight:800}
+.thread-tags-strip{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tag-pill{padding:4px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid;transition:.2s}
+.tag-pill:hover,.tag-pill.active-filter{opacity:1}
+.forum-threads{display:flex;flex-direction:column;gap:12px}
+.thread-item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start;cursor:pointer;transition:.2s}
+.thread-item:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(233,69,96,.08)}
+.thread-meta-top{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.thread-status{width:8px;height:8px;border-radius:50%;background:var(--success);flex-shrink:0}
+.thread-status.closed{background:var(--muted)}
+.thread-tag-badge{padding:2px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.thread-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.thread-excerpt{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.thread-footer{display:flex;gap:16px;font-size:12px;color:var(--muted)}
+.thread-stats{display:flex;flex-direction:column;align-items:flex-end;gap:4px;min-width:80px}
+.thread-replies{font-size:22px;font-weight:800;color:var(--brand);text-align:center;line-height:1}
+.thread-replies-label{font-size:11px;color:var(--muted)}
+.thread-latest{font-size:11px;color:var(--muted);white-space:nowrap}
+.pagination{display:flex;gap:8px;justify-content:center;margin-top:32px}
+.page-btn{width:36px;height:36px;border-radius:var(--radius);border:1.5px solid var(--border);background:#fff;cursor:pointer;font-size:13px;font-weight:600;transition:.2s;display:flex;align-items:center;justify-content:center}
+.page-btn:hover,.page-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* Thread detail */
+.thread-detail-page{max-width:900px;margin:0 auto;padding:40px 24px}
+.thread-detail-header{margin-bottom:32px}
+.breadcrumb{font-size:13px;color:var(--muted);margin-bottom:16px}
+.breadcrumb span{cursor:pointer;color:var(--accent)}
+.thread-detail-title{font-size:28px;font-weight:800;margin-bottom:12px}
+.thread-detail-meta{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.post-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.post-card.op{border-color:var(--accent2)}
+.post-author-col{display:flex;gap:16px;padding:20px}
+.author-avatar{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#fff;flex-shrink:0}
+.post-body-col{flex:1}
+.post-author-name{font-weight:700;font-size:14px;margin-bottom:2px}
+.post-author-role{font-size:12px;color:var(--accent);font-weight:600;margin-bottom:10px}
+.post-text{font-size:14px;line-height:1.8;color:var(--text)}
+.post-actions{margin-top:12px;display:flex;gap:12px}
+.post-action-btn{border:none;background:none;cursor:pointer;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:var(--radius);transition:.2s}
+.post-action-btn:hover{background:var(--light);color:var(--text)}
+.post-footer{background:var(--light);padding:8px 20px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);display:flex;justify-content:space-between}
+.reply-form-section{background:var(--light);border-radius:12px;padding:28px;margin-top:32px}
+.reply-form-section h3{font-size:18px;font-weight:700;margin-bottom:20px}
+
+/* New thread */
+.new-thread-page{max-width:800px;margin:0 auto;padding:40px 24px}
+.new-thread-page h2{font-size:28px;font-weight:800;margin-bottom:8px}
+.new-thread-page>p{color:var(--muted);margin-bottom:28px}
+
+/* Page: About */
+.about-hero{background:linear-gradient(135deg,var(--brand),var(--accent2));color:#fff;padding:80px 24px;text-align:center}
+.timeline{max-width:700px;margin:0 auto;padding:48px 24px;position:relative}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--border)}
+.timeline-item{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:48px;position:relative}
+.timeline-item:nth-child(even) .tl-content{grid-column:2;text-align:right}
+.timeline-dot{position:absolute;left:50%;top:8px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid #fff;transform:translateX(-50%);z-index:1;box-shadow:0 0 0 4px var(--border)}
+.tl-content{padding:16px;background:#fff;border-radius:10px;box-shadow:var(--shadow)}
+.tl-year{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.tl-content h4{font-size:15px;font-weight:700;margin-bottom:6px}
+.tl-content p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* Multi-step brief flow */
+.wizard-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;align-items:center;justify-content:center}
+.wizard-backdrop.open{display:flex}
+.wizard-box{background:#fff;border-radius:16px;padding:40px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto}
+.wizard-steps{display:flex;gap:0;margin-bottom:36px;position:relative}
+.wizard-steps::before{content:'';position:absolute;top:15px;left:0;right:0;height:2px;background:var(--border);z-index:0}
+.wizard-step-dot{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;z-index:1}
+.wstep-circle{width:30px;height:30px;border-radius:50%;background:var(--border);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:6px;transition:.3s}
+.wstep-circle.done{background:var(--success);color:#fff}
+.wstep-circle.active{background:var(--accent);color:#fff}
+.wstep-label{font-size:11px;color:var(--muted);font-weight:600;text-align:center}
+.wizard-panel{display:none}
+.wizard-panel.active{display:block}
+.wizard-title{font-size:20px;font-weight:700;margin-bottom:8px}
+.wizard-sub{color:var(--muted);font-size:14px;margin-bottom:24px}
+.wizard-nav{display:flex;justify-content:space-between;margin-top:28px}
+.budget-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.budget-opt{border:2px solid var(--border);border-radius:10px;padding:16px;cursor:pointer;transition:.2s;text-align:center}
+.budget-opt:hover,.budget-opt.selected{border-color:var(--accent);background:rgba(233,69,96,.05)}
+.budget-opt strong{display:block;font-size:16px;margin-bottom:4px}
+.budget-opt span{font-size:12px;color:var(--muted)}
+.service-checkboxes{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.svc-check{border:1.5px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;transition:.2s}
+.svc-check:hover,.svc-check.checked{border-color:var(--accent);background:rgba(233,69,96,.05)}
+.svc-check input{pointer-events:none}
+
+/* Footer */
+footer{background:var(--brand);color:#fff;margin-top:auto}
+.footer-top{max-width:1200px;margin:0 auto;padding:56px 24px 32px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-brand .logo{margin-bottom:12px;display:block}
+.footer-brand p{font-size:13px;opacity:.65;line-height:1.7;margin-bottom:16px}
+.social-links{display:flex;gap:8px}
+.social-btn{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:.2s}
+.social-btn:hover{background:var(--accent)}
+.footer-col h5{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;opacity:.9}
+.footer-col a{display:block;font-size:13px;opacity:.6;margin-bottom:8px;color:#fff;text-decoration:none;transition:.2s}
+.footer-col a:hover{opacity:1;color:var(--accent)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;opacity:.5}
+
+/* Utility */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.tag-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.t-brand{background:#1a1a2e20;color:var(--brand)}
+.t-accent{background:rgba(233,69,96,.12);color:var(--accent)}
+.t-success{background:#d4edda;color:var(--success)}
+.t-warn{background:#fff3cd;color:#856404}
+.t-blue{background:#cfe2ff;color:#0d6efd}
+.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.badge-new{background:#d4edda;color:var(--success)}
+.badge-hot{background:#fff3cd;color:#856404}
+.text-muted{color:var(--muted)}
+.font-sm{font-size:13px}
+.mb-3{margin-bottom:12px}
+.alert-success{background:#d4edda;border:1px solid #c3e6cb;color:#155724;padding:14px 18px;border-radius:var(--radius);margin-bottom:16px}
+.alert-danger{background:#f8d7da;border:1px solid #f5c6cb;color:#721c24;padding:14px 18px;border-radius:var(--radius);margin-bottom:16px}
+.hidden{display:none}
+@media(max-width:768px){
+  .hero h1{font-size:32px}
+  .services-grid,.case-grid,.pricing-grid,.team-grid,.footer-top,.contact-wrapper{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .forum-page{grid-template-columns:1fr}
+  .forum-sidebar-nav{display:none}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .process-steps::before{display:none}
+  .stats-bar-inner{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="qa-banner">⚠️ This is a QA TEST WEBSITE - NOT FOR PRODUCTION USE ⚠️</div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo" onclick="showPage('home')">Vertex<span>.</span></div>
+    <nav>
+      <a onclick="showPage('home')" class="nav-btn">Home</a>
+      <div class="nav-dropdown">
+        <a class="nav-btn">Services ▾</a>
+        <div class="nav-dropdown-menu">
+          <a onclick="showPage('services')">All Services</a>
+          <div class="divider"></div>
+          <a onclick="showPage('services')">🎨 Brand Identity</a>
+          <a onclick="showPage('services')">💻 Web Development</a>
+          <a onclick="showPage('services')">📱 Mobile Apps</a>
+          <a onclick="showPage('services')">📊 Digital Marketing</a>
+          <a onclick="showPage('services')">🎬 Video Production</a>
+          <div class="divider"></div>
+          <a onclick="showPage('services')">View Pricing →</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a class="nav-btn">Work ▾</a>
+        <div class="nav-dropdown-menu">
+          <a onclick="showPage('home')">Case Studies</a>
+          <a onclick="showPage('home')">Portfolio</a>
+          <a href="/nonexistent-clients.html">Client Showcase</a>
+        </div>
+      </div>
+      <a onclick="showPage('about')" class="nav-btn">About</a>
+      <a onclick="showPage('forum')" class="nav-btn">Client Forum</a>
+      <a onclick="showPage('contact')" class="nav-btn btn-header">Get a Quote</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HOME PAGE ===== -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">Award-Winning Agency</span>
+      <h1>We Build Brands That <span>Matter</span></h1>
+      <p>Vertex Creative is a full-service digital agency helping startups and enterprises craft compelling digital experiences since 2012.</p>
+      <div class="hero-btns">
+        <button class="btn btn-primary" onclick="openWizard()">Start a Project</button>
+        <button class="btn btn-outline" onclick="showPage('services')">View Services</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stats-bar-inner">
+      <div><div class="stat-num">350+</div><div class="stat-label">Projects Delivered</div></div>
+      <div><div class="stat-num">12</div><div class="stat-label">Years in Business</div></div>
+      <div><div class="stat-num">98%</div><div class="stat-label">Client Satisfaction</div></div>
+      <div><div class="stat-num">48</div><div class="stat-label">Team Members</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What We Do</div>
+    <div class="section-title">End-to-End Digital Services</div>
+    <p class="section-sub">From strategy to execution, we cover every aspect of your digital presence with precision and creativity.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>Brand Identity</h3>
+        <p>Logo design, brand guidelines, visual language, and full identity systems that set you apart from competitors.</p>
+        <div class="service-price">Starting at $3,500</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💻</div>
+        <h3>Web Development</h3>
+        <p>Custom websites, web apps, and e-commerce platforms built with modern tech stacks and SEO in mind.</p>
+        <div class="service-price">Starting at $8,000</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📱</div>
+        <h3>Mobile Applications</h3>
+        <p>iOS and Android apps designed for performance, usability, and scalability from day one.</p>
+        <div class="service-price">Starting at $25,000</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Digital Marketing</h3>
+        <p>SEO, PPC, social media, and content strategy that drives measurable growth and brand awareness.</p>
+        <div class="service-price">Starting at $2,000/mo</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎬</div>
+        <h3>Video Production</h3>
+        <p>Brand films, explainer videos, product demos, and social content that captivates your audience.</p>
+        <div class="service-price">Starting at $5,000</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📐</div>
+        <h3>UX Strategy</h3>
+        <p>User research, wireframing, prototyping, and design systems that create intuitive product experiences.</p>
+        <div class="service-price">Starting at $6,500</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--light);padding:72px 0">
+    <div class="section" style="padding-top:0;padding-bottom:0">
+      <div class="section-label">Our Work</div>
+      <div class="section-title">Selected Case Studies</div>
+      <div class="case-grid">
+        <div class="case-card">
+          <div class="case-img" style="background:linear-gradient(135deg,#667eea,#764ba2)">NX</div>
+          <div class="case-body">
+            <span class="case-tag">Brand + Web</span>
+            <h3>Nexaflow Rebrand</h3>
+            <p>Complete brand overhaul and website rebuild resulted in 340% increase in qualified leads.</p>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-img" style="background:linear-gradient(135deg,#f093fb,#f5576c)">OR</div>
+          <div class="case-body">
+            <span class="case-tag">Mobile App</span>
+            <h3>Orion Fitness App</h3>
+            <p>Cross-platform mobile app with 50k+ downloads in the first month post-launch.</p>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-img" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">PL</div>
+          <div class="case-body">
+            <span class="case-tag">E-commerce</span>
+            <h3>PulseMarket Launch</h3>
+            <p>Full e-commerce platform with custom checkout flow, driving $2M in first-quarter revenue.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Our Team</div>
+    <div class="section-title">The People Behind the Work</div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2)">SR</div>
+        <h4>Sara Reinhart</h4>
+        <div class="role">CEO & Creative Director</div>
+        <p class="bio">15 years in brand strategy and creative direction.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">MK</div>
+        <h4>Marcus Kim</h4>
+        <div class="role">Head of Technology</div>
+        <p class="bio">Full-stack engineer and systems architect.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">LP</div>
+        <h4>Lucia Patel</h4>
+        <div class="role">Lead UX Designer</div>
+        <p class="bio">Former Google UX researcher with 10+ years of product design.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">DO</div>
+        <h4>David Osei</h4>
+        <div class="role">Marketing Strategist</div>
+        <p class="bio">Growth marketing specialist with 8 years in digital campaigns.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SERVICES PAGE ===== -->
+<div id="page-services" class="page">
+  <div class="services-hero">
+    <h1>Our Services & Pricing</h1>
+    <p>Transparent pricing, no hidden fees. Pick the engagement model that works for your business.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">How We Work</div>
+    <div class="section-title">Our Proven Process</div>
+    <div class="process-steps">
+      <div class="process-step step-active">
+        <div class="step-num">1</div>
+        <h4>Discovery</h4>
+        <p>We deep-dive into your brand, audience, and goals.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h4>Strategy</h4>
+        <p>We build a custom roadmap tailored to your objectives.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h4>Execution</h4>
+        <p>Our team brings the strategy to life with precision.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <h4>Launch & Grow</h4>
+        <p>We support post-launch and measure for continuous improvement.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="padding-top:0">
+    <div class="section-label">Pricing</div>
+    <div class="section-title">Choose Your Plan</div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-price"><sup>$</sup>4,999</div>
+        <div class="pricing-period">One-time project</div>
+        <ul class="pricing-features">
+          <li><span class="check-icon">✓</span> Brand identity design</li>
+          <li><span class="check-icon">✓</span> 5-page website</li>
+          <li><span class="check-icon">✓</span> Mobile responsive</li>
+          <li><span class="check-icon">✓</span> 30-day support</li>
+          <li><span class="x-icon">✗</span> Custom development</li>
+          <li><span class="x-icon">✗</span> Marketing campaigns</li>
+        </ul>
+        <button class="btn btn-dark" style="width:100%" onclick="openWizard()">Get Started</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-name">Growth</div>
+        <div class="pricing-price"><sup>$</sup>14,999</div>
+        <div class="pricing-period">Per project</div>
+        <ul class="pricing-features">
+          <li><span class="check-icon">✓</span> Full brand identity</li>
+          <li><span class="check-icon">✓</span> Custom web application</li>
+          <li><span class="check-icon">✓</span> SEO optimization</li>
+          <li><span class="check-icon">✓</span> 3 months support</li>
+          <li><span class="check-icon">✓</span> Analytics dashboard</li>
+          <li><span class="x-icon">✗</span> Mobile app</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%" onclick="openWizard()">Get Started</button>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-price">Custom</div>
+        <div class="pricing-period">Tailored scope</div>
+        <ul class="pricing-features">
+          <li><span class="check-icon">✓</span> Everything in Growth</li>
+          <li><span class="check-icon">✓</span> Mobile applications</li>
+          <li><span class="check-icon">✓</span> Marketing retainer</li>
+          <li><span class="check-icon">✓</span> Dedicated team</li>
+          <li><span class="check-icon">✓</span> SLA guarantee</li>
+          <li><span class="check-icon">✓</span> 12 months support</li>
+        </ul>
+        <button class="btn btn-dark" style="width:100%" onclick="openWizard()">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ABOUT PAGE ===== -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <h1>About Vertex Creative</h1>
+    <p>Built by designers and engineers who believe great work changes businesses.</p>
+  </div>
+  <div class="section">
+    <div class="section-label">Our Story</div>
+    <div class="section-title">From Freelancers to Full Agency</div>
+    <p style="color:var(--muted);line-height:1.9;max-width:700px;margin-bottom:32px">Vertex Creative was founded in 2012 by Sara Reinhart and Marcus Kim in a small studio in Portland, Oregon. What started as a two-person design shop has grown into a 48-person agency with clients ranging from funded startups to Fortune 500 companies. Our philosophy has never changed: honest work, thoughtful design, and real results.</p>
+  </div>
+  <div class="section" style="padding-top:0">
+    <div class="section-label">Timeline</div>
+    <div class="section-title">Our Journey</div>
+    <div class="timeline" style="max-width:800px;margin:0 auto">
+      <div style="margin-bottom:28px;padding:20px;background:var(--light);border-radius:10px;border-left:4px solid var(--accent)">
+        <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">2012</div>
+        <h4 style="font-weight:700;margin-bottom:6px">Founded in Portland</h4>
+        <p style="font-size:13px;color:var(--muted)">Sara and Marcus start the agency with 2 clients and a vision for honest, impactful design.</p>
+      </div>
+      <div style="margin-bottom:28px;padding:20px;background:var(--light);border-radius:10px;border-left:4px solid var(--accent2)">
+        <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">2015</div>
+        <h4 style="font-weight:700;margin-bottom:6px">First Enterprise Client</h4>
+        <p style="font-size:13px;color:var(--muted)">Land a Fortune 500 rebrand project, growing to 12 full-time staff.</p>
+      </div>
+      <div style="margin-bottom:28px;padding:20px;background:var(--light);border-radius:10px;border-left:4px solid var(--success)">
+        <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">2019</div>
+        <h4 style="font-weight:700;margin-bottom:6px">Expand to Digital & Mobile</h4>
+        <p style="font-size:13px;color:var(--muted)">Launch mobile app division and digital marketing team, growing to 35 people.</p>
+      </div>
+      <div style="padding:20px;background:var(--light);border-radius:10px;border-left:4px solid var(--warn)">
+        <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">2024</div>
+        <h4 style="font-weight:700;margin-bottom:6px">48-Person Full Service Agency</h4>
+        <p style="font-size:13px;color:var(--muted)">350+ projects delivered, multiple international clients, and a new London office opening.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTACT PAGE ===== -->
+<div id="page-contact" class="page">
+  <div style="background:linear-gradient(135deg,var(--brand),var(--accent2));color:#fff;padding:64px 24px;text-align:center">
+    <h1 style="font-size:38px;font-weight:800;margin-bottom:12px">Let's Work Together</h1>
+    <p style="opacity:.8;font-size:16px">Tell us about your project and we'll get back to you within 24 hours.</p>
+  </div>
+  <div class="section">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h2>Get in Touch</h2>
+        <p>Whether you have a fully formed brief or just an idea, we'd love to hear from you. Our team responds to every inquiry within one business day.</p>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div class="contact-text"><strong>Office</strong><span>1240 SW Burnside St, Portland, OR 97205</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div class="contact-text"><strong>Email</strong><span>hello@vertex-creative-agency.fake</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-text"><strong>Phone</strong><span>+1 (503) 555-0147</span></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🕐</div>
+          <div class="contact-text"><strong>Hours</strong><span>Mon–Fri, 9am–6pm PST</span></div>
+        </div>
+        <div style="margin-top:24px">
+          <a href="/nonexistent-office-map.html" style="color:var(--accent);font-size:14px;font-weight:600">View on Google Maps →</a><br>
+          <a href="https://example.com/vertex-creative-glassdoor" style="color:var(--accent);font-size:14px;font-weight:600">Read our Glassdoor reviews →</a>
+        </div>
+      </div>
+      <div class="lead-form">
+        <h3>Send Us a Message</h3>
+        <p>Fill in your details and we'll be in touch shortly.</p>
+        <div id="contact-success" class="form-success alert-success">✅ Message sent! We'll reply within 24 hours.</div>
+        <div id="contact-fail" class="form-fail-msg alert-danger">⚠️ Failed to send message. Server error — please try again later or call us directly.</div>
+        <form id="contact-form" onsubmit="submitContact(event)">
+          <div class="form-row">
+            <div class="form-group" id="fg-cname">
+              <label>First Name *</label>
+              <input type="text" id="c-fname" placeholder="Sara"/>
+              <div class="form-error" id="err-cname"></div>
+            </div>
+            <div class="form-group" id="fg-clname">
+              <label>Last Name *</label>
+              <input type="text" id="c-lname" placeholder="Reinhart"/>
+            </div>
+          </div>
+          <div class="form-group" id="fg-cemail">
+            <label>Work Email *</label>
+            <input type="email" id="c-email" placeholder="sara@company.com"/>
+            <div class="form-error" id="err-cemail"></div>
+          </div>
+          <div class="form-group">
+            <label>Company</label>
+            <input type="text" id="c-company" placeholder="Acme Corp"/>
+          </div>
+          <div class="form-group" id="fg-cservice">
+            <label>Service Interested In *</label>
+            <select id="c-service">
+              <option value="">— Select a service —</option>
+              <option>Brand Identity</option>
+              <option>Web Development</option>
+              <option>Mobile App</option>
+              <option>Digital Marketing</option>
+              <option>Video Production</option>
+              <option>UX Strategy</option>
+              <option>Full Service Retainer</option>
+            </select>
+            <div class="form-error" id="err-cservice"></div>
+          </div>
+          <div class="form-group" id="fg-cbudget">
+            <label>Budget Range *</label>
+            <select id="c-budget">
+              <option value="">— Select budget —</option>
+              <option>Under $5k</option>
+              <option>$5k–$15k</option>
+              <option>$15k–$50k</option>
+              <option>$50k+</option>
+            </select>
+            <div class="form-error" id="err-cbudget"></div>
+          </div>
+          <div class="form-group" id="fg-cmsg">
+            <label>Tell us about your project *</label>
+            <textarea id="c-msg" rows="4" placeholder="Describe your project, timeline, and goals..."></textarea>
+            <div class="form-error" id="err-cmsg"></div>
+          </div>
+          <div class="form-group">
+            <div class="checkboxes">
+              <label class="checkbox-item"><input type="checkbox" id="c-nda"> I require an NDA before sharing details</label>
+              <label class="checkbox-item"><input type="checkbox" id="c-newsletter"> Subscribe me to agency news and insights</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FORUM LIST PAGE ===== -->
+<div id="page-forum" class="page">
+  <div style="background:linear-gradient(135deg,var(--brand),var(--accent2));color:#fff;padding:48px 24px">
+    <div class="container">
+      <h1 style="font-size:32px;font-weight:800;margin-bottom:8px">Client Discussion Board</h1>
+      <p style="opacity:.8">Project updates, feedback, questions, and collaboration — all in one place.</p>
+    </div>
+  </div>
+  <div class="forum-page">
+    <aside class="forum-sidebar-nav">
+      <h4>Browse by Tag</h4>
+      <div class="tag-list" id="sidebar-tags"></div>
+      <h4 style="margin-top:16px">Quick Stats</h4>
+      <div style="font-size:13px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between"><span>Threads</span><strong id="stat-threads">0</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Replies</span><strong>284</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Members</span><strong>47</strong></div>
+        <div style="display:flex;justify-content:space-between"><span>Online Now</span><strong style="color:var(--success)">6</strong></div>
+      </div>
+    </aside>
+    <div class="forum-main">
+      <div class="forum-header-row">
+        <h2>All Discussions</h2>
+        <button class="btn btn-primary btn-sm" onclick="showPage('new-thread')">+ New Thread</button>
+      </div>
+      <div class="thread-tags-strip" id="tag-filters"></div>
+      <div class="forum-threads" id="thread-list"></div>
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">›</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== THREAD DETAIL ===== -->
+<div id="page-thread-detail" class="page">
+  <div class="thread-detail-page">
+    <div class="thread-detail-header">
+      <div class="breadcrumb"><span onclick="showPage('forum')">Forum</span> › <span id="td-breadcrumb"></span></div>
+      <div class="thread-detail-title" id="td-title"></div>
+      <div class="thread-detail-meta" id="td-meta"></div>
+    </div>
+    <div id="td-posts"></div>
+    <div class="reply-form-section">
+      <h3>Post a Reply</h3>
+      <div id="reply-success" class="alert-success hidden">✅ Reply posted successfully.</div>
+      <div class="form-group">
+        <label>Your Name *</label>
+        <input type="text" id="reply-name" placeholder="Your name"/>
+      </div>
+      <div class="form-group">
+        <label>Message *</label>
+        <textarea id="reply-text" rows="4" placeholder="Type your reply..."></textarea>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:12px">
+        <button class="btn btn-primary" onclick="postReply()">Submit Reply</button>
+        <button class="btn btn-dark btn-sm" onclick="showPage('forum')">Back to Forum</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== NEW THREAD ===== -->
+<div id="page-new-thread" class="page">
+  <div class="new-thread-page">
+    <div class="breadcrumb" style="margin-bottom:16px"><span onclick="showPage('forum')" style="color:var(--accent);cursor:pointer">Forum</span> › New Thread</div>
+    <h2>Start a New Discussion</h2>
+    <p>Use this form to post project updates, questions, or feedback for the Vertex team.</p>
+    <div id="nt-success" class="alert-success hidden">✅ Thread posted! <span onclick="showPage('forum')" style="color:var(--accent);cursor:pointer;font-weight:600">Back to Forum →</span></div>
+    <form id="new-thread-form" onsubmit="postThread(event)" style="margin-top:24px">
+      <div class="form-group" id="fg-nt-name">
+        <label>Your Name *</label>
+        <input type="text" id="nt-name" placeholder="Full name"/>
+        <div class="form-error" id="err-nt-name"></div>
+      </div>
+      <div class="form-group" id="fg-nt-email">
+        <label>Email *</label>
+        <input type="email" id="nt-email" placeholder="you@company.com"/>
+        <div class="form-error" id="err-nt-email"></div>
+      </div>
+      <div class="form-group" id="fg-nt-tag">
+        <label>Category Tag *</label>
+        <select id="nt-tag">
+          <option value="">— Select tag —</option>
+          <option value="project-update">Project Update</option>
+          <option value="feedback">Feedback</option>
+          <option value="question">Question</option>
+          <option value="bug-report">Bug Report</option>
+          <option value="idea">Idea</option>
+          <option value="milestone">Milestone</option>
+        </select>
+        <div class="form-error" id="err-nt-tag"></div>
+      </div>
+      <div class="form-group" id="fg-nt-title">
+        <label>Thread Title *</label>
+        <input type="text" id="nt-title" placeholder="Brief, descriptive title..."/>
+        <div class="form-error" id="err-nt-title"></div>
+      </div>
+      <div class="form-group" id="fg-nt-body">
+        <label>Message *</label>
+        <textarea id="nt-body" rows="6" placeholder="Share project updates, ask questions, or provide feedback..."></textarea>
+        <div class="form-error" id="err-nt-body"></div>
+      </div>
+      <div class="form-group">
+        <label class="checkbox-item"><input type="checkbox" id="nt-notify"> Notify me of replies via email</label>
+      </div>
+      <div style="display:flex;gap:12px">
+        <button type="submit" class="btn btn-primary">Post Thread</button>
+        <button type="button" class="btn btn-dark btn-sm" onclick="showPage('forum')">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===== PROJECT BRIEF WIZARD ===== -->
+<div class="wizard-backdrop" id="wizard-backdrop">
+  <div class="wizard-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px">
+      <strong style="font-size:18px">Start a Project</strong>
+      <button onclick="closeWizard()" style="border:none;background:none;cursor:pointer;font-size:20px;color:var(--muted)">✕</button>
+    </div>
+    <div class="wizard-steps" id="wizard-step-dots"></div>
+    <!-- Panel 1 -->
+    <div class="wizard-panel active" id="wp-1">
+      <div class="wizard-title">What services do you need?</div>
+      <div class="wizard-sub">Select all that apply — you can always adjust later.</div>
+      <div class="service-checkboxes" id="svc-checks"></div>
+      <div class="wizard-nav">
+        <div></div>
+        <button class="btn btn-primary" onclick="wNext(1)">Next →</button>
+      </div>
+    </div>
+    <!-- Panel 2 -->
+    <div class="wizard-panel" id="wp-2">
+      <div class="wizard-title">What's your budget?</div>
+      <div class="wizard-sub">This helps us tailor the right team and scope for you.</div>
+      <div class="budget-options" id="budget-opts"></div>
+      <div id="budget-err" class="form-error hidden" style="margin-top:8px">Please select a budget range.</div>
+      <div class="wizard-nav">
+        <button class="btn btn-dark btn-sm" onclick="wBack(2)">← Back</button>
+        <button class="btn btn-primary" onclick="wNext(2)">Next →</button>
+      </div>
+    </div>
+    <!-- Panel 3 -->
+    <div class="wizard-panel" id="wp-3">
+      <div class="wizard-title">Your Contact Details</div>
+      <div class="wizard-sub">We'll reach out within one business day.</div>
+      <div class="form-group" id="fg-wr-name">
+        <label>Full Name *</label>
+        <input type="text" id="wr-name" placeholder="Jane Smith"/>
+        <div class="form-error" id="err-wr-name"></div>
+      </div>
+      <div class="form-group" id="fg-wr-email">
+        <label>Email *</label>
+        <input type="email" id="wr-email" placeholder="jane@company.com"/>
+        <div class="form-error" id="err-wr-email"></div>
+      </div>
+      <div class="form-group">
+        <label>Company</label>
+        <input type="text" id="wr-company" placeholder="Company name"/>
+      </div>
+      <div class="form-group">
+        <label>Timeline</label>
+        <select id="wr-timeline">
+          <option>ASAP (within 2 weeks)</option>
+          <option>1–3 months</option>
+          <option>3–6 months</option>
+          <option>Flexible</option>
+        </select>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn btn-dark btn-sm" onclick="wBack(3)">← Back</button>
+        <button class="btn btn-primary" onclick="wNext(3)">Submit Brief →</button>
+      </div>
+    </div>
+    <!-- Panel 4 (success) -->
+    <div class="wizard-panel" id="wp-4">
+      <div style="text-align:center;padding:20px 0">
+        <div style="font-size:56px;margin-bottom:20px">🎉</div>
+        <h3 style="font-size:22px;font-weight:800;margin-bottom:12px">Brief Received!</h3>
+        <p style="color:var(--muted);margin-bottom:24px">Thanks! A Vertex strategist will review your brief and reach out within one business day to schedule an intro call.</p>
+        <button class="btn btn-primary" onclick="closeWizard()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="logo">Vertex<span>.</span></span>
+      <p>Full-service digital agency building brands and products that move people.</p>
+      <div class="social-links">
+        <div class="social-btn">𝕏</div>
+        <div class="social-btn">in</div>
+        <div class="social-btn">▶</div>
+        <div class="social-btn">📸</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a onclick="showPage('services')">Brand Identity</a>
+      <a onclick="showPage('services')">Web Development</a>
+      <a onclick="showPage('services')">Mobile Apps</a>
+      <a href="/nonexistent-ar-services.html">AR/VR Experiences</a>
+      <a onclick="showPage('services')">Digital Marketing</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a onclick="showPage('about')">About Us</a>
+      <a onclick="showPage('home')">Our Work</a>
+      <a href="/nonexistent-careers.html">Careers (4 open)</a>
+      <a onclick="showPage('contact')">Contact</a>
+      <a href="https://example.com/vertex-press-kit">Press Kit</a>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="/nonexistent-privacy.html">Privacy Policy</a>
+      <a href="/nonexistent-terms.html">Terms of Service</a>
+      <a href="/nonexistent-cookie-policy.html">Cookie Policy</a>
+      <a href="/nonexistent-gdpr.html">GDPR</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Vertex Creative Agency. All rights reserved.</span>
+    <span>Portland, OR · London, UK</span>
+  </div>
+</footer>
+
+<script>
+// =========== DATA ===========
+const TAG_CONFIG = [
+  {id:'project-update', label:'Project Update', color:'#0d6efd', bg:'#cfe2ff'},
+  {id:'feedback',       label:'Feedback',       color:'#6f42c1', bg:'#e2d9f3'},
+  {id:'question',       label:'Question',       color:'#0f5132', bg:'#d1e7dd'},
+  {id:'bug-report',     label:'Bug Report',     color:'#842029', bg:'#f8d7da'},
+  {id:'idea',           label:'Idea',           color:'#664d03', bg:'#fff3cd'},
+  {id:'milestone',      label:'Milestone',      color:'#055160', bg:'#cff4fc'},
+];
+
+let threads = [
+  {id:1, tag:'project-update', title:'Homepage redesign — round 2 feedback needed', excerpt:'We have uploaded the second iteration of the homepage designs to the shared drive. Please review and leave your comments below before Friday.', author:'Sara Reinhart', role:'Creative Director', date:'2 hours ago', replies:[
+    {name:'James Webb',role:'Client · Nexaflow',text:'Looking great! Love the new hero section. My only note is the CTA button color feels a bit off — can we try the brand red?',date:'1 hour ago',avatar:'JW',color:'#667eea'},
+    {name:'Lucia Patel',role:'UX Designer',text:'Good call James. We\'ll prep 3 color variants for your review tomorrow.',date:'45 min ago',avatar:'LP',color:'#f093fb'}
+  ], open:true},
+  {id:2, tag:'question', title:'What file formats do you accept for brand assets?', excerpt:'We want to send over our existing logo files and brand guide. What formats work best for your team?', author:'Rachel Okonkwo', role:'Client · PulseMarket', date:'Yesterday', replies:[
+    {name:'Marcus Kim',role:'Tech Lead',text:'We accept SVG, AI, EPS for logos and PDF for brand guides. PNG at 300dpi minimum for raster assets.',date:'Yesterday',avatar:'MK',color:'#4facfe'}
+  ], open:true},
+  {id:3, tag:'milestone', title:'🎉 Phase 1 complete — site live on staging!', excerpt:'The full Phase 1 build is now live on staging at staging-client.vertex-preview.fake — please QA test across devices and report any issues here.', author:'Marcus Kim', role:'Tech Lead', date:'3 days ago', replies:[], open:false},
+  {id:4, tag:'bug-report', title:'Mobile nav menu not closing after tap on iOS Safari', excerpt:'Tested on iPhone 14 Pro (iOS 17.2). After tapping a nav item, the dropdown menu stays open. Reproducible 100% of the time.', author:'Priya Sharma', role:'Client · Orion Fitness', date:'3 days ago', replies:[
+    {name:'Marcus Kim',role:'Tech Lead',text:'Thanks for the detailed report. This is a known WebKit quirk. Fix deployed to staging — please confirm resolved.',date:'2 days ago',avatar:'MK',color:'#4facfe'}
+  ], open:true},
+  {id:5, tag:'feedback', title:'Brand guide revisions — v3 uploaded', excerpt:'After your feedback, we\'ve updated the typography scale and updated the secondary palette. See attached PDF in the shared drive.', author:'Lucia Patel', role:'UX Designer', date:'4 days ago', replies:[], open:true},
+  {id:6, tag:'idea', title:'Idea: add a live chat widget to the new site', excerpt:'Our sales team is asking if we can add a live chat option, like Intercom or Crisp. Would that be in scope for Phase 2?', author:'David Chen', role:'Client · Nexaflow', date:'5 days ago', replies:[
+    {name:'Sara Reinhart',role:'Creative Director',text:'Absolutely in scope for Phase 2. We\'ll include a live chat integration option in the Phase 2 proposal.',date:'5 days ago',avatar:'SR',color:'#e94560'}
+  ], open:true},
+];
+
+let activeFilter = 'all';
+let activeThread = null;
+
+// =========== INIT ===========
+function initForum() {
+  renderTagFilters();
+  renderSidebarTags();
+  renderThreads();
+  document.getElementById('stat-threads').textContent = threads.length;
+}
+
+function renderTagFilters() {
+  const t = document.getElementById('tag-filters');
+  t.innerHTML = `<span class="tag-pill ${activeFilter==='all'?'active-filter':''}" style="border-color:#6c757d;color:#6c757d" onclick="filterTag('all')">All</span>`;
+  TAG_CONFIG.forEach(tc=>{
+    const count = threads.filter(th=>th.tag===tc.id).length;
+    t.innerHTML+=`<span class="tag-pill ${activeFilter===tc.id?'active-filter':''}" style="border-color:${tc.color};color:${tc.color};background:${activeFilter===tc.id?tc.bg:'transparent'}" onclick="filterTag('${tc.id}')">${tc.label} (${count})</span>`;
+  });
+}
+
+function renderSidebarTags() {
+  const el = document.getElementById('sidebar-tags');
+  el.innerHTML = '';
+  TAG_CONFIG.forEach(tc=>{
+    const count = threads.filter(th=>th.tag===tc.id).length;
+    el.innerHTML+=`<div class="tag-item ${activeFilter===tc.id?'active':''}" onclick="filterTag('${tc.id}')">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="tag-dot" style="background:${tc.color}"></div>
+        <span>${tc.label}</span>
+      </div>
+      <span class="tag-count">${count}</span>
+    </div>`;
+  });
+}
+
+function renderThreads() {
+  const el = document.getElementById('thread-list');
+  const list = activeFilter==='all' ? threads : threads.filter(t=>t.tag===activeFilter);
+  if(!list.length){el.innerHTML='<div style="text-align:center;padding:48px;color:var(--muted)">No threads in this category.</div>';return;}
+  el.innerHTML = list.map(t=>{
+    const tc = TAG_CONFIG.find(x=>x.id===t.tag)||{color:'#666',bg:'#eee',label:t.tag};
+    return `<div class="thread-item" onclick="openThread(${t.id})">
+      <div>
+        <div class="thread-meta-top">
+          <div class="thread-status ${t.open?'':'closed'}"></div>
+          <span class="thread-tag-badge" style="background:${tc.bg};color:${tc.color}">${tc.label}</span>
+          ${!t.open?'<span class="badge" style="background:#f0f0f0;color:#666">Closed</span>':''}
+        </div>
+        <div class="thread-title">${t.title}</div>
+        <div class="thread-excerpt">${t.excerpt.substring(0,100)}…</div>
+        <div class="thread-footer">
+          <span>👤 ${t.author}</span>
+          <span>🕐 ${t.date}</span>
+          <span>💬 ${t.replies.length} repl${t.replies.length===1?'y':'ies'}</span>
+        </div>
+      </div>
+      <div class="thread-stats">
+        <div class="thread-replies">${t.replies.length}</div>
+        <div class="thread-replies-label">replies</div>
+        <div class="thread-latest">${t.date}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterTag(tag) {
+  activeFilter = tag;
+  renderTagFilters();
+  renderSidebarTags();
+  renderThreads();
+}
+
+function openThread(id) {
+  activeThread = threads.find(t=>t.id===id);
+  if(!activeThread) return;
+  const tc = TAG_CONFIG.find(x=>x.id===activeThread.tag)||{color:'#666',bg:'#eee',label:activeThread.tag};
+
+  document.getElementById('td-breadcrumb').textContent = activeThread.tag.replace('-',' ');
+  document.getElementById('td-title').textContent = activeThread.title;
+  document.getElementById('td-meta').innerHTML = `
+    <span class="thread-tag-badge" style="background:${tc.bg};color:${tc.color}">${tc.label}</span>
+    <span class="text-muted font-sm">by <strong>${activeThread.author}</strong></span>
+    <span class="text-muted font-sm">• ${activeThread.date}</span>
+    <span class="text-muted font-sm">• ${activeThread.replies.length} repl${activeThread.replies.length===1?'y':'ies'}</span>
+  `;
+
+  const colors = ['#e94560','#0f3460','#4facfe','#43e97b','#f093fb','#667eea'];
+  const opColor = colors[activeThread.id % colors.length];
+  const initials = activeThread.author.split(' ').map(x=>x[0]).join('').substring(0,2);
+
+  let postsHTML = `<div class="post-card op">
+    <div class="post-author-col">
+      <div class="author-avatar" style="background:${opColor}">${initials}</div>
+      <div class="post-body-col">
+        <div class="post-author-name">${activeThread.author}</div>
+        <div class="post-author-role">${activeThread.role} • Original Post</div>
+        <div class="post-text">${activeThread.excerpt}</div>
+        <div class="post-actions">
+          <button class="post-action-btn">👍 Like</button>
+          <button class="post-action-btn">💬 Quote</button>
+        </div>
+      </div>
+    </div>
+    <div class="post-footer"><span>${activeThread.date}</span><span>#1</span></div>
+  </div>`;
+
+  activeThread.replies.forEach((r,i)=>{
+    postsHTML+=`<div class="post-card">
+      <div class="post-author-col">
+        <div class="author-avatar" style="background:${r.color||'#666'}">${r.avatar||'?'}</div>
+        <div class="post-body-col">
+          <div class="post-author-name">${r.name}</div>
+          <div class="post-author-role">${r.role}</div>
+          <div class="post-text">${r.text}</div>
+          <div class="post-actions">
+            <button class="post-action-btn">👍 Like</button>
+            <button class="post-action-btn">💬 Quote</button>
+          </div>
+        </div>
+      </div>
+      <div class="post-footer"><span>${r.date}</span><span>#${i+2}</span></div>
+    </div>`;
+  });
+
+  document.getElementById('td-posts').innerHTML = postsHTML;
+  document.getElementById('reply-success').classList.add('hidden');
+  document.getElementById('reply-name').value = '';
+  document.getElementById('reply-text').value = '';
+  showPage('thread-detail');
+}
+
+function postReply() {
+  const name = document.getElementById('reply-name').value.trim();
+  const text = document.getElementById('reply-text').value.trim();
+  if(!name||!text){alert('Please fill in both fields.');return;}
+  const initials = name.split(' ').map(x=>x[0]).join('').substring(0,2).toUpperCase();
+  const newReply = {name,role:'Forum Member',text,date:'Just now',avatar:initials,color:'#6c757d'};
+  activeThread.replies.push(newReply);
+  openThread(activeThread.id);
+  document.getElementById('reply-success').classList.remove('hidden');
+}
+
+function postThread(e) {
+  e.preventDefault();
+  let valid = true;
+  const fields=[['nt-name','fg-nt-name','err-nt-name','Name required'],
+    ['nt-email','fg-nt-email','err-nt-email','Valid email required'],
+    ['nt-tag','fg-nt-tag','err-nt-tag','Please select a category'],
+    ['nt-title','fg-nt-title','err-nt-title','Title required'],
+    ['nt-body','fg-nt-body','err-nt-body','Message required']];
+  fields.forEach(([id,fg,err,msg])=>{
+    const el=document.getElementById(id),errEl=document.getElementById(err),fgEl=document.getElementById(fg);
+    if(!el.value.trim()||(id==='nt-email'&&!/\S+@\S+\.\S+/.test(el.value))){
+      fgEl.classList.add('error');errEl.textContent=msg;valid=false;
+    } else {fgEl.classList.remove('error');errEl.textContent='';}
+  });
+  if(!valid) return;
+  const tc = TAG_CONFIG.find(x=>x.id===document.getElementById('nt-tag').value)||TAG_CONFIG[0];
+  threads.unshift({
+    id:Date.now(),
+    tag:document.getElementById('nt-tag').value,
+    title:document.getElementById('nt-title').value,
+    excerpt:document.getElementById('nt-body').value,
+    author:document.getElementById('nt-name').value,
+    role:'Forum Member',
+    date:'Just now',
+    replies:[],
+    open:true
+  });
+  document.getElementById('nt-success').classList.remove('hidden');
+  document.getElementById('new-thread-form').style.display='none';
+  document.getElementById('stat-threads').textContent=threads.length;
+}
+
+// =========== CONTACT FORM ===========
+function submitContact(e) {
+  e.preventDefault();
+  let valid = true;
+  [['c-fname','fg-cname','err-cname','First name required'],
+   ['c-email','fg-cemail','err-cemail','Valid email required'],
+   ['c-service','fg-cservice','err-cservice','Please select a service'],
+   ['c-budget','fg-cbudget','err-cbudget','Please select a budget'],
+   ['c-msg','fg-cmsg','err-cmsg','Message required']
+  ].forEach(([id,fg,err,msg])=>{
+    const el=document.getElementById(id),errEl=document.getElementById(err),fgEl=document.getElementById(fg);
+    const val=el.value.trim();
+    let bad=!val;
+    if(id==='c-email'&&val&&!/\S+@\S+\.\S+/.test(val))bad=true;
+    if(bad){fgEl.classList.add('error');errEl.textContent=msg;valid=false;}
+    else{fgEl.classList.remove('error');errEl.textContent='';}
+  });
+  if(!valid) return;
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('fail')==='true'){
+    document.getElementById('contact-fail').style.display='block';
+    document.getElementById('contact-success').style.display='none';
+  } else {
+    document.getElementById('contact-success').style.display='block';
+    document.getElementById('contact-fail').style.display='none';
+    document.getElementById('contact-form').style.opacity='.5';
+    document.getElementById('contact-form').style.pointerEvents='none';
+  }
+}
+
+// =========== PROJECT BRIEF WIZARD ===========
+const SERVICES = ['Brand Identity','Web Development','Mobile App','Digital Marketing','Video Production','UX Strategy'];
+const BUDGETS = [
+  {label:'Under $5k', sub:'Starter projects'},
+  {label:'$5k – $15k', sub:'Small business'},
+  {label:'$15k – $50k', sub:'Mid-size projects'},
+  {label:'$50k+', sub:'Enterprise scope'},
+];
+const WIZARD_STEPS = ['Services','Budget','Contact','Done'];
+let selectedBudget = null;
+
+function openWizard() {
+  // Init services
+  document.getElementById('svc-checks').innerHTML = SERVICES.map((s,i)=>
+    `<label class="svc-check" id="svc-${i}"><input type="checkbox" onchange="toggleSvc(${i})"> ${s}</label>`
+  ).join('');
+  // Init budgets
+  document.getElementById('budget-opts').innerHTML = BUDGETS.map((b,i)=>
+    `<div class="budget-opt" id="bopt-${i}" onclick="selectBudget(${i})"><strong>${b.label}</strong><span>${b.sub}</span></div>`
+  ).join('');
+  // Init step dots
+  document.getElementById('wizard-step-dots').innerHTML = WIZARD_STEPS.map((s,i)=>
+    `<div class="wizard-step-dot"><div class="wstep-circle ${i===0?'active':''}" id="wdot-${i}">${i+1}</div><div class="wstep-label">${s}</div></div>`
+  ).join('');
+  selectedBudget = null;
+  [1,2,3,4].forEach(n=>{
+    document.getElementById(`wp-${n}`).classList.toggle('active', n===1);
+  });
+  document.getElementById('wizard-backdrop').classList.add('open');
+}
+
+function closeWizard(){document.getElementById('wizard-backdrop').classList.remove('open');}
+
+function toggleSvc(i){
+  document.getElementById(`svc-${i}`).classList.toggle('checked',document.querySelectorAll(`#svc-${i} input`)[0].checked);
+}
+function selectBudget(i){
+  selectedBudget=i;
+  BUDGETS.forEach((_,j)=>document.getElementById(`bopt-${j}`).classList.toggle('selected',j===i));
+  document.getElementById('budget-err').classList.add('hidden');
+}
+
+function updateWizardDots(step){
+  WIZARD_STEPS.forEach((_,i)=>{
+    const dot=document.getElementById(`wdot-${i}`);
+    if(i<step-1){dot.className='wstep-circle done';dot.textContent='✓';}
+    else if(i===step-1){dot.className='wstep-circle active';dot.textContent=i+1;}
+    else{dot.className='wstep-circle';dot.textContent=i+1;}
+  });
+}
+
+function wNext(panel){
+  if(panel===2&&selectedBudget===null){
+    document.getElementById('budget-err').classList.remove('hidden');return;
+  }
+  if(panel===3){
+    let ok=true;
+    [['wr-name','fg-wr-name','err-wr-name','Name required'],
+     ['wr-email','fg-wr-email','err-wr-email','Valid email required']
+    ].forEach(([id,fg,err,msg])=>{
+      const el=document.getElementById(id),errEl=document.getElementById(err),fgEl=document.getElementById(fg);
+      if(!el.value.trim()||(id==='wr-email'&&!/\S+@\S+\.\S+/.test(el.value))){fgEl.classList.add('error');errEl.textContent=msg;ok=false;}
+      else{fgEl.classList.remove('error');errEl.textContent='';}
+    });
+    if(!ok)return;
+  }
+  const next=panel+1;
+  document.getElementById(`wp-${panel}`).classList.remove('active');
+  document.getElementById(`wp-${next}`).classList.add('active');
+  updateWizardDots(next);
+}
+function wBack(panel){
+  document.getElementById(`wp-${panel}`).classList.remove('active');
+  document.getElementById(`wp-${panel-1}`).classList.add('active');
+  updateWizardDots(panel-1);
+}
+
+// =========== PAGE ROUTER ===========
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(`page-${name}`).classList.add('active');
+  window.scrollTo(0,0);
+  if(name==='forum'||name==='thread-detail'){initForum();}
+}
+
+// ========== BOOT ==========
+initForum();
+</script>
+</body>
+</html>
