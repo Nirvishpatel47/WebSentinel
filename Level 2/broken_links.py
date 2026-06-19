@@ -14,8 +14,18 @@ from urllib.parse import urljoin, urlparse, urldefrag
 from playwright.async_api import async_playwright, Page, TimeoutError as PlaywrightTimeout
 from typing import Dict, List, Set, Tuple, Optional
 from typing import Dict, List, Set, Tuple
+import logging
+import os
+import re
 
 
+logging.basicConfig(
+    filename="scan.log",
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+
+screenshots_dir = r"F:\Smart AI workflow\ETHOWT\proofs"
 
 # =========================
 # CONFIG
@@ -28,6 +38,57 @@ DROPDOWN_INTERACTION_TIMEOUT = 800
 MAX_INTERACTIONS = 25
 WAIT_AFTER_ACTION_MS = 400
 
+NON_HTML = (
+    ".pdf",
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".svg",
+    ".webp",
+    ".mp4",
+    ".mp3",
+    ".css",
+    ".js",
+    ".zip"
+)
+
+def should_check_url(url: str) -> bool:
+
+    if not url:
+        return False
+
+    scheme = urlparse(url).scheme.lower()
+
+    SKIP_SCHEMES = {
+        "blob",
+        "data",
+        "javascript",
+        "mailto",
+        "tel",
+        "sms",
+        "whatsapp"
+    }
+
+    if scheme in SKIP_SCHEMES:
+        return False
+
+    return True
+
+def is_html_page(url: str) -> bool:
+
+    path = urlparse(url).path.lower()
+
+    return not path.endswith(
+        NON_HTML
+    )
+
+def safe_filename(text: str) -> str:
+    return re.sub(
+        r'[<>:"/\\\\|?*]',
+        '_',
+        text
+    )
 
 # =========================
 # URL HELPERS
@@ -56,29 +117,31 @@ def is_internal(base_domain: str, url: str) -> bool:
 # -----------------------------
 # STABLE PAGE SIGNATURE
 # -----------------------------
-async def get_page_signature(page: Page) -> str:
-    """
-    Lightweight fingerprint to detect DOM changes.
-    """
-    try:
-        return await page.evaluate("""
-            () => document.body.innerText.length + '|' +
-                  document.querySelectorAll('*').length
-        """)
-    except:
-        return ""
+async def get_page_signature(page):
+    return await page.evaluate("""
+        () => {
+            return JSON.stringify({
+                text: document.body.innerText.length,
+                elements: document.querySelectorAll('*').length,
+                links: document.querySelectorAll('a').length,
+                images: document.querySelectorAll('img').length
+            });
+        }
+    """)
 
 
 # -----------------------------
 # SAFE ELEMENT IDENTIFICATION
 # -----------------------------
-async def get_element_key(element) -> str:
-    """
-    Stable identity instead of bounding-box dedupe.
-    """
+async def get_element_key(element):
     try:
         return await element.evaluate("""
-            el => el.outerHTML.slice(0, 200)
+        el => JSON.stringify({
+            tag: el.tagName,
+            id: el.id,
+            name: el.getAttribute('name'),
+            text: el.innerText?.trim().slice(0,50)
+        })
         """)
     except:
         return ""
@@ -89,14 +152,11 @@ async def get_element_key(element) -> str:
 # -----------------------------
 async def reveal_dropdowns_and_extract(page: Page) -> Dict[str, List[str]]:
     """
-    Production-grade UI interaction engine:
-    - Extracts resources
-    - Expands dropdowns / menus / accordions / tabs
-    - Uses state validation (not blind clicking)
-    - Prevents duplicate or unsafe interactions
+    Reveal menus/accordions/tabs and collect newly exposed resources.
+    Safer and simpler than DOM-signature based approach.
     """
 
-    all_resources: Dict[str, List[str]] = {
+    all_resources = {
         "links": [],
         "images": [],
         "scripts": [],
@@ -104,134 +164,177 @@ async def reveal_dropdowns_and_extract(page: Page) -> Dict[str, List[str]]:
         "videos": [],
         "audios": [],
         "iframes": [],
+        "network": []
     }
 
-    seen_elements: Set[str] = set()
-    interactions = 0
+    # --------------------------------
+    # TRACK NETWORK REQUESTS
+    # --------------------------------
+    network_urls = set()
 
-    # -----------------------------
-    # BASE EXTRACTION
-    # -----------------------------
+    def capture_response(response):
+        try:
+            network_urls.add(response.url)
+        except:
+            pass
+
+    page.on("response", capture_response)
+
+    # --------------------------------
+    # INITIAL EXTRACTION
+    # --------------------------------
     try:
         initial = await extract_visible_resources(page)
         merge_resources(all_resources, initial)
     except:
         pass
 
-    # -----------------------------
-    # COLLECT INTERACTIVE ELEMENTS
-    # -----------------------------
+    # --------------------------------
+    # FIND REAL INTERACTIVE CONTROLS
+    # --------------------------------
     try:
         candidates = await page.locator("""
-            [aria-haspopup],
-            [aria-expanded],
-            [aria-controls],
             button,
-            a,
-            [role='button']
+            [role='button'],
+            [aria-expanded],
+            [aria-haspopup],
+            [aria-controls]
         """).all()
     except:
         candidates = []
 
-    # -----------------------------
-    # FILTER + DEDUPE
-    # -----------------------------
-    valid_triggers = []
+    seen = set()
+    interactions = 0
 
-    for el in candidates:
-        try:
-            if not await el.is_visible():
-                continue
-
-            key = await get_element_key(el)
-
-            if not key or key in seen_elements:
-                continue
-
-            seen_elements.add(key)
-            valid_triggers.append(el)
-
-        except:
-            continue
-
-    valid_triggers = valid_triggers[:MAX_INTERACTIONS]
-
-    # -----------------------------
-    # MAIN INTERACTION LOOP
-    # -----------------------------
-    for trigger in valid_triggers:
+    # --------------------------------
+    # PROCESS CONTROLS
+    # --------------------------------
+    for element in candidates:
 
         if interactions >= MAX_INTERACTIONS:
             break
 
         try:
-            before_state = await get_page_signature(page)
 
-            # -------------------------
-            # STRATEGY 1: HOVER EXPANSION
-            # -------------------------
+            if not await element.is_visible():
+                continue
+
+            key = await get_element_key(element)
+
+            if not key or key in seen:
+                continue
+
+            seen.add(key)
+
+            before_count = sum(
+                len(v)
+                for k, v in all_resources.items()
+                if k != "network"
+            )
+
+            # ------------------------
+            # HOVER
+            # ------------------------
             try:
-                await trigger.hover(timeout=800)
-                await page.wait_for_timeout(WAIT_AFTER_ACTION_MS)
-            except PlaywrightTimeout:
-                pass
-
-            after_hover = await get_page_signature(page)
-
-            if after_hover != before_state:
-                try:
-                    updated = await extract_visible_resources(page)
-                    merge_resources(all_resources, updated)
-                except:
-                    pass
-
-            # -------------------------
-            # STRATEGY 2: CLICK EXPANSION
-            # -------------------------
-            clicked = False
-
-            try:
-                aria = await trigger.get_attribute("aria-expanded")
-                cls = await trigger.get_attribute("class") or ""
-
-                # Only click if it looks interactive
-                if aria is not None or "menu" in cls or "dropdown" in cls:
-                    await trigger.click(timeout=800, force=True)
-                    clicked = True
+                await element.hover(timeout=1000)
+                await page.wait_for_timeout(500)
             except:
                 pass
 
-            if clicked:
-                await page.wait_for_timeout(WAIT_AFTER_ACTION_MS)
+            # ------------------------
+            # CLICK ONLY IF IT LOOKS
+            # LIKE A TOGGLE
+            # ------------------------
+            try:
 
-                after_click = await get_page_signature(page)
+                aria = await element.get_attribute("aria-expanded")
 
-                if after_click != before_state:
-                    try:
-                        updated = await extract_visible_resources(page)
-                        merge_resources(all_resources, updated)
-                    except:
-                        pass
+                role = await element.get_attribute("role") or ""
 
-                # close menu safely
-                try:
-                    await page.keyboard.press("Escape")
-                except:
-                    pass
+                cls = (
+                    await element.get_attribute("class")
+                    or ""
+                ).lower()
+
+                looks_like_toggle = (
+                    aria is not None
+                    or "menu" in cls
+                    or "dropdown" in cls
+                    or "accordion" in cls
+                    or role == "button"
+                )
+
+                if looks_like_toggle:
+
+                    await element.click(
+                        timeout=1000
+                    )
+
+                    await page.wait_for_timeout(500)
+
+            except:
+                pass
+
+            # ------------------------
+            # EXTRACT AGAIN
+            # ------------------------
+            try:
+
+                updated = await extract_visible_resources(page)
+
+                merge_resources(
+                    all_resources,
+                    updated
+                )
+
+            except:
+                pass
+
+            after_count = sum(
+                len(v)
+                for k, v in all_resources.items()
+                if k != "network"
+            )
+
+            # Close dropdown safely
+            try:
+                await page.keyboard.press(
+                    "Escape"
+                )
+            except:
+                pass
 
             interactions += 1
+
+            # If nothing new discovered,
+            # move on quickly
+            if after_count == before_count:
+                continue
 
         except:
             continue
 
-    # -----------------------------
-    # FINAL EXTRACTION PASS
-    # -----------------------------
+    # --------------------------------
+    # FINAL EXTRACTION
+    # --------------------------------
     try:
+
         final = await extract_visible_resources(page)
-        merge_resources(all_resources, final)
+
+        merge_resources(
+            all_resources,
+            final
+        )
+
     except:
         pass
+
+    # --------------------------------
+    # NETWORK RESOURCES
+    # --------------------------------
+    all_resources["network"] = list(
+        network_urls
+    )
 
     return all_resources
 
@@ -244,25 +347,79 @@ def merge_resources(target: Dict, source: Dict):
 
 
 async def extract_visible_resources(page) -> Dict[str, List[str]]:
-    """Extract all resources currently visible in DOM"""
-    return await page.evaluate("""
-        () => {
-            const getAttr = (els, attr) => Array.from(els).map(e => e.getAttribute(attr)).filter(Boolean);
-            
-            return {
-                links: getAttr(document.querySelectorAll('a[href]'), 'href'),
-                images: getAttr(document.querySelectorAll('img[src]'), 'src'),
-                scripts: getAttr(document.querySelectorAll('script[src]'), 'src'),
-                styles: getAttr(document.querySelectorAll('link[rel="stylesheet"]'), 'href'),
-                videos: getAttr(document.querySelectorAll('video[src]'), 'src'),
-                video_sources: getAttr(document.querySelectorAll('video source[src]'), 'src'),
-                audios: getAttr(document.querySelectorAll('audio[src]'), 'src'),
-                audio_sources: getAttr(document.querySelectorAll('audio source[src]'), 'src'),
-                iframes: getAttr(document.querySelectorAll('iframe[src]'), 'src'),
-                video_posters: getAttr(document.querySelectorAll('video[poster]'), 'poster')
-            };
-        }
+    """
+    Extract resources currently present in the DOM.
+    Returns raw URLs/paths exactly as found.
+    """
+
+    resources = await page.evaluate("""
+    () => {
+
+        const getAttr = (selector, attr) => {
+            return [...document.querySelectorAll(selector)]
+                .map(el => el.getAttribute(attr))
+                .filter(Boolean);
+        };
+
+        return {
+
+            links: getAttr(
+                'a[href]',
+                'href'
+            ),
+
+            images: [
+                ...getAttr('img[src]', 'src'),
+                ...getAttr('img[data-src]', 'data-src'),
+                ...getAttr('img[data-lazy-src]', 'data-lazy-src')
+            ],
+
+            scripts: getAttr(
+                'script[src]',
+                'src'
+            ),
+
+            styles: getAttr(
+                'link[rel="stylesheet"]',
+                'href'
+            ),
+
+            videos: [
+                ...getAttr('video[src]', 'src'),
+                ...getAttr('video source[src]', 'src')
+            ],
+
+            audios: [
+                ...getAttr('audio[src]', 'src'),
+                ...getAttr('audio source[src]', 'src')
+            ],
+
+            iframes: getAttr(
+                'iframe[src]',
+                'src'
+            ),
+
+            posters: getAttr(
+                'video[poster]',
+                'poster'
+            ),
+
+            pictures: getAttr(
+                'picture source[srcset]',
+                'srcset'
+            )
+        };
+    }
     """)
+    for category, urls in resources.items():
+
+        resources[category] = [
+            url
+            for url in urls
+            if should_check_url(url)
+        ]
+
+    return resources
 
 
 # =========================
@@ -272,14 +429,26 @@ async def check_url(client: httpx.AsyncClient, url: str) -> Tuple[str, str, Opti
     try:
         response = await client.get(url, timeout=TIMEOUT, follow_redirects=True)
         status = response.status_code
+
         if 200 <= status < 300:
             return url, "OK", status
         elif 300 <= status < 400:
             return url, "REDIRECT", status
-        else:
+        elif status in {401, 403}:
+            return url, "RESTRICTED", status
+        elif status == 429:
+            return url, "RATE_LIMITED", status
+        elif 400 <= status < 500:
             return url, "BROKEN", status
+        elif 500 <= status < 600:
+            return url, "SERVER_ERROR", status
+        else:
+            return url, "UNKNOWN", status
+
     except httpx.TimeoutException:
         return url, "TIMEOUT", None
+    except httpx.ConnectError:
+        return url, "CONNECTION_FAILED", None
     except Exception:
         return url, "ERROR", None
 
@@ -293,17 +462,16 @@ async def worker(queue: asyncio.Queue, client: httpx.AsyncClient, results: List)
         results.append(result)
         queue.task_done()
 
-
 # =========================
 # MAIN SCANNER
 # =========================
 async def scan_site(start_url: str) -> Dict:
-    print(f"🚀 Starting Production-Grade Scan: {start_url}\n")
+    print(f"🚀 Starting Production-Grade Scan | {start_url}\n")
 
     base_domain = get_domain(start_url)
     visited_pages: Set[str] = set()
     page_queue: asyncio.Queue = asyncio.Queue()
-    resource_set: Set[str] = set()
+    resource_map = {}
 
     await page_queue.put(start_url)
 
@@ -327,25 +495,45 @@ async def scan_site(start_url: str) -> Dict:
 
             try:
                 page = await context.new_page()
-                await page.goto(current_url, timeout=50000, wait_until="domcontentloaded")
-                await page.wait_for_load_state("networkidle", timeout=10000)
+                res = await page.goto(current_url, timeout=50000, wait_until="domcontentloaded")
+                if res.status >= 400:
+                    safe_name = safe_filename(current_url)
+                    path = os.path.join(screenshots_dir, f"{safe_name}_{res.status}.png")
+                    await page.screenshot(path=path, full_page=True)
+                    print(f"{current_url} is Broken | Proof saved to path.")
+
+                await page.wait_for_load_state("domcontentloaded", timeout=20000)
 
                 # === KEY IMPROVEMENT: Reveal dropdowns before extracting ===
                 resources = await reveal_dropdowns_and_extract(page)
 
                 # Collect resources
-                for key in resources:
-                    for raw_url in resources[key]:
-                        norm = normalize(current_url, raw_url)
-                        if norm:
-                            resource_set.add(norm)
+                for resource_type, urls in resources.items():
+
+                    for raw_url in urls:
+
+                        norm = normalize(
+                            current_url,
+                            raw_url
+                        )
+
+                        if not norm:
+                            continue
+
+                        if norm not in resource_map:
+
+                            resource_map[norm] = {
+                                "found_on": current_url,
+                                "resource_type": resource_type
+                            }
 
                 # Discover new internal pages
                 for link in resources.get("links", []):
                     norm_link = normalize(current_url, link)
                     if norm_link and is_internal(base_domain, norm_link):
                         if norm_link not in visited_pages:
-                            await page_queue.put(norm_link)
+                            if is_html_page(norm_link):
+                                await page_queue.put(norm_link)
 
                 await page.close()
 
@@ -357,7 +545,7 @@ async def scan_site(start_url: str) -> Dict:
         await browser.close()
 
     print(f"\n✅ Crawled {len(visited_pages)} pages")
-    print(f"📦 Found {len(resource_set)} unique resources\n")
+    print(f"📦 Found {len(resource_map)} unique resources\n")
 
     # Check resources
     print("🔍 Checking all resources for broken items...\n")
@@ -365,7 +553,7 @@ async def scan_site(start_url: str) -> Dict:
         queue: asyncio.Queue = asyncio.Queue()
         results: List[Tuple] = []
 
-        for url in resource_set:
+        for url in resource_map:
             await queue.put(url)
 
         workers = [asyncio.create_task(worker(queue, client, results)) for _ in range(CONCURRENCY)]
@@ -376,14 +564,37 @@ async def scan_site(start_url: str) -> Dict:
 
         all_results = results
 
+        detailed_results = []
+
+        for url, status, code in all_results:
+            meta = resource_map.get(
+                url,
+                {}
+            )
+            detailed_results.append({
+                "url": url,
+                "status": status,
+                "http_code": code,
+                "found_on": meta.get(
+                    "found_on"
+                ),
+                "resource_type": meta.get(
+                    "resource_type"
+                )
+            })
+
     # Analysis
     ok = [r for r in all_results if r[1] == "OK"]
-    broken = [r for r in all_results if r[1] == "BROKEN"]
     redirects = [r for r in all_results if r[1] == "REDIRECT"]
-    errors = [r for r in all_results if r[1] in ["ERROR", "TIMEOUT"]]
+    
+    # 1. Expand broken to include connection failures, timeouts, and server crashes
+    broken_statuses = {"BROKEN", "SERVER_ERROR", "CONNECTION_FAILED", "TIMEOUT", "ERROR"}
+    broken = [r for r in detailed_results if r["status"] in broken_statuses]
 
-    broken_images = [b for b in broken if any(ext in b[0].lower() for ext in ['.jpg','.png','.gif','.webp','.svg','.ico'])]
-    broken_links = [b for b in broken if b not in broken_images]
+    # 2. Fix categorization to use the exact resource_type tracked by the crawler
+    broken_images = [b for b in broken if b["resource_type"] in ["images", "posters", "pictures"]]
+    broken_links = [b for b in broken if b["resource_type"] == "links"]
+    broken_other = [b for b in broken if b["resource_type"] not in ["links", "images", "posters", "pictures"]]
 
     # Report
     print("=" * 70)
@@ -394,18 +605,13 @@ async def scan_site(start_url: str) -> Dict:
     print(f"✅ OK:                  {len(ok)}")
     print(f"🔀 Redirects:           {len(redirects)}")
     print(f"❌ BROKEN:              {len(broken)}")
-    print(f"⚠️  Errors/Timeouts:    {len(errors)}")
     print("-" * 70)
 
     if broken:
         print(f"\n❌ BROKEN RESOURCES ({len(broken)}):")
-        for url, status, code in broken:
-            print(f"   [{code or status}] {url}")
-
-    if errors:
-        print(f"\n⚠️  ERRORS / TIMEOUTS ({len(errors)}):")
-        for url, status, code in errors:
-            print(f"   [{status}] {url}")
+        for item in broken:
+            # Accessing dictionary keys
+            print(f"   [{item['http_code'] or item['status']}] {item['url']} (Found on: {item['found_on']})")
 
     print("\n" + "=" * 70)
 
@@ -419,18 +625,10 @@ async def scan_site(start_url: str) -> Dict:
             "ok": len(ok),
             "redirects": len(redirects),
             "broken": len(broken),
-            "errors_timeouts": len(errors),
             "broken_images": len(broken_images),
             "broken_links": len(broken_links)
         },
-        "broken_resources": [
-            {"url": url, "status": status, "http_code": code}
-            for url, status, code in broken
-        ],
-        "error_resources": [
-            {"url": url, "status": status, "http_code": code}
-            for url, status, code in errors
-        ]
+        "broken_resources": broken
     }
 
     return response
@@ -441,7 +639,7 @@ async def scan_site(start_url: str) -> Dict:
 # =========================
 if __name__ == "__main__":
     import sys
-    target = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:5500/ETHOWT/TESTING/Website-5/portfolio.html"
+    target = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:5500/ETHOWT/TESTING/Website-5/index.html"
 
     result = asyncio.run(scan_site(target))
 
