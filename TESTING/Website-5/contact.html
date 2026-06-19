@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS • Contact Us | Digital Agency</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">NEXUS</a>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="dropdown">
+          <a href="services.html">Services ▾</a>
+          <div class="dropdown-content">
+            <a href="services.html">All Services</a>
+            <a href="/services-old.html">Legacy Services (2023)</a>
+            <a href="services.html#web">Web Development</a>
+          </div>
+        </li>
+        <li><a href="portfolio.html">Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <button id="login-btn" class="btn btn-ghost">Client Login</button>
+        <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTACT HERO -->
+  <section class="hero" style="min-height:60vh; padding-top:7rem;">
+    <div class="container" style="text-align:center; max-width:720px;">
+      <div class="badge" style="margin-bottom:1rem;">LET'S BUILD TOGETHER</div>
+      <h1 style="margin-bottom:1.25rem;">Tell us about your project.</h1>
+      <p style="font-size:1.15rem;">Whether you're starting from scratch or scaling something ambitious, we'd love to hear from you.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM + INFO -->
+  <section class="section" style="padding-top:2rem;">
+    <div class="container" style="max-width:1100px;">
+      <div style="display:grid; grid-template-columns: 1fr 380px; gap:4rem; align-items:start;">
+        
+        <!-- Main Contact Form -->
+        <div>
+          <h2 style="margin-bottom:2rem;">Send us a message</h2>
+          
+          <!-- Contact Form with intentional QA issues -->
+          <form id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Full Name *</label>
+                <input type="text" id="contact-name" name="name" placeholder="Jordan Lee" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Work Email *</label>
+                <!-- DUPLICATE ID: contact-email and login-email exist (intentional) -->
+                <input type="email" id="contact-email" name="email" placeholder="jordan@company.com" required>
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-company">Company</label>
+                <input type="text" id="contact-company" name="company" placeholder="Your Company Inc.">
+              </div>
+              <div class="form-group">
+                <label for="contact-role">Your Role</label>
+                <input type="text" id="contact-role" name="role" placeholder="Founder / Head of Product">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="contact-service">What are you looking for?</label>
+              <select id="contact-service" name="service" required>
+                <option value="">Please select...</option>
+                <option value="new-product">New product / MVP</option>
+                <option value="redesign">Website or product redesign</option>
+                <option value="design-system">Design system &amp; component library</option>
+                <option value="growth">Growth &amp; experimentation program</option>
+                <option value="audit">Design / tech audit</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="contact-message">Message / Project brief *</label>
+              <textarea id="contact-message" name="message" placeholder="Tell us about your goals, timeline, budget range, or any relevant context..." required></textarea>
+            </div>
+            
+            <!-- Intentional missing name attribute + no required on this field -->
+            <div class="form-group">
+              <label>Preferred contact method</label>
+              <select style="width:100%;">
+                <option>Email</option>
+                <option>Video call</option>
+                <option>Phone</option>
+              </select>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" style="padding-left:2.5rem; padding-right:2.5rem;">Send Message</button>
+            </div>
+            
+            <div class="success-message"></div>
+          </form>
+        </div>
+        
+        <!-- Contact Info Sidebar -->
+        <div style="background:var(--dark-2); border:1px solid var(--border); border-radius:20px; padding:2.25rem;">
+          <h3 style="margin-bottom:1.5rem;">Other ways to reach us</h3>
+          
+          <div style="margin-bottom:1.75rem;">
+            <div style="font-weight:600; margin-bottom:0.35rem;">Email</div>
+            <a href="mailto:hello@nexus.agency" style="color:#6366f1;">hello@nexus.agency</a>
+          </div>
+          
+          <div style="margin-bottom:1.75rem;">
+            <div style="font-weight:600; margin-bottom:0.35rem;">San Francisco</div>
+            <p style="margin:0; font-size:0.95rem;">2261 Market Street, Suite 456<br>San Francisco, CA 94114</p>
+          </div>
+          
+          <div style="margin-bottom:1.75rem;">
+            <div style="font-weight:600; margin-bottom:0.35rem;">Remote-first team</div>
+            <p style="margin:0; font-size:0.95rem;">Working across 18 time zones. We’re online when you are.</p>
+          </div>
+          
+          <div>
+            <a href="https://cal.com/nexus/30min" class="btn btn-outline" style="width:100%; justify-content:center;">Book a 30-min intro call</a>
+          </div>
+          
+          <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border); font-size:0.85rem; color:#64748b;">
+            Response time: Usually within 24–48 hours on business days.
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK NEWSLETTER CTA -->
+  <section class="section" style="padding-top:1rem; padding-bottom:4rem;">
+    <div class="container" style="max-width:620px; text-align:center; background:var(--dark-2); border-radius:24px; padding:3rem 2.5rem; border:1px solid var(--border);">
+      <h3 style="margin-bottom:0.75rem;">Stay in the loop</h3>
+      <p style="margin-bottom:1.75rem;">Occasional essays on product, design systems, and building high-performing teams. No spam.</p>
+      
+      <form id="footer-newsletter">
+        <div style="display:flex; gap:0.75rem;">
+          <input type="email" name="email" placeholder="you@company.com" required style="flex:1; border-radius:9999px;">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </div>
+        <div class="success-message" style="margin-top:1rem;"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid container">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:1rem;">NEXUS</div>
+        <p style="font-size:0.9rem; max-width:260px;">Strategic digital agency crafting exceptional products since 2018.</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#team">Team</a></li>
+          <li><a href="/undefined-route">Careers</a></li>
+          <li><a href="contact.html">Press</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Work</h4>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="portfolio.html">Case Studies</a></li>
+          <li><a href="http://localhost:9999/missing">Process</a></li>
+          <li><a href="services.html">Capabilities</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#twitter">Twitter / X</a></li>
+          <li><a href="#linkedin">LinkedIn</a></li>
+          <li><a href="broken-link-contactus.html">Support Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom container">
+      <div>© 2026 NEXUS Digital. All rights reserved.</div>
+      <div style="display:flex; gap:1.5rem;">
+        <a href="#">Privacy</a>
+        <a href="#">Legal</a>
+        <a href="#">Status</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2 style="margin-bottom:0.5rem;">Client Portal</h2>
+      <p style="color:#94a3b8; margin-bottom:2rem;">Sign in to access project dashboards and files.</p>
+      
+      <form>
+        <div class="form-group">
+          <label for="login-email">Work Email</label>
+          <input type="email" id="login-email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
+        </div>
+        <div class="success-message" style="margin-top:1rem;"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

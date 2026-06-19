@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS • Digital Agency | Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">NEXUS</a>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="dropdown">
+          <a href="services.html">Services ▾</a>
+          <div class="dropdown-content">
+            <a href="services.html">All Services</a>
+            <!-- INTENTIONAL BROKEN LINK -->
+            <a href="/services-old.html">Legacy Services (2023)</a>
+            <a href="services.html#web">Web Development</a>
+          </div>
+        </li>
+        <li><a href="portfolio.html">Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <!-- Login triggers modal -->
+        <button id="login-btn" class="btn btn-ghost">Client Login</button>
+        <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+        
+        <!-- HAMBURGER -->
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content container">
+      <div class="hero-text">
+        <div class="badge" style="margin-bottom:1rem">EST. 2018 • SAN FRANCISCO + REMOTE</div>
+        <h1>We build digital products<br>that move the world forward.</h1>
+        <p>Strategic design and engineering for ambitious brands. From concept to launch, we craft experiences people love.</p>
+        
+        <div class="hero-buttons">
+          <a href="contact.html" class="btn btn-primary">Start a Project</a>
+          <!-- INTENTIONAL BROKEN LINK -->
+          <a href="fake-page.html" class="btn btn-outline">Watch 2:14 reel →</a>
+        </div>
+        
+        <div style="margin-top:2.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+          <div style="display:flex; align-items:center;">
+            <img src="https://picsum.photos/id/1005/32/32" alt="Client avatar" style="border-radius:50%; border:2px solid #334155; margin-right:-8px;">
+            <img src="https://picsum.photos/id/1011/32/32" alt="Client avatar" style="border-radius:50%; border:2px solid #334155; margin-right:-8px;">
+            <img src="https://picsum.photos/id/201/32/32" alt="Client avatar" style="border-radius:50%; border:2px solid #334155;">
+          </div>
+          <span style="color:#94a3b8; font-size:0.9rem;">Trusted by 120+ founders &amp; teams</span>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <!-- VALID image -->
+        <img src="https://picsum.photos/id/1015/620/520" alt="Modern workspace with team collaborating on digital strategy">
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUSTED BY / LOGOS -->
+  <section class="section" style="padding-top:2rem; padding-bottom:3rem;">
+    <div class="container">
+      <p style="text-align:center; color:#64748b; font-size:0.85rem; letter-spacing:2px; margin-bottom:1.5rem;">FEATURED IN &amp; PARTNERED WITH</p>
+      <div style="display:flex; justify-content:center; gap:3.5rem; flex-wrap:wrap; opacity:0.7;">
+        <!-- VALID -->
+        <img src="https://picsum.photos/id/180/110/32" alt="Stripe logo placeholder">
+        <!-- BROKEN IMAGE #1 -->
+        <img src="https://example.com/broken-image.jpg" alt="Vercel" style="height:32px;">
+        <img src="https://picsum.photos/id/29/110/32" alt="Notion">
+        <!-- BROKEN IMAGE #2 -->
+        <img src="/assets/missing1.jpg" alt="Linear" style="height:32px;">
+        <img src="https://picsum.photos/id/160/110/32" alt="Webflow">
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Capabilities that scale with you</h2>
+        <p>We combine strategy, design, and engineering to deliver end-to-end digital transformation.</p>
+      </div>
+      
+      <div class="grid grid-3">
+        <!-- Service Card 1 -->
+        <div class="card service-card">
+          <div class="service-icon">💻</div>
+          <h3>Product Strategy &amp; Design</h3>
+          <p>From discovery workshops to high-fidelity interfaces. We define the vision and craft delightful experiences.</p>
+          <a href="services.html" class="btn btn-outline" style="width:100%; margin-top:1rem;">Explore Service</a>
+        </div>
+        
+        <!-- Service Card 2 -->
+        <div class="card service-card">
+          <div class="service-icon">⚙️</div>
+          <h3>Full-Stack Engineering</h3>
+          <p>Modern web apps, scalable APIs, and performant frontends built with the latest technologies.</p>
+          <a href="services.html#engineering" class="btn btn-outline" style="width:100%; margin-top:1rem;">Explore Service</a>
+        </div>
+        
+        <!-- Service Card 3 - links to broken page -->
+        <div class="card service-card">
+          <div class="service-icon">📈</div>
+          <h3>Growth Systems &amp; Analytics</h3>
+          <p>Conversion-focused experimentation, data infrastructure, and growth loops that compound.</p>
+          <!-- INTENTIONAL BROKEN LINK -->
+          <a href="/portfolio-details-999.html" class="btn btn-outline" style="width:100%; margin-top:1rem;">View Growth Case Studies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED WORK / PORTFOLIO TEASER -->
+  <section class="section" style="background:var(--dark-2);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Selected Work</h2>
+        <p>Recent projects that showcase our approach to solving complex digital challenges.</p>
+      </div>
+      
+      <div class="grid grid-3">
+        <!-- Project Card 1 -->
+        <div class="card">
+          <img src="https://picsum.photos/id/1016/400/220" alt="Fintech dashboard interface for Series B startup" class="card-img">
+          <div>
+            <span class="badge">FINTECH</span>
+            <h3 style="margin-top:1rem;">Aether Pay — Modern Treasury Platform</h3>
+            <p>End-to-end design system and web application for real-time global payments infrastructure.</p>
+          </div>
+          <div class="card-footer">
+            <a href="portfolio.html" class="btn btn-ghost">View Case →</a>
+            <span style="font-size:0.8rem; color:#64748b;">2025</span>
+          </div>
+        </div>
+        
+        <!-- Project Card 2 - broken image -->
+        <div class="card">
+          <!-- BROKEN IMAGE #3 -->
+          <img src="https://thisimagedoesnotexist.xyz/img.png" alt="Healthtech patient portal redesign" class="card-img">
+          <div>
+            <span class="badge">HEALTH</span>
+            <h3 style="margin-top:1rem;">Vital • Patient Experience Platform</h3>
+            <p>Complete redesign of patient onboarding and clinician dashboard for a Series C healthtech company.</p>
+          </div>
+          <div class="card-footer">
+            <a href="portfolio.html" class="btn btn-ghost">View Case →</a>
+            <span style="font-size:0.8rem; color:#64748b;">2024</span>
+          </div>
+        </div>
+        
+        <!-- Project Card 3 -->
+        <div class="card">
+          <img src="https://picsum.photos/id/251/400/220" alt="SaaS collaboration platform hero visual" class="card-img">
+          <div>
+            <span class="badge">SAAS</span>
+            <h3 style="margin-top:1rem;">Loop • Async Collaboration OS</h3>
+            <p>Design and build of a new category-defining async-first workspace used by 40k+ teams.</p>
+          </div>
+          <div class="card-footer">
+            <!-- INTENTIONAL BROKEN LINK -->
+            <a href="broken-link-contactus.html" class="btn btn-ghost">View Case →</a>
+            <span style="font-size:0.8rem; color:#64748b;">2025</span>
+          </div>
+        </div>
+      </div>
+      
+      <div style="text-align:center; margin-top:3rem;">
+        <a href="portfolio.html" class="btn btn-primary">See Full Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Real results from real teams</h2>
+      </div>
+      
+      <div class="grid grid-3">
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <!-- VALID -->
+            <img src="https://picsum.photos/id/1009/56/56" alt="Sarah Chen, CEO at Aether">
+            <div class="testimonial-author">
+              <h4>Sarah Chen</h4>
+              <span>CEO, Aether Financial</span>
+            </div>
+          </div>
+          <p>“NEXUS completely transformed how we think about product. The strategy work alone paid for itself in the first quarter.”</p>
+        </div>
+        
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <!-- BROKEN IMAGE #4 -->
+            <img src="http://localhost:3000/invalid.jpg" alt="Marcus Rodriguez">
+            <div class="testimonial-author">
+              <h4>Marcus Rodriguez</h4>
+              <span>Head of Product, Vital Health</span>
+            </div>
+          </div>
+          <p>“The engineering quality and attention to performance details is unmatched. Our load times dropped 68%.”</p>
+        </div>
+        
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <img src="https://picsum.photos/id/1006/56/56" alt="Priya Patel, Founder">
+            <div class="testimonial-author">
+              <h4>Priya Patel</h4>
+              <span>Founder &amp; CEO, Loop</span>
+            </div>
+          </div>
+          <p>“They don’t just deliver beautiful interfaces — they build systems that scale with your business for years.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA + NEWSLETTER -->
+  <section class="section" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+    <div class="container" style="max-width:720px; text-align:center;">
+      <h2 style="margin-bottom:1rem;">Ready to build something extraordinary?</h2>
+      <p style="margin-bottom:2rem;">Join 120+ ambitious teams who’ve partnered with NEXUS to ship category-defining products.</p>
+      
+      <!-- Newsletter form (intentional missing required on one field for testing) -->
+      <form id="newsletter-form" style="display:flex; gap:0.75rem; max-width:520px; margin:0 auto;">
+        <input type="email" name="email" placeholder="you@company.com" required style="flex:1; border-radius:9999px;">
+        <!-- Missing name attribute on purpose -->
+        <input type="text" placeholder="First name" style="flex:0.7; border-radius:9999px;">
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <p style="font-size:0.75rem; color:#64748b; margin-top:1rem;">We send one thoughtful email per month. No spam, ever.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid container">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:1rem;">NEXUS</div>
+        <p style="font-size:0.9rem; max-width:260px;">Strategic digital agency crafting exceptional products since 2018.</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#team">Team</a></li>
+          <!-- INTENTIONAL BROKEN LINK -->
+          <li><a href="/undefined-route">Careers</a></li>
+          <li><a href="contact.html">Press</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Work</h4>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="portfolio.html">Case Studies</a></li>
+          <!-- BROKEN LINK #5 -->
+          <li><a href="http://localhost:9999/missing">Process</a></li>
+          <li><a href="services.html">Capabilities</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#twitter">Twitter / X</a></li>
+          <li><a href="#linkedin">LinkedIn</a></li>
+          <!-- BROKEN LINK #6 -->
+          <li><a href="broken-link-contactus.html">Support Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom container">
+      <div>© 2026 NEXUS Digital. All rights reserved.</div>
+      <div style="display:flex; gap:1.5rem;">
+        <a href="#">Privacy</a>
+        <a href="#">Legal</a>
+        <a href="https://example.com/broken-image.jpg">Status</a> <!-- broken image link but it's a link, not img -->
+      </div>
+    </div>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2 style="margin-bottom:0.5rem;">Client Portal</h2>
+      <p style="color:#94a3b8; margin-bottom:2rem;">Sign in to access project dashboards and files.</p>
+      
+      <form id="login-form">
+        <!-- DUPLICATE ID: email (also exists in contact form) -->
+        <div class="form-group">
+          <label for="login-email">Work Email</label>
+          <input type="email" id="login-email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
+        </div>
+        
+        <div class="success-message" style="margin-top:1rem;"></div>
+        
+        <p style="text-align:center; font-size:0.8rem; margin-top:1.5rem; color:#64748b;">
+          Forgot password? <a href="contact.html" style="color:#6366f1;">Contact your account manager</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

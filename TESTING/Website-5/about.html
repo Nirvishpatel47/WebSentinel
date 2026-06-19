@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS • About Us | Digital Agency</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- NAVBAR (shared structure) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">NEXUS</a>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="dropdown">
+          <a href="services.html">Services ▾</a>
+          <div class="dropdown-content">
+            <a href="services.html">All Services</a>
+            <a href="/services-old.html">Legacy Services (2023)</a>
+            <a href="services.html#web">Web Development</a>
+          </div>
+        </li>
+        <li><a href="portfolio.html">Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <button id="login-btn" class="btn btn-ghost">Client Login</button>
+        <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ABOUT HERO -->
+  <section class="hero" style="min-height:70vh; padding-top:8rem;">
+    <div class="container hero-content" style="grid-template-columns: 1.1fr 0.9fr; align-items:center;">
+      <div>
+        <div class="badge" style="margin-bottom:1rem;">OUR STORY</div>
+        <h1 style="margin-bottom:1.25rem;">We exist to make ambitious ideas real.</h1>
+        <p style="font-size:1.15rem;">Founded in 2018 by a group of designers and engineers frustrated with mediocre digital experiences, NEXUS has grown into a tight-knit team of 42 multidisciplinary creatives and technologists.</p>
+        
+        <div style="margin-top:2rem;">
+          <a href="#team" class="btn btn-primary">Meet the team</a>
+          <a href="portfolio.html" class="btn btn-outline" style="margin-left:0.75rem;">See our work</a>
+        </div>
+      </div>
+      
+      <div>
+        <!-- VALID image -->
+        <img src="https://picsum.photos/id/1005/580/420" alt="NEXUS team offsite in Big Sur, 2025" style="border-radius:24px; box-shadow:0 25px 50px -12px rgb(0 0 0 / 0.35); width:100%;">
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section" style="padding-top:1rem;">
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-number">120+</div>
+          <div class="stat-label">Projects shipped</div>
+        </div>
+        <div>
+          <div class="stat-number">42</div>
+          <div class="stat-label">Team members</div>
+        </div>
+        <div>
+          <div class="stat-number">18</div>
+          <div class="stat-label">Countries represented</div>
+        </div>
+        <div>
+          <div class="stat-number">94%</div>
+          <div class="stat-label">Client retention</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES / MISSION -->
+  <section class="section">
+    <div class="container" style="max-width:980px;">
+      <div class="section-header">
+        <h2>How we work</h2>
+        <p>Our values aren't just words on a wall. They guide every decision, critique, and line of code we write.</p>
+      </div>
+      
+      <div class="grid grid-3">
+        <div class="card">
+          <h3 style="color:#6366f1; margin-bottom:0.75rem;">01 — Ruthless Clarity</h3>
+          <p>We ask the hard questions early. Ambiguity is the enemy of great products. We surface assumptions and align stakeholders before writing a single line of code.</p>
+        </div>
+        <div class="card">
+          <h3 style="color:#6366f1; margin-bottom:0.75rem;">02 — Craft Over Speed</h3>
+          <p>We move fast, but never at the expense of quality. Every pixel, interaction, and API response is considered and intentional.</p>
+        </div>
+        <div class="card">
+          <h3 style="color:#6366f1; margin-bottom:0.75rem;">03 — Long-term Partnership</h3>
+          <p>We don't disappear after launch. Many of our clients have been with us for 4+ years because we treat their success as our own.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section id="team" class="section" style="background:var(--dark-2);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Meet the humans behind NEXUS</h2>
+        <p>A diverse group of builders, thinkers, and makers united by craft and curiosity.</p>
+      </div>
+      
+      <div class="grid grid-4">
+        <!-- Team Member 1 -->
+        <div class="card" style="text-align:center; padding:2rem 1.5rem;">
+          <img src="https://picsum.photos/id/1005/120/120" alt="Elena Voss, Co-Founder &amp; CEO" style="width:120px; height:120px; border-radius:9999px; object-fit:cover; margin-bottom:1.25rem; border:4px solid #334155;">
+          <h3 style="margin-bottom:0.25rem;">Elena Voss</h3>
+          <p style="color:#6366f1; font-weight:600; margin-bottom:0.5rem;">Co-Founder &amp; CEO</p>
+          <p style="font-size:0.9rem;">Former Design Director at Stripe. Obsessed with systems thinking and beautiful typography.</p>
+        </div>
+        
+        <!-- Team Member 2 - broken image -->
+        <div class="card" style="text-align:center; padding:2rem 1.5rem;">
+          <!-- BROKEN IMAGE #5 -->
+          <img src="404-image.png" alt="Jamal Wright, CTO" style="width:120px; height:120px; border-radius:9999px; object-fit:cover; margin-bottom:1.25rem; border:4px solid #334155;">
+          <h3 style="margin-bottom:0.25rem;">Jamal Wright</h3>
+          <p style="color:#6366f1; font-weight:600; margin-bottom:0.5rem;">Co-Founder &amp; CTO</p>
+          <p style="font-size:0.9rem;">Ex-Google, ex-Vercel. Builds the invisible infrastructure that makes great products feel magical.</p>
+        </div>
+        
+        <div class="card" style="text-align:center; padding:2rem 1.5rem;">
+          <img src="https://picsum.photos/id/1012/120/120" alt="Dr. Priya Sharma, Head of Strategy" style="width:120px; height:120px; border-radius:9999px; object-fit:cover; margin-bottom:1.25rem; border:4px solid #334155;">
+          <h3 style="margin-bottom:0.25rem;">Dr. Priya Sharma</h3>
+          <p style="color:#6366f1; font-weight:600; margin-bottom:0.5rem;">Head of Strategy</p>
+          <p style="font-size:0.9rem;">PhD in Behavioral Economics. Helps teams make decisions backed by data, not just intuition.</p>
+        </div>
+        
+        <div class="card" style="text-align:center; padding:2rem 1.5rem;">
+          <!-- Missing alt attribute intentionally -->
+          <img src="https://picsum.photos/id/160/120/120" style="width:120px; height:120px; border-radius:9999px; object-fit:cover; margin-bottom:1.25rem; border:4px solid #334155;">
+          <h3 style="margin-bottom:0.25rem;">Marcus Chen</h3>
+          <p style="color:#6366f1; font-weight:600; margin-bottom:0.5rem;">Design Director</p>
+          <p style="font-size:0.9rem;">Previously at Figma and Linear. Champion of accessible, inclusive product design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVALID NESTING EXAMPLE (for QA) -->
+  <section class="section" style="padding-top:1rem; padding-bottom:3rem;">
+    <div class="container" style="max-width:720px; text-align:center;">
+      <!-- INTENTIONAL INVALID HTML NESTING: p containing div (common QA test case) -->
+      <p style="color:#64748b; font-size:0.9rem;">We believe in radical transparency. 
+        <div style="margin:1.5rem 0; padding:1rem; background:#1e293b; border-radius:12px; display:inline-block;">
+          <strong>Fun fact:</strong> Our average project NPS is <span style="color:#22c55e;">92</span>. 
+          <a href="contact.html">Read the latest impact report</a>
+        </div>
+      We share post-mortems publicly with clients.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid container">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:1rem;">NEXUS</div>
+        <p style="font-size:0.9rem; max-width:260px;">Strategic digital agency crafting exceptional products since 2018.</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#team">Team</a></li>
+          <li><a href="/undefined-route">Careers</a></li>
+          <li><a href="contact.html">Press</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Work</h4>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="portfolio.html">Case Studies</a></li>
+          <li><a href="http://localhost:9999/missing">Process</a></li>
+          <li><a href="services.html">Capabilities</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#twitter">Twitter / X</a></li>
+          <li><a href="#linkedin">LinkedIn</a></li>
+          <li><a href="broken-link-contactus.html">Support Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom container">
+      <div>© 2026 NEXUS Digital. All rights reserved.</div>
+      <div style="display:flex; gap:1.5rem;">
+        <a href="#">Privacy</a>
+        <a href="#">Legal</a>
+        <a href="#">Status</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LOGIN MODAL (same as index) -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2 style="margin-bottom:0.5rem;">Client Portal</h2>
+      <p style="color:#94a3b8; margin-bottom:2rem;">Sign in to access project dashboards and files.</p>
+      
+      <form>
+        <div class="form-group">
+          <label for="login-email">Work Email</label>
+          <input type="email" id="login-email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
+        </div>
+        <div class="success-message" style="margin-top:1rem;"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
