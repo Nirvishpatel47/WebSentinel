@@ -54,7 +54,6 @@ class ResourceExtractor:
 import asyncio
 from urllib.parse import urlparse, urldefrag, parse_qsl
 from playwright.async_api import async_playwright
-from typing import Dict, List, Set
 
 class MockLinker:
     def __init__(self):
