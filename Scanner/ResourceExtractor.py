@@ -50,60 +50,58 @@ class ResourceExtractor:
             if canonical_net not in global_map:
                 global_map[canonical_net] = {"found_on": current_url, "resource_type": "network"}
 
-# Testing Phase
-import asyncio
-from urllib.parse import urlparse, urldefrag, parse_qsl
-from playwright.async_api import async_playwright
-
-class MockLinker:
-    def __init__(self):
-        self.skip_schemes = {"mailto", "tel", "javascript", "data", "sms"}
-    def canonicalize(self, url: str) -> str:
-        try:
-            defragged, _ = urldefrag(url.strip())
-            parsed = urlparse(defragged)
-            return parsed.geturl()
-        except:
-            return url
-        
-async def test_resource_extractor():
-    TARGET_URL = "http://127.0.0.1:5501/TESTING/Website-5/about.html"
-    
-    global_map = {}
-    linker = MockLinker()
-    extractor = ResourceExtractor()
-
-    async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=True)
-        page = await browser.new_page()
-        
-        captured_network: Set[str] = set()
-        page.on("request", lambda request: captured_network.add(request.url))
-        
-        print(f"Navigating headless browser to: {TARGET_URL}")
-        await page.goto(TARGET_URL, wait_until="domcontentloaded")
-        
-        raw_resources = await extractor.extract_dom_resources(page)
-        
-        extractor.map_to_global(
-            current_url=TARGET_URL,
-            raw_resources=raw_resources,
-            network_urls=captured_network,
-            global_map=global_map,
-            linker=linker
-        )
-        
-        print("\n=== EXTRACTED DOM RESOURCES RAW COUNTS ===")
-        for category, items in raw_resources.items():
-            print(f"- {category.capitalize()}: {len(items)} items found")
-
-        print("\n=== SAMPLE ENTRIES MAPPED TO GLOBAL SPACE (FIRST 15) ===")
-        for index, (url, metadata) in enumerate(global_map.items()):
-            if index >= 15:
-                break
-            print(f"[{metadata['resource_type'].upper()}] -> {url}")
-            
-        await browser.close()
-
 if __name__ == "__main__":
+    import asyncio
+    from urllib.parse import urlparse, urldefrag, parse_qsl
+    from playwright.async_api import async_playwright
+
+    class MockLinker:
+        def __init__(self):
+            self.skip_schemes = {"mailto", "tel", "javascript", "data", "sms"}
+        def canonicalize(self, url: str) -> str:
+            try:
+                defragged, _ = urldefrag(url.strip())
+                parsed = urlparse(defragged)
+                return parsed.geturl()
+            except:
+                return url
+            
+    async def test_resource_extractor():
+        TARGET_URL = "http://127.0.0.1:5501/TESTING/Website-5/about.html"
+        
+        global_map = {}
+        linker = MockLinker()
+        extractor = ResourceExtractor()
+
+        async with async_playwright() as p:
+            browser = await p.chromium.launch(headless=True)
+            page = await browser.new_page()
+            
+            captured_network: Set[str] = set()
+            page.on("request", lambda request: captured_network.add(request.url))
+            
+            print(f"Navigating headless browser to: {TARGET_URL}")
+            await page.goto(TARGET_URL, wait_until="domcontentloaded")
+            
+            raw_resources = await extractor.extract_dom_resources(page)
+            
+            extractor.map_to_global(
+                current_url=TARGET_URL,
+                raw_resources=raw_resources,
+                network_urls=captured_network,
+                global_map=global_map,
+                linker=linker
+            )
+            
+            print("\n=== EXTRACTED DOM RESOURCES RAW COUNTS ===")
+            for category, items in raw_resources.items():
+                print(f"- {category.capitalize()}: {len(items)} items found")
+
+            print("\n=== SAMPLE ENTRIES MAPPED TO GLOBAL SPACE (FIRST 15) ===")
+            for index, (url, metadata) in enumerate(global_map.items()):
+                if index >= 15:
+                    break
+                print(f"[{metadata['resource_type'].upper()}] -> {url}")
+                
+            await browser.close()
     asyncio.run(test_resource_extractor())
