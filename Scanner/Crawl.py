@@ -55,7 +55,6 @@ class SentinelCrawler:
             try:
                 page = await context.new_page()
                 
-                # Setup active background response listener
                 network_urls = set()
                 page.on("response", lambda r: network_urls.add(r.url) if any(r.url.lower().startswith(s) for s in ["http", "https"]) else None)
 
