@@ -45,54 +45,37 @@ class FormExtractor:
         return locators
 
     async def extract_forms(self, page: Page) -> List[Dict]:
-        """
-        Responsibility:
-            Discover forms and extract structural properties.
+        extracted_forms = []
 
-        Does NOT:
-            - classify forms
-            - submit forms
-            - test forms
-            - generate issues
-        """
+        form_locators = await page.locator("form").all()
 
-        return await page.evaluate("""
-        () => {
-            const extractedForms = [];
+        for form_locator in form_locators:
 
-            function getLabel(element) {
-                return (
-                    element.labels?.[0]?.innerText?.trim() ||
-                    element.getAttribute('placeholder') ||
-                    element.getAttribute('aria-label') ||
-                    ''
-                );
-            }
+            form_data = await form_locator.evaluate("""
+            (form) => {
 
-            function extractField(element) {
-                return {
-                    tag: element.tagName.toLowerCase(),
-                    type: element.getAttribute('type') || element.tagName.toLowerCase(),
-                    name: element.getAttribute('name') || '',
-                    id: element.id || '',
-                    className: element.className || '',
-                    placeholder: element.getAttribute('placeholder') || '',
-                    label: getLabel(element),
-                    required: element.hasAttribute('required'),
-                    value: element.value || element.getAttribute('value') || '',
-                    options:
-                        element.tagName.toLowerCase() === 'select'
-                            ? [...element.options].map(o => o.value)
-                            : []
-                };
-            }
+                function getLabel(element) {
+                    return (
+                        element.labels?.[0]?.innerText?.trim() ||
+                        element.getAttribute('placeholder') ||
+                        element.getAttribute('aria-label') ||
+                        ''
+                    );
+                }
 
-            // --------------------------
-            // Standard forms
-            // --------------------------
-            const processedElements = new Set();
+                function extractField(element) {
 
-            document.querySelectorAll('form').forEach(form => {
+                    return {
+                        tag: element.tagName.toLowerCase(),
+                        type: element.getAttribute('type') || element.tagName.toLowerCase(),
+                        name: element.getAttribute('name') || '',
+                        id: element.id || '',
+                        placeholder: element.getAttribute('placeholder') || '',
+                        label: getLabel(element),
+                        required: element.hasAttribute('required')
+                    };
+
+                }
 
                 const controls = [
                     ...form.querySelectorAll(
@@ -100,40 +83,26 @@ class FormExtractor:
                     )
                 ];
 
-                controls.forEach(el => processedElements.add(el));
+                return {
 
-                extractedForms.push({
-                    form_kind: 'standard_form',
                     action: form.getAttribute('action') || '',
-                    method: (form.getAttribute('method') || 'GET').toUpperCase(),
+
+                    method: (
+                        form.getAttribute('method') || 'GET'
+                    ).toUpperCase(),
+
                     fields: controls.map(extractField)
-                });
-            });
 
-
-            // --------------------------
-            // Loose SPA controls
-            // --------------------------
-            const looseControls = [
-                ...document.querySelectorAll(
-                    'input, textarea, select, button'
-                )
-            ].filter(el => !processedElements.has(el));
-
-            if (looseControls.length > 0) {
-
-                extractedForms.push({
-                    form_kind: 'javascript_loose_form',
-                    action: window.location.href,
-                    method: 'DYNAMIC_JS',
-                    fields: looseControls.map(extractField)
-                });
-
+                };
             }
+            """)
 
-            return extractedForms;
-        }
-        """)
+            form_data["locator"] = form_locator
+
+            extracted_forms.append(form_data)
+
+        return extracted_forms
+    
 if __name__ == "__main__":
     async def test_form_extractor():
         TARGET_URL = "http://127.0.0.1:5500/tests/Website-5/contact.html"

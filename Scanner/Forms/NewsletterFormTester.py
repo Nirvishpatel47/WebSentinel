@@ -1,55 +1,124 @@
 #!/usr/bin/env python3
-import time
-from playwright.async_api import Page, Locator
+
 from typing import List, Dict, Any
 
-class NewsletterFormTester:
+from playwright.async_api import Page, Locator
+
+from Scanner.Forms.BaseFormTester import BaseFormTester
+from Scanner.Forms.FormResult import FormResult
+
+
+class NewsletterFormTester(BaseFormTester):
     """
-    Responsibility: Automated validation testing of newsletter signups and subscriptions.
+    Tests newsletter subscription forms.
     """
-    async def test(self, page: Page, form_locator: Locator, fields: List[Dict[str, Any]]) -> Dict[str, Any]:
-        start_time = time.time()
-        messages = []
-        errors = []
-        success = False
+
+    async def test(
+        self,
+        page: Page,
+        form_locator: Locator,
+        fields: List[Dict[str, Any]]
+    ) -> FormResult:
+
+        start_time = self.start_timer()
+        result = FormResult()
 
         try:
-            # 1. Identify targeted email channel field
-            email_field = None
+
+            email_locator = None
+
             for field in fields:
-                if field['type'] == 'email' or 'email' in field['name'].lower():
-                    email_field = form_locator.locator(f"input[name='{field['name']}']").first if field['name'] else form_locator.locator("input[type='email']").first
+
+                field_type = field.get("type", "")
+                field_name = field.get("name", "").lower()
+
+                if (
+                    field_type == "email"
+                    or "email" in field_name
+                ):
+                    email_locator = self.get_field_locator(
+                        form_locator,
+                        field
+                    )
                     break
 
-            if email_field and await email_field.is_visible():
-                await email_field.fill("sentinel_subscribe_test@domain.com")
-                messages.append("Newsletter subscription channel filled with verification email address.")
-            else:
-                errors.append("Failed to locate required email target entry point control within newsletter layout block.")
+            if (
+                email_locator is not None
+                and await email_locator.is_visible()
+            ):
 
-            # 2. Fire submit target actions
-            submit_trigger = form_locator.locator("button, input[type='submit']").first
-            if await submit_trigger.is_visible():
-                await submit_trigger.click(timeout=1000, no_wait_after=True)
-                await page.wait_for_timeout(800)
-                messages.append("Newsletter subscription trigger executed.")
-            
-            # 3. Analyze DOM criteria for verification markers
-            dom_text = (await page.content()).lower()
-            validation_keywords = ["subscribe", "joined", "success", "welcome", "newsletter", "confirm"]
-            
-            if any(kw in dom_text for kw in validation_keywords) and not any(err in dom_text for err in ["error", "invalid", "failed"]):
-                success = True
-                messages.append("Newsletter verification pass clear.")
+                await email_locator.fill(
+                    "sentinel_subscribe_test@example.com"
+                )
+
+                result.messages.append(
+                    "Email populated."
+                )
+
             else:
-                errors.append("Subscription sequence failed to yield baseline structural feedback indicators.")
+                result.errors.append(
+                    "Email field not found."
+                )
+
+            submit_button = form_locator.locator(
+                """
+                button[type='submit'],
+                input[type='submit'],
+                button:has-text('Subscribe'),
+                button:has-text('Join')
+                """
+            ).first
+
+            if (
+                await submit_button.count() > 0
+                and await submit_button.is_visible()
+            ):
+
+                await submit_button.click(
+                    timeout=2000,
+                    no_wait_after=True
+                )
+
+                await page.wait_for_timeout(800)
+
+                result.messages.append(
+                    "Newsletter submit triggered."
+                )
+
+            html = (await page.content()).lower()
+
+            success_keywords = [
+                "subscribed",
+                "joined",
+                "success",
+                "welcome",
+                "newsletter",
+                "confirm"
+            ]
+
+            failure_keywords = [
+                "error",
+                "invalid",
+                "failed"
+            ]
+
+            if (
+                any(x in html for x in success_keywords)
+                and not any(x in html for x in failure_keywords)
+            ):
+
+                result.success = True
+
+                result.messages.append(
+                    "Newsletter verification passed."
+                )
+
+            else:
+                result.errors.append(
+                    "No successful subscription confirmation detected."
+                )
 
         except Exception as e:
-            errors.append(f"Newsletter processing anomaly caught: {str(e)}")
+            result.errors.append(str(e))
 
-        return {
-            "success": success,
-            "errors": errors,
-            "messages": messages,
-            "timings": time.time() - start_time
-        }
+        return self.finish_result(result, start_time)

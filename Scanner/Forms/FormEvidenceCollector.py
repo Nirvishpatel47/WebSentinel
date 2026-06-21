@@ -23,10 +23,7 @@ class FormEvidenceCollector:
             filename = f"{form_type.lower()}_failure_{uuid.uuid4().hex[:8]}.png"
             file_path = os.path.join(self.output_dir, filename)
             
-            # Capture the current live frame buffer
             await page.screenshot(path=file_path, full_page=False)
-            logger.info(f"FormEvidenceCollector successfully generated binary image footprint trace: {file_path}")
             return file_path
         except Exception as e:
-            logger.error(f"Failed to generate evidence snapshot asset: {e}")
             return None

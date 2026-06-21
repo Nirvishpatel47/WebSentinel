@@ -1,50 +1,101 @@
 #!/usr/bin/env python3
-import time
-from playwright.async_api import Page, Locator
+
 from typing import List, Dict, Any
 
-class LoginFormTester:
+from playwright.async_api import Page, Locator
+
+from Scanner.Forms.BaseFormTester import BaseFormTester
+from Scanner.Forms.FormResult import FormResult
+
+
+class LoginFormTester(BaseFormTester):
     """
-    Responsibility: Verifies security fields and input validation behaviors on authentication layouts.
+    Verifies login form structure and validation behavior.
+    Does NOT attempt real authentication.
     """
-    async def test(self, page: Page, form_locator: Locator, fields: List[Dict[str, Any]]) -> Dict[str, Any]:
-        start_time = time.time()
-        messages = []
-        errors = []
-        success = False
+
+    async def test(
+        self,
+        page: Page,
+        form_locator: Locator,
+        fields: List[Dict[str, Any]]
+    ) -> FormResult:
+
+        start_time = self.start_timer()
+        result = FormResult()
 
         try:
-            # 1. Fill fields to verify structural validation criteria
+
             for field in fields:
-                el_locator = form_locator.locator(f"input[name='{field['name']}']").first if field['name'] else None
-                if not el_locator or not await el_locator.is_visible():
+
+                locator = self.get_field_locator(
+                    form_locator,
+                    field
+                )
+
+                if locator is None:
                     continue
 
-                if field['type'] == "password":
-                    await el_locator.fill("Sentinel_Protected_Pass_99!")
-                elif "user" in field['name'].lower() or "mail" in field['name'].lower():
-                    await el_locator.fill("sentinel_audit_user@test.org")
+                if not await locator.is_visible():
+                    continue
 
-            messages.append("Authentication structural placeholder text elements populated successfully.")
+                field_type = field.get("type", "")
+                field_name = field.get("name", "").lower()
 
-            # 2. Trigger input execution validation loop check
-            submit_btn = form_locator.locator("button[type='submit'], input[type='submit'], button:has-text('Log'), button:has-text('Sign')").first
-            if await submit_btn.is_visible():
-                await submit_btn.click(timeout=1000, no_wait_after=True)
-                await page.wait_for_timeout(800)
-                messages.append("Authentication form validation execution sequence clicked.")
-                
-                # Check for client-side crash errors or structural misconfigurations
-                success = True  # Target verified if form accepts inputs and triggers response pipeline without structural collapse
+                if field_type == "password":
+                    await locator.fill(
+                        "Sentinel_Protected_Pass_99!"
+                    )
+
+                elif (
+                    "user" in field_name
+                    or "mail" in field_name
+                    or field_type == "email"
+                ):
+                    await locator.fill(
+                        "sentinel_audit_user@test.org"
+                    )
+
+            result.messages.append(
+                "Authentication inputs populated."
+            )
+
+            submit_btn = form_locator.locator(
+                """
+                button[type='submit'],
+                input[type='submit'],
+                button:has-text('Log'),
+                button:has-text('Sign')
+                """
+            ).first
+
+            if (
+                await submit_btn.count() > 0
+                and await submit_btn.is_visible()
+            ):
+
+                await submit_btn.click(
+                    timeout=2000,
+                    no_wait_after=True
+                )
+
+                await page.wait_for_timeout(1000)
+
+                result.success = True
+
+                result.messages.append(
+                    "Login form accepted interaction."
+                )
+
             else:
-                errors.append("Authentication form structure is missing an explicit login submission node handler.")
+                result.errors.append(
+                    "Login submit control not found."
+                )
 
         except Exception as e:
-            errors.append(f"Authentication structural audit run disrupted: {str(e)}")
+            result.errors.append(str(e))
 
-        return {
-            "success": success,
-            "errors": errors,
-            "messages": messages,
-            "timings": time.time() - start_time
-        }
+        return self.finish_result(
+            result,
+            start_time
+        )

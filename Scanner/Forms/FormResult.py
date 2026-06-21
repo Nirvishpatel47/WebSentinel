@@ -1,30 +1,25 @@
 #!/usr/bin/env python3
-from typing import List, Optional
 
+from dataclasses import dataclass, field
+from typing import List
+
+
+@dataclass
 class FormResult:
-    """
-    Responsibility: Standardized data model to store testing results from the specific strategies.
-    """
-    def __init__(
-        self, 
-        success: bool, 
-        errors: List[str], 
-        messages: List[str], 
-        timings: float,
-        screenshot_path: Optional[str] = None
-    ):
-        self.success: bool = success
-        self.errors: List[str] = errors
-        self.messages: List[str] = messages
-        self.timings: float = timings
-        self.screenshots: List[str] = [screenshot_path] if screenshot_path else []
+    success: bool = False
+    errors: List[str] = field(default_factory=list)
+    messages: List[str] = field(default_factory=list)
+    timings: float = 0.0
+
+    before_screenshot: str | None = None
+    after_screenshot: str | None = None
+    failure_screenshot: str | None = None
 
     def to_dict(self) -> dict:
-        """Converts the model state into a serializeable dictionary structure."""
         return {
             "success": self.success,
             "errors": self.errors,
             "messages": self.messages,
-            "timings": f"{self.timings:.3f}s",
+            "timings": round(self.timings, 3),
             "screenshots": self.screenshots
         }
