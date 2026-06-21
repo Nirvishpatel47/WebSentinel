@@ -9,7 +9,7 @@ class InteractionEngine:
     def __init__(self, max_interactions_per_page: int = 30):
         self.max_interactions = max_interactions_per_page
 
-    async def reveal_hidden_dom(self, page: Page, nodes: List[Locator], nav_extractor, callback_on_delta: Callable[[], Awaitable[None]]):
+    async def reveal_hidden_dom(self, page: Page, nodes: List[Locator], nav_extractor, callback_on_delta: Callable[[], Awaitable[None]] ):
         """
         Systematically audits all discovery candidate nodes and logs distinct 
         contextual actions to maximize target state transparency.
@@ -137,7 +137,12 @@ if __name__ == "__main__":
                 print(f"\nDiscovered {len(candidates)} functional element interaction paths across target page DOM.")
 
                 print("\n=== STARTING SYSTEM INTEGRATION LIFECYCLE ===")
-                await engine.reveal_hidden_dom(page=page, nodes=candidates, nav_extractor=nav_extractor, callback_on_delta=on_delta_notification)
+                await engine.reveal_hidden_dom(
+                    page=page,
+                    nodes=candidates,
+                    nav_extractor=nav_extractor,
+                    callback_on_delta=on_delta_notification
+                )
                 print("=== SYSTEM INTEGRATION LIFECYCLE FINISHED ===")
 
             except Exception as err:

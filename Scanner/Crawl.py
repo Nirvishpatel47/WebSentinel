@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 from Browser import BrowserManager
 from LinkExtractor import LinkExtractor
 from ResourceExtractor import ResourceExtractor
-from FormExtractor import FormExtractor
+from Scanner.Forms.FormExtractor import FormExtractor
 from NavigationExtractor import NavigationExtractor
 from Interactions import InteractionEngine
 

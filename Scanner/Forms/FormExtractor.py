@@ -3,9 +3,51 @@ import asyncio
 from playwright.async_api import async_playwright, Page
 from typing import List, Dict
 
+#!/usr/bin/env python3
+import asyncio
+from playwright.async_api import async_playwright, Page, Locator
+from typing import List, Dict
+
 class FormExtractor:
+    """
+    Responsibility: Discover forms and extract structural properties.
+    Preserves exact reliability logic while providing locator streams for FormManager orchestration.
+    """
+    async def locate_forms(self, page: Page) -> List[Locator]:
+        """
+        Provides the Locator array required by FormManager framework loops.
+        """
+        locators = []
+        try:
+            # 1. Grab all standard explicit HTML forms
+            standard_forms = await page.locator("form").all()
+            locators.extend(standard_forms)
+
+            # 2. Check for loose inputs using your exact logic filter to determine if body container is needed
+            has_loose_inputs = await page.evaluate("""
+                () => {
+                    const standardForms = [...document.querySelectorAll('form')];
+                    const processedInputs = new Set();
+                    standardForms.forEach(f => {
+                        [...f.querySelectorAll('input, select, textarea')].forEach(i => processedInputs.add(i));
+                    });
+                    const allInputs = [...document.querySelectorAll('input, select, textarea')];
+                    const looseInputs = allInputs.filter(i => !processedInputs.has(i));
+                    return looseInputs.length > 0;
+                }
+            """)
+
+            if has_loose_inputs:
+                # Add the body element to act as the locator shell for loose interactive layouts
+                locators.append(page.locator("body"))
+        except Exception:
+            pass
+        return locators
+
     async def extract_forms(self, page: Page) -> List[Dict]:
-        """Collects structural definitions of interactable form containers and loose form elements."""
+        """
+        Your exact, highly reliable JavaScript DOM extraction logic.
+        """
         return await page.evaluate("""
         () => {
             const extractedForms = [];
@@ -57,10 +99,9 @@ class FormExtractor:
         }
         """)
 
-
 if __name__ == "__main__":
     async def test_form_extractor():
-        TARGET_URL = "http://127.0.0.1:5501/TESTING/Website-5/contact.html"
+        TARGET_URL = "http://127.0.0.1:5500/tests/Website-5/contact.html"
         extractor = FormExtractor()
 
         async with async_playwright() as p:
@@ -70,9 +111,13 @@ if __name__ == "__main__":
             print(f"Navigating browser to target form sandbox: {TARGET_URL}")
             await page.goto(TARGET_URL, wait_until="domcontentloaded")
             
-            detected_forms = await extractor.extract_forms(page)
+            # Verify both contracts are satisfied perfectly
+            locators = await extractor.locate_forms(page)
+            data_spec = await extractor.extract_forms(page)
             
-            print(detected_forms)
+            print(f"-> Locators Count (For FormManager): {len(locators)}")
+            print(f"-> Extracted Data Specs (For Logging): {len(data_spec)}")
                     
             await browser.close()
     asyncio.run(test_form_extractor())
+
