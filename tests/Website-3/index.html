@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Website-3</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="topbar">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">▣</span>
+        <span class="brand-name">Website-3</span>
+      </div>
+
+      <nav class="nav nav-desktop" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html">Home</a></li>
+
+          <!-- MEGA MENU trigger via HOVER -->
+          <li class="nav-item mega" data-mega>
+            <button class="nav-link btn-ghost" type="button" aria-haspopup="true" aria-expanded="false">
+              Services
+            </button>
+
+            <!-- Hidden working + broken links inside mega menu -->
+            <div class="mega-panel" role="menu" aria-hidden="true">
+              <div class="mega-grid">
+                <div class="mega-col">
+                  <div class="mega-title">Plans</div>
+                  <!-- Hidden working links become visible only after HOVER -->
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="pricing.html">
+                    Pricing (working)
+                  </a>
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="legacy-pricing.html">
+                    Legacy Pricing (broken)
+                  </a>
+                </div>
+
+                <div class="mega-col">
+                  <div class="mega-title">Support</div>
+                  <!-- Hidden working links become visible only after HOVER -->
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="faq.html">
+                    FAQ (working)
+                  </a>
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="hidden404.html">
+                    Hidden 404 (broken)
+                  </a>
+                </div>
+
+                <div class="mega-col">
+                  <div class="mega-title">Extra pages</div>
+                  <!-- Hidden broken links become visible only after HOVER -->
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="services-old.html">
+                    Services Old (broken)
+                  </a>
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="deadpage.html">
+                    Dead Page (broken)
+                  </a>
+                </div>
+              </div>
+
+              <div class="mega-footer">
+                <span class="muted">Tip:</span>
+                <span>Hover stays open; clicking outside closes.</span>
+              </div>
+            </div>
+          </li>
+
+          <li><a class="nav-link" href="about.html">About</a></li>
+
+          <!-- DROPDOWN trigger via CLICK -->
+          <li class="nav-item dropdown" data-dropdown>
+            <button class="nav-link btn-ghost" type="button" aria-haspopup="true" aria-expanded="false">
+              Company
+            </button>
+            <div class="dropdown-panel" role="menu" aria-hidden="true">
+              <a class="dropdown-link" href="contact.html">Contact</a>
+              <a class="dropdown-link" href="faq.html">FAQ (working)</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-mobile">
+        <button class="hamburger" type="button" aria-controls="mobileMenu" aria-expanded="false">
+          <span class="hamburger-lines" aria-hidden="true"></span>
+          <span class="sr-only">Open menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu trigger via HAMBURGER OPEN -->
+  <aside id="mobileMenu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <div class="mobile-head">
+        <div class="brand">
+          <span class="logo" aria-hidden="true">▣</span>
+          <span class="brand-name">Website-3</span>
+        </div>
+        <button class="mobile-close" type="button" aria-label="Close menu">✕</button>
+      </div>
+
+      <nav aria-label="Mobile navigation">
+        <ul class="mobile-list">
+          <li><a href="index.html">Home</a></li>
+
+          <li>
+            <button class="mobile-accordion" type="button" aria-expanded="false" data-acc="mobile-services">
+              Services
+            </button>
+            <div class="mobile-accordion-panel" data-acc-panel="mobile-services" hidden>
+              <ul class="mobile-sublist">
+                <!-- Hidden working/broken mobile links only revealed after hamburger open -->
+                <li><a class="reveal-on-mobile-open" data-reveal="mobile-open" href="pricing.html">Pricing (working)</a></li>
+                <li><a class="reveal-on-mobile-open" data-reveal="mobile-open" href="legacy-pricing.html">Legacy Pricing (broken)</a></li>
+                <li><a class="reveal-on-mobile-open" data-reveal="mobile-open" href="faq.html">FAQ (working)</a></li>
+                <li><a class="reveal-on-mobile-open" data-reveal="mobile-open" href="deadpage.html">Dead Page (broken)</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="mobile-foot">
+        <p class="muted">Everything hidden here is only made visible when the hamburger menu opens.</p>
+      </div>
+    </div>
+  </aside>
+
+  <main id="main" class="page">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Test Playwright interaction + hidden extraction</h1>
+        <p class="lead">
+          This site contains multiple interactive patterns (dropdowns, accordions, tabs, mega menus, hover/click/hamburger reveal)
+          with hidden links that only appear after specific UI actions.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="pricing.html">View Pricing</a>
+          <a class="btn" href="faq.html">Read FAQ</a>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Quick features">
+        <div class="feature">
+          <div class="feature-icon" aria-hidden="true">⚡</div>
+          <div>
+            <div class="feature-title">Fast interactions</div>
+            <div class="feature-desc">Built with plain HTML/CSS/JS for deterministic behavior.</div>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon" aria-hidden="true">🧩</div>
+          <div>
+            <div class="feature-title">Hidden link reveal</div>
+            <div class="feature-desc">Only shown after hover/click/accordion/tabs/hamburger.</div>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon" aria-hidden="true">🧪</div>
+          <div>
+            <div class="feature-title">Playwright friendly</div>
+            <div class="feature-desc">Stable selectors and stateful UI.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <section class="card">
+        <div class="card-head">
+          <h2>Accordion</h2>
+          <p class="muted">Accordion #1 is used for realism; Accordion #2 contains a hidden link reveal.</p>
+        </div>
+
+        <div class="accordion" data-accordion="one">
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              What is this page for?
+            </button>
+            <div class="acc-panel" hidden>
+              <p>
+                It’s a small marketing site designed for automated UI tests. Some links are intentionally hidden until
+                specific interactions occur.
+              </p>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              Does it have real UI widgets?
+            </button>
+            <div class="acc-panel" hidden>
+              <p>
+                Yes—dropdowns, mega menu, hamburger menu, accordion, tabs, and hover interactions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABS reveal hidden link only after tab switching -->
+      <section class="card">
+        <div class="card-head">
+          <h2>Tabs</h2>
+          <p class="muted">Hidden links appear only when a specific tab is selected.</p>
+        </div>
+
+        <div class="tabs" data-tabs="main">
+          <div class="tablist" role="tablist" aria-label="Primary tabs">
+            <button class="tab" role="tab" aria-selected="true" aria-controls="tab-panel-overview" id="tab-overview" data-tab="overview">
+              Overview
+            </button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="tab-panel-resources" id="tab-resources" data-tab="resources">
+              Resources
+            </button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="tab-panel-explore" id="tab-explore" data-tab="explore">
+              Explore
+            </button>
+          </div>
+
+          <div class="tab-panels">
+            <div class="tab-panel" role="tabpanel" id="tab-panel-overview" aria-labelledby="tab-overview">
+              <p class="muted">Choose another tab to reveal hidden links.</p>
+            </div>
+
+            <div class="tab-panel" role="tabpanel" id="tab-panel-resources" aria-labelledby="tab-resources" hidden>
+              <p>Resources for testing:</p>
+              <ul class="bullets">
+                <li>Reveal via tab switching.</li>
+                <li>Use deterministic state updates.</li>
+              </ul>
+
+              <!-- Hidden working link revealed only on tab switch to Resources -->
+              <a class="tab-reveal" data-reveal="tab:resources" href="pricing.html" style="display:none;">
+                Pricing (working) — revealed by tab
+              </a>
+              <a class="tab-reveal" data-reveal="tab:resources" href="services-old.html" style="display:none;">
+                Services Old (broken) — revealed by tab
+              </a>
+            </div>
+
+            <div class="tab-panel" role="tabpanel" id="tab-panel-explore" aria-labelledby="tab-explore" hidden>
+              <p>Extra hidden targets:</p>
+
+              <!-- Hidden working link revealed only on tab switch to Explore -->
+              <a class="tab-reveal" data-reveal="tab:explore" href="faq.html" style="display:none;">
+                FAQ (working) — revealed by tab
+              </a>
+              <a class="tab-reveal" data-reveal="tab:explore" href="hidden404.html" style="display:none;">
+                Hidden 404 (broken) — revealed by tab
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="content-grid">
+      <!-- Accordion #2 must reveal hidden working/broken links -->
+      <section class="card accordion2-wrap">
+        <div class="card-head">
+          <h2>Accordion #2 (hidden extraction targets)</h2>
+          <p class="muted">Links below remain hidden until this accordion expands.</p>
+        </div>
+
+        <div class="accordion" data-accordion="two" id="accordion2">
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              Click to expand: Hidden Links
+            </button>
+            <div class="acc-panel" hidden>
+              <p>Now revealed after accordion expansion:</p>
+              <div class="link-list">
+                <a class="reveal-on-acc2" data-reveal="acc2" href="pricing.html" style="display:none;">pricing.html (working)</a>
+                <a class="reveal-on-acc2" data-reveal="acc2" href="faq.html" style="display:none;">faq.html (working)</a>
+                <a class="reveal-on-acc2" data-reveal="acc2" href="deadpage.html" style="display:none;">deadpage.html (broken)</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item">
+            <button class="acc-btn" type="button" aria-expanded="false">
+              Another section
+            </button>
+            <div class="acc-panel" hidden>
+              <p>Extra content for realism.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hover menu -->
+      <section class="card hover-menu">
+        <div class="card-head">
+          <h2>Hover Menu</h2>
+          <p class="muted">Links reveal only after hovering the trigger.</p>
+        </div>
+
+        <div class="hover-wrap" data-hover-menu>
+          <button class="hover-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+            Hover for more
+          </button>
+
+          <div class="hover-panel" role="menu" aria-hidden="true">
+            <a class="hover-link" data-reveal="hovermenu" href="services-old.html" style="display:none;">services-old.html (broken)</a>
+            <a class="hover-link" data-reveal="hovermenu" href="about.html" style="display:none;">about.html (visible after hover)</a>
+            <a class="hover-link" data-reveal="hovermenu" href="hidden404.html" style="display:none;">hidden404.html (broken)</a>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="foot-inner">
+      <small class="muted">© 2026 Website-3. Built for Playwright hidden content testing.</small>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

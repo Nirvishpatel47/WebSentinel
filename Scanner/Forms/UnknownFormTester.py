@@ -13,12 +13,7 @@ class UnknownFormTester(BaseFormTester):
     Safely evaluates unknown forms without submitting them.
     """
 
-    async def test(
-        self,
-        page: Page,
-        form_locator: Locator,
-        fields: List[Dict[str, Any]]
-    ) -> FormResult:
+    async def test( self, page: Page, form_locator: Locator, fields: List[Dict[str, Any]] ) -> FormResult:
 
         start_time = self.start_timer()
         result = FormResult()

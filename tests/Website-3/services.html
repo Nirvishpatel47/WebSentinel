@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Services - Website-3</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="topbar">
+      <div class="brand"><span class="logo" aria-hidden="true">▣</span><span class="brand-name">Website-3</span></div>
+
+      <nav class="nav nav-desktop" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item mega" data-mega>
+            <button class="nav-link btn-ghost" type="button" aria-haspopup="true" aria-expanded="false">Services</button>
+            <div class="mega-panel" role="menu" aria-hidden="true">
+              <div class="mega-grid">
+                <div class="mega-col">
+                  <div class="mega-title">Plans</div>
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="pricing.html">Pricing (working)</a>
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="legacy-pricing.html">Legacy Pricing (broken)</a>
+                </div>
+                <div class="mega-col">
+                  <div class="mega-title">Support</div>
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="faq.html">FAQ (working)</a>
+                  <a class="mega-link reveal-on-hover" data-reveal="hover" href="hidden404.html">Hidden 404 (broken)</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item dropdown" data-dropdown>
+            <button class="nav-link btn-ghost" type="button" aria-haspopup="true" aria-expanded="false">Company</button>
+            <div class="dropdown-panel" role="menu" aria-hidden="true">
+              <a class="dropdown-link" href="contact.html">Contact</a>
+              <a class="dropdown-link" href="faq.html">FAQ</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-mobile">
+        <button class="hamburger" type="button" aria-controls="mobileMenu" aria-expanded="false">
+          <span class="hamburger-lines" aria-hidden="true"></span>
+          <span class="sr-only">Open menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <aside id="mobileMenu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <div class="mobile-head">
+        <div class="brand"><span class="logo" aria-hidden="true">▣</span><span class="brand-name">Website-3</span></div>
+        <button class="mobile-close" type="button" aria-label="Close menu">✕</button>
+      </div>
+
+      <nav aria-label="Mobile navigation">
+        <ul class="mobile-list">
+          <li><a href="index.html">Home</a></li>
+          <li>
+            <button class="mobile-accordion" type="button" aria-expanded="false" data-acc="mobile-services">Services</button>
+            <div class="mobile-accordion-panel" data-acc-panel="mobile-services" hidden>
+              <ul class="mobile-sublist">
+                <li><a class="reveal-on-mobile-open" data-reveal="mobile-open" href="pricing.html">Pricing (working)</a></li>
+                <li><a class="reveal-on-mobile-open" data-reveal="mobile-open" href="services-old.html">services-old.html (broken)</a></li>
+                <li><a class="reveal-on-mobile-open" data-reveal="mobile-open" href="faq.html">FAQ (working)</a></li>
+                <li><a class="reveal-on-mobile-open" data-reveal="mobile-open" href="deadpage.html">deadpage.html (broken)</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="page">
+    <section class="page-head">
+      <h1>Services</h1>
+      <p class="lead">A page with navigation widgets and hidden link triggers.</p>
+    </section>
+
+    <section class="card">
+      <h2>Dropdown test</h2>
+      <p class="muted">Use the navbar dropdown/mega menu to reveal hidden links.</p>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

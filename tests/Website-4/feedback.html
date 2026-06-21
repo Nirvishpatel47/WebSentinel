@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback — Form Testing Lab</title>
+    <link rel="stylesheet" href="styles.css">
+<base target="_blank">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4"/>
+                <circle cx="12" cy="12" r="10"/>
+            </svg>
+            <span>FormTestingLab</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="contact.html">Contact</a>
+            <a href="quote.html">Quote</a>
+            <a href="newsletter.html">Newsletter</a>
+            <a href="feedback.html" class="active">Feedback</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <main class="page-main">
+        <div class="container">
+            <h1 class="page-title">Feedback</h1>
+            <p class="page-subtitle">Fake success — data is not actually saved</p>
+
+            <section class="form-section">
+                <div class="form-card">
+                    <div class="form-header">
+                        <span class="form-badge badge-fake">Fake Success</span>
+                        <h2>Share Your Feedback</h2>
+                        <p>This form shows a success message but does not save or transmit any data.</p>
+                    </div>
+                    <form id="fake-form" class="form-body" novalidate>
+                        <div class="form-group">
+                            <label for="feedback-name">Name</label>
+                            <input type="text" id="feedback-name" name="name" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback-rating">Rating</label>
+                            <div class="star-rating" id="star-rating">
+                                <input type="radio" name="rating" id="star5" value="5"><label for="star5">★</label>
+                                <input type="radio" name="rating" id="star4" value="4"><label for="star4">★</label>
+                                <input type="radio" name="rating" id="star3" value="3" checked><label for="star3">★</label>
+                                <input type="radio" name="rating" id="star2" value="2"><label for="star2">★</label>
+                                <input type="radio" name="rating" id="star1" value="1"><label for="star1">★</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback-message">Your Feedback</label>
+                            <textarea id="feedback-message" name="message" rows="4" placeholder="Tell us what you think..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                    </form>
+                    <div id="fake-success" class="form-success hidden">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h3>Thank you for your feedback!</h3>
+                        <p>Your input helps us improve. (Note: data was not actually saved.)</p>
+                        <button class="btn btn-secondary" onclick="resetForm('fake')">Send More Feedback</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Form Testing Lab — Built for automation testing</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

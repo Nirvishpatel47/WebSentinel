@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter — Form Testing Lab</title>
+    <link rel="stylesheet" href="styles.css">
+<base target="_blank">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4"/>
+                <circle cx="12" cy="12" r="10"/>
+            </svg>
+            <span>FormTestingLab</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="contact.html">Contact</a>
+            <a href="quote.html">Quote</a>
+            <a href="newsletter.html" class="active">Newsletter</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <main class="page-main">
+        <div class="container">
+            <h1 class="page-title">Newsletter</h1>
+            <p class="page-subtitle">Form with email validation</p>
+
+            <section class="form-section">
+                <div class="form-card">
+                    <div class="form-header">
+                        <span class="form-badge badge-validation">Validation</span>
+                        <h2>Subscribe to Updates</h2>
+                        <p>Email is required. Submitting without it shows a validation error.</p>
+                    </div>
+                    <form id="validation-form" class="form-body" novalidate>
+                        <div class="form-group">
+                            <label for="newsletter-name">Name (optional)</label>
+                            <input type="text" id="newsletter-name" name="name" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="newsletter-email">Email <span class="required">*</span></label>
+                            <input type="email" id="newsletter-email" name="email" placeholder="you@example.com">
+                            <span id="email-error" class="error-message hidden">Email required</span>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="weekly" checked>
+                                <span class="checkmark"></span>
+                                Weekly digest
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="product">
+                                <span class="checkmark"></span>
+                                Product updates
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                    <div id="validation-success" class="form-success hidden">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h3>Subscribed!</h3>
+                        <p>Check your inbox for a confirmation email.</p>
+                        <button class="btn btn-secondary" onclick="resetForm('validation')">Subscribe Another</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Form Testing Lab — Built for automation testing</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

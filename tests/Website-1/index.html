@@ -1,480 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nexus Consulting — Strategy. Growth. Results.</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Northstar Advisory | Business Growth & Digital Operations</title>
+  <meta name="description" content="Northstar Advisory helps growing businesses improve operations, digital strategy, and customer experience.">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/app.js"></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Northstar Advisory home">
+        <img src="images/logo.png" alt="Northstar Advisory logo" width="44" height="44">
+        <span>
+          <strong>Northstar</strong>
+          <small>Advisory Group</small>
+        </span>
+      </a>
 
-  <!-- ═══════════════════════════════════════
-       NAVBAR
-       BROKEN: services-old.html (navbar Services Legacy link)
-       BROKEN: undefined-route (navbar "Resources" link)
-  ═══════════════════════════════════════ -->
-  <header class="navbar" role="banner">
-    <div class="container">
-      <div class="navbar__inner">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+        <span class="sr-only">Toggle navigation</span>
+        <span></span><span></span><span></span>
+      </button>
 
-        <a href="index.html" class="navbar__logo" aria-label="Nexus Consulting home">
-          <div class="navbar__logo-mark">N</div>
-          Nexus
-        </a>
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="services-old.html">Legacy Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html" class="nav-cta">Contact</a>
+      </nav>
 
-        <nav class="navbar__nav" role="navigation" aria-label="Primary navigation">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="services.html">Services</a>
-          <!-- BROKEN LINK #1 — Navbar: services-old.html -->
-          <a href="services-old.html">Services (Legacy)<span class="sr-only"> (broken)</span></a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="blog.html">Blog</a>
-          <!-- BROKEN LINK #2 — Navbar: undefined-route -->
-          <a href="undefined-route">Resources</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-
-        <div class="navbar__cta">
-          <a href="contact.html" class="btn btn-primary">Get a Quote</a>
-        </div>
-
-        <button class="hamburger" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+        <span aria-hidden="true">◐</span>
+      </button>
     </div>
   </header>
 
-
-  <!-- ═══════════════════════════════════════
-       HERO
-       BROKEN: undefined-route (hero CTA button)
-       BROKEN: fake-page.html (hero secondary link)
-  ═══════════════════════════════════════ -->
-  <section class="hero" id="home">
-    <div class="hero__slash" aria-hidden="true"></div>
-
-    <div class="container">
-      <div class="hero__grid">
-        <div class="hero__content">
-          <div class="hero__eyebrow">
-            <span class="hero__eyebrow-dot"></span>
-            Trusted by 200+ Companies Worldwide
+  <main id="main-content">
+    <section class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Growth strategy for practical teams</p>
+          <h1>Build a steadier business engine without adding operational chaos.</h1>
+          <p class="hero-text">We help service firms, B2B teams, and modern operators improve delivery, streamline internal systems, and create a clearer customer journey.</p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="contact.html">Book a discovery call</a>
+            <a class="btn btn-secondary" href="undefined-route">See rollout plan</a>
+            <a class="btn btn-ghost" href="fake-page.html">Download company overview</a>
           </div>
-
-          <h1 class="hero__title">
-            Strategy That<br>
-            <span>Drives Real</span><br>
-            Business Growth
-          </h1>
-
-          <p class="hero__desc">
-            Nexus Consulting partners with ambitious organisations to unlock
-            sustainable growth through data-driven strategy, operational excellence,
-            and transformative digital solutions.
-          </p>
-
-          <div class="hero__actions">
-            <a href="services.html" class="btn btn-primary">Explore Services</a>
-            <!-- BROKEN LINK #3 — Hero button: undefined-route -->
-            <a href="undefined-route" class="btn btn-outline">View Our Process</a>
-          </div>
-
-          <!-- BROKEN LINK #4 — Hero secondary: fake-page.html -->
-          <p style="margin-top:20px; font-size:13px; color:var(--slate-400);">
-            Not sure where to start?
-            <a href="fake-page.html" style="color:var(--amber); text-decoration:underline;">Read our Getting Started guide →</a>
-          </p>
-
-          <div class="hero__stats">
-            <div class="hero__stat">
-              <div class="hero__stat-num"><span data-count="200" data-suffix="+">200+</span></div>
-              <div class="hero__stat-label">Clients Served</div>
-            </div>
-            <div class="hero__stat">
-              <div class="hero__stat-num"><span data-count="98" data-suffix="%">98%</span></div>
-              <div class="hero__stat-label">Client Satisfaction</div>
-            </div>
-            <div class="hero__stat">
-              <div class="hero__stat-num"><span data-count="15" data-suffix="yr">15yr</span></div>
-              <div class="hero__stat-label">Industry Experience</div>
-            </div>
+          <div class="hero-links">
+            <a href="services.html">Explore current services</a>
+            <a href="http://localhost:9999/missing" target="_blank" rel="noopener noreferrer">Open local diagnostics</a>
           </div>
         </div>
-
-        <!-- Hero right visual cards -->
-        <div class="hero__visual" aria-hidden="true">
-          <div class="hero__card">
-            <div class="hero__card-title">Q4 Revenue Growth</div>
-            <div class="hero__card-value">$4.2M</div>
-            <div class="hero__card-badge">↑ 34% vs last quarter</div>
-          </div>
-          <div class="hero__card">
-            <div class="hero__card-title">Active Projects</div>
-            <div class="hero__card-list">
-              <div class="hero__card-item"><span class="hero__card-item-dot"></span>Digital Transformation — Acme Corp</div>
-              <div class="hero__card-item"><span class="hero__card-item-dot"></span>Market Expansion — TechFront</div>
-              <div class="hero__card-item"><span class="hero__card-item-dot"></span>Operational Audit — GreenLeaf</div>
-            </div>
+        <div class="hero-media card">
+          <img src="images/hero.jpg" alt="Business consultants reviewing a digital operations dashboard" width="960" height="720" loading="eager">
+          <div class="hero-stat-grid">
+            <article>
+              <strong>42%</strong>
+              <span>Average process time reduction across transformation projects</span>
+            </article>
+            <article>
+              <strong>18 weeks</strong>
+              <span>Typical engagement length for strategy plus implementation support</span>
+            </article>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+    <section class="section surface-alt">
+      <div class="container section-heading">
+        <p class="eyebrow">Services</p>
+        <h2>Advisory services that connect strategy to execution.</h2>
+        <p>Each engagement is designed to give leadership teams clear direction, better visibility, and faster delivery across the business.</p>
+      </div>
+      <div class="container card-grid three-up">
+        <article class="card service-card">
+          <h3>Operations redesign</h3>
+          <p>Audit existing workflows, remove bottlenecks, and build lean operating models for scaling teams.</p>
+          <a class="text-link" href="services.html">View service details</a>
+        </article>
+        <article class="card service-card">
+          <h3>Customer journey design</h3>
+          <p>Map touchpoints, improve retention, and tighten the path from first conversation to long-term account growth.</p>
+          <a class="text-link" href="services-old.html">Read legacy methodology</a>
+        </article>
+        <article class="card service-card">
+          <h3>Performance reporting</h3>
+          <p>Translate disconnected data into weekly decision dashboards your leadership team can actually use.</p>
+          <a class="text-link" href="portfolio-details-999.html">See dashboard example</a>
+        </article>
+      </div>
+    </section>
 
-  <!-- ═══════════════════════════════════════
-       SERVICES PREVIEW
-       BROKEN: services-old.html (card link)
-       BROKEN: products.html (card link)
-  ═══════════════════════════════════════ -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="services__head">
+    <section class="section">
+      <div class="container split-section">
         <div>
-          <div class="section-label">What We Do</div>
-          <h2 class="section-title">End-to-End Business Solutions</h2>
-          <p class="section-sub">From strategic planning to hands-on execution, we cover every dimension of modern business growth.</p>
+          <p class="eyebrow">Portfolio</p>
+          <h2>Selected work across consulting, operations, and digital optimization.</h2>
+          <p>Our recent projects span service businesses, digital-first teams, and regional companies modernizing internal operations.</p>
+          <div class="button-row compact">
+            <a class="btn btn-primary" href="portfolio.html">Browse portfolio</a>
+            <a class="btn btn-secondary" href="portfolio-details-999.html">View featured case</a>
+          </div>
         </div>
-        <a href="services.html" class="btn btn-dark">All Services</a>
+        <div class="card-grid two-up">
+          <article class="card project-card">
+            <span class="chip">Consulting</span>
+            <h3>Regional support network</h3>
+            <p>Unified intake, CRM workflows, and renewal reporting for a fast-growing client services company.</p>
+            <a class="text-link" href="portfolio.html">Read project snapshot</a>
+          </article>
+          <article class="card project-card">
+            <span class="chip">B2B Services</span>
+            <h3>Commercial operations reset</h3>
+            <p>Reworked internal approval flows and proposal generation to shorten deal cycles.</p>
+            <a class="text-link" href="fake-page.html">Open transformation notes</a>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <div class="services__grid">
-        <!-- Card 1 — working -->
-        <article class="service-card">
-          <div class="service-card__icon">📊</div>
-          <h3 class="service-card__title">Business Strategy</h3>
-          <p class="service-card__desc">We craft bespoke strategic roadmaps aligned with your market position, competitive landscape, and long-term vision.</p>
-          <a href="services.html" class="service-card__link">Learn more →</a>
+    <section class="section surface-alt">
+      <div class="container section-heading narrow">
+        <p class="eyebrow">Client voice</p>
+        <h2>Testimonials grounded in operational outcomes.</h2>
+      </div>
+      <div class="container card-grid three-up">
+        <article class="card testimonial-card">
+          <p>“Northstar helped us replace reactive firefighting with a weekly operating rhythm the team actually follows.”</p>
+          <strong>Director of Operations, Meridian Partners</strong>
         </article>
-
-        <!-- Card 2 — BROKEN: services-old.html -->
-        <article class="service-card">
-          <div class="service-card__icon">💻</div>
-          <h3 class="service-card__title">Digital Transformation</h3>
-          <p class="service-card__desc">Modernise your operations with cutting-edge technology solutions, cloud migration, and process automation at scale.</p>
-          <!-- BROKEN LINK #5 — Service card: services-old.html -->
-          <a href="services-old.html" class="service-card__link">Learn more →</a>
+        <article class="card testimonial-card">
+          <p>“Their work gave us cleaner reporting, clearer responsibilities, and a better client handoff process.”</p>
+          <strong>Managing Partner, Vale Growth Studio</strong>
         </article>
-
-        <!-- Card 3 — BROKEN: products.html -->
-        <article class="service-card">
-          <div class="service-card__icon">🚀</div>
-          <h3 class="service-card__title">Growth Marketing</h3>
-          <p class="service-card__desc">Data-driven marketing strategies that acquire, engage, and retain your most valuable customers across every channel.</p>
-          <!-- BROKEN LINK #6 — Service card: products.html -->
-          <a href="products.html" class="service-card__link">Learn more →</a>
-        </article>
-
-        <!-- Card 4 — working -->
-        <article class="service-card">
-          <div class="service-card__icon">⚙️</div>
-          <h3 class="service-card__title">Operations Consulting</h3>
-          <p class="service-card__desc">Eliminate inefficiencies, reduce costs, and build scalable operational frameworks that grow with your business.</p>
-          <a href="services.html" class="service-card__link">Learn more →</a>
-        </article>
-
-        <!-- Card 5 — working -->
-        <article class="service-card">
-          <div class="service-card__icon">📈</div>
-          <h3 class="service-card__title">Financial Advisory</h3>
-          <p class="service-card__desc">Expert financial modelling, M&amp;A due diligence, and investment strategy to maximise shareholder value.</p>
-          <a href="services.html" class="service-card__link">Learn more →</a>
-        </article>
-
-        <!-- Card 6 — working -->
-        <article class="service-card">
-          <div class="service-card__icon">🌍</div>
-          <h3 class="service-card__title">Market Expansion</h3>
-          <p class="service-card__desc">Enter new markets with confidence through our in-depth feasibility studies, localisation expertise, and partner networks.</p>
-          <a href="services.html" class="service-card__link">Learn more →</a>
+        <article class="card testimonial-card">
+          <p>“We finally had a delivery model that matched the promises our sales team was making.”</p>
+          <strong>Founder, Axiom Field Services</strong>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-
-  <!-- ═══════════════════════════════════════
-       PORTFOLIO PREVIEW
-       BROKEN: portfolio-details-999.html (card link)
-  ═══════════════════════════════════════ -->
-  <section class="portfolio" id="portfolio">
-    <div class="container">
-      <div class="portfolio__head">
-        <div class="section-label">Our Work</div>
-        <h2 class="section-title">Featured Case Studies</h2>
-        <p class="section-sub">Proven results across industries — from Series A start-ups to Fortune 500 enterprises.</p>
-      </div>
-
-      <div class="portfolio__grid">
-        <!-- Card 1 — working -->
-        <article class="portfolio-card">
-          <div class="portfolio-card__thumb">🏗️</div>
-          <div class="portfolio-card__body">
-            <div class="portfolio-card__tag">Manufacturing</div>
-            <h3 class="portfolio-card__title">Acme Corp — Supply Chain Overhaul</h3>
-            <p class="portfolio-card__desc">Redesigned the end-to-end supply chain reducing costs by 28% and lead times by 40% within 18 months.</p>
-            <a href="portfolio.html" class="portfolio-card__link">View case study →</a>
-          </div>
-        </article>
-
-        <!-- Card 2 — BROKEN: portfolio-details-999.html -->
-        <article class="portfolio-card">
-          <div class="portfolio-card__thumb">🏦</div>
-          <div class="portfolio-card__body">
-            <div class="portfolio-card__tag">Fintech</div>
-            <h3 class="portfolio-card__title">NovaPay — Digital Payments Launch</h3>
-            <p class="portfolio-card__desc">Guided NovaPay's entry into three new markets, achieving $12M ARR in the first year of operations.</p>
-            <!-- BROKEN LINK #7 — Portfolio card: portfolio-details-999.html -->
-            <a href="portfolio-details-999.html" class="portfolio-card__link">View case study →</a>
-          </div>
-        </article>
-
-        <!-- Card 3 — working -->
-        <article class="portfolio-card">
-          <div class="portfolio-card__thumb">🌿</div>
-          <div class="portfolio-card__body">
-            <div class="portfolio-card__tag">Sustainability</div>
-            <h3 class="portfolio-card__title">GreenLeaf — ESG Strategy</h3>
-            <p class="portfolio-card__desc">Built a comprehensive ESG framework that attracted $50M in impact investment and cut carbon emissions by 35%.</p>
-            <a href="portfolio.html" class="portfolio-card__link">View case study →</a>
-          </div>
-        </article>
-      </div>
-
-      <div style="text-align:center; margin-top:48px;">
-        <a href="portfolio.html" class="btn btn-dark">See All Case Studies</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       TESTIMONIALS
-  ═══════════════════════════════════════ -->
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="testimonials__head">
-        <div class="section-label">Client Voices</div>
-        <h2 class="section-title section-title--light">What Our Clients Say</h2>
-        <p class="section-sub section-sub--light" style="margin:12px auto 0;">Real outcomes, real feedback — from the leaders who've worked with us.</p>
-      </div>
-
-      <div class="testimonials__grid">
-        <article class="testimonial-card">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p class="testimonial-card__quote">"Nexus didn't just hand us a slide deck — they worked alongside our team for months to see the strategy through. The results speak for themselves: 40% revenue growth in year one."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">MJ</div>
-            <div>
-              <div class="testimonial-card__name">Marcus Johnson</div>
-              <div class="testimonial-card__role">CEO, Acme Corp</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-card">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p class="testimonial-card__quote">"Their market expansion playbook was surgical. We entered Southeast Asia with confidence and hit profitability six months ahead of schedule. I can't recommend them highly enough."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">SR</div>
-            <div>
-              <div class="testimonial-card__name">Sophia Reeves</div>
-              <div class="testimonial-card__role">VP Strategy, NovaPay</div>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-card">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p class="testimonial-card__quote">"The operational audit uncovered €2M in hidden costs we didn't know existed. Nexus paid for itself within the first quarter. Exceptional work from an exceptional team."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">AF</div>
-            <div>
-              <div class="testimonial-card__name">Amelie Fischer</div>
-              <div class="testimonial-card__role">COO, GreenLeaf GmbH</div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       BLOG PREVIEW
-       BROKEN: old-blog.html (blog card #2)
-       BROKEN: http://localhost:9999/missing (blog card #3 author)
-  ═══════════════════════════════════════ -->
-  <section class="blog" id="blog">
-    <div class="container">
-      <div class="blog__head">
+    <section class="section">
+      <div class="container blog-preview-header">
         <div>
-          <div class="section-label">Insights</div>
-          <h2 class="section-title">From the Nexus Blog</h2>
+          <p class="eyebrow">Insights</p>
+          <h2>Recent thinking on systems, growth, and execution.</h2>
         </div>
-        <a href="blog.html" class="btn btn-dark">All Articles</a>
+        <a class="btn btn-secondary" href="blog.html">Visit the blog</a>
       </div>
-
-      <div class="blog__grid">
-        <!-- Blog card 1 — working -->
-        <article class="blog-card">
-          <div class="blog-card__thumb">📰</div>
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__cat">Strategy</span>
-              <span class="blog-card__date">June 12, 2025</span>
-            </div>
-            <h3 class="blog-card__title">
-              <a href="blog.html">5 Signs Your Business Strategy Needs a Reset</a>
-            </h3>
-            <p class="blog-card__excerpt">Stagnant growth, rising churn, and reactive decision-making are all warning signs. Here's how to diagnose and fix them fast.</p>
-            <a href="blog.html" class="blog-card__read">Read article →</a>
-          </div>
+      <div class="container card-grid three-up">
+        <article class="card blog-card">
+          <span class="meta">Operations</span>
+          <h3>Why mid-sized teams outgrow spreadsheet-led reporting</h3>
+          <p>Common signs that reporting habits are slowing decisions instead of supporting them.</p>
+          <a class="text-link" href="blog.html">Read article list</a>
         </article>
-
-        <!-- Blog card 2 — BROKEN: old-blog.html -->
-        <article class="blog-card">
-          <div class="blog-card__thumb">🤖</div>
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__cat">Technology</span>
-              <span class="blog-card__date">May 28, 2025</span>
-            </div>
-            <h3 class="blog-card__title">
-              <!-- BROKEN LINK #8 — Blog card #2: old-blog.html -->
-              <a href="old-blog.html">AI in the Boardroom: Hype vs. Reality in 2025</a>
-            </h3>
-            <p class="blog-card__excerpt">We surveyed 150 C-suite executives on their AI adoption plans. The results were surprising — and a little sobering.</p>
-            <!-- BROKEN LINK #9 — Blog card #2 read button: old-blog.html -->
-            <a href="old-blog.html" class="blog-card__read">Read article →</a>
-          </div>
+        <article class="card blog-card">
+          <span class="meta">Process</span>
+          <h3>What to review before rebuilding a service workflow</h3>
+          <p>A practical pre-project checklist for leaders planning a process redesign.</p>
+          <a class="text-link" href="old-blog.html">Read archived post</a>
         </article>
-
-        <!-- Blog card 3 — BROKEN: http://localhost:9999/missing -->
-        <article class="blog-card">
-          <div class="blog-card__thumb">🌐</div>
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__cat">Growth</span>
-              <span class="blog-card__date">May 14, 2025</span>
-            </div>
-            <h3 class="blog-card__title">
-              <a href="blog.html">Emerging Markets in 2025: Where Smart Money Is Moving</a>
-            </h3>
-            <p class="blog-card__excerpt">From Southeast Asia to West Africa, we map the highest-potential markets for B2B expansion over the next 24 months.</p>
-            <!-- BROKEN LINK #10 — Blog card #3 author link: http://localhost:9999/missing -->
-            <p style="font-size:12px; color:var(--slate-400); margin-bottom:10px;">
-              By <a href="http://localhost:9999/missing" style="color:var(--amber-dk);">Dr. Priya Nair</a>
-            </p>
-            <a href="blog.html" class="blog-card__read">Read article →</a>
-          </div>
+        <article class="card blog-card">
+          <span class="meta">CX</span>
+          <h3>How stronger handoffs improve client retention</h3>
+          <p>Operational continuity often matters more to customers than flashy delivery promises.</p>
+          <a class="text-link" href="blog.html">Open blog hub</a>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-
-  <!-- ═══════════════════════════════════════
-       CTA BANNER
-       BROKEN: broken-contact.html (CTA button)
-  ═══════════════════════════════════════ -->
-  <section class="cta-banner">
-    <div class="container">
-      <h2 class="cta-banner__title">Ready to <span>Transform</span> Your Business?</h2>
-      <p class="cta-banner__sub">Schedule a free 60-minute strategy session with one of our senior consultants.</p>
-      <div class="cta-banner__actions">
-        <!-- BROKEN LINK #11 — CTA banner button: broken-contact.html -->
-        <a href="broken-contact.html" class="btn btn-primary">Book a Free Consultation</a>
-        <a href="about.html" class="btn btn-outline">Meet the Team</a>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="index.html" aria-label="Northstar Advisory home">
+          <img src="images/logo.png" alt="Northstar Advisory logo" width="40" height="40" loading="lazy">
+          <span>
+            <strong>Northstar</strong>
+            <small>Advisory Group</small>
+          </span>
+        </a>
+        <p>Helping ambitious businesses improve operational clarity, service delivery, and digital execution.</p>
       </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════
-       FOOTER
-       BROKEN: products.html (Products column)
-       BROKEN: services-old.html (repeated)
-       BROKEN: broken-contact.html (repeated)
-       BROKEN: http://localhost:9999/missing (repeated)
-  ═══════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-
-        <!-- Brand col -->
-        <div>
-          <a href="index.html" class="navbar__logo" style="display:inline-flex;">
-            <div class="navbar__logo-mark">N</div>
-            Nexus
-          </a>
-          <p class="footer__brand-desc">
-            Nexus Consulting is a global strategy and operations firm helping businesses
-            unlock sustainable, measurable growth since 2009.
-          </p>
-          <div class="footer__social">
-            <a href="https://linkedin.com" class="footer__social-link" aria-label="LinkedIn" rel="noopener">in</a>
-            <a href="https://twitter.com" class="footer__social-link" aria-label="Twitter" rel="noopener">𝕏</a>
-            <a href="https://facebook.com" class="footer__social-link" aria-label="Facebook" rel="noopener">f</a>
-          </div>
-        </div>
-
-        <!-- Services col -->
-        <div>
-          <div class="footer__col-title">Services</div>
-          <ul class="footer__links">
-            <li><a href="services.html">Business Strategy</a></li>
-            <li><a href="services.html">Digital Transformation</a></li>
-            <li><a href="services.html">Growth Marketing</a></li>
-            <!-- BROKEN LINK #12 — Footer Services: services-old.html -->
-            <li><a href="services-old.html">Legacy Services</a></li>
-            <!-- BROKEN LINK #13 — Footer Products: products.html -->
-            <li><a href="products.html">Products</a></li>
-          </ul>
-        </div>
-
-        <!-- Company col -->
-        <div>
-          <div class="footer__col-title">Company</div>
-          <ul class="footer__links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="portfolio.html">Case Studies</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <!-- BROKEN LINK #14 — Footer Company: old-blog.html -->
-            <li><a href="old-blog.html">Archive Blog</a></li>
-            <!-- BROKEN LINK #15 — Footer Company: fake-page.html -->
-            <li><a href="fake-page.html">Careers</a></li>
-          </ul>
-        </div>
-
-        <!-- Contact col -->
-        <div>
-          <div class="footer__col-title">Contact</div>
-          <ul class="footer__links">
-            <li><a href="contact.html">Get in Touch</a></li>
-            <!-- BROKEN LINK #16 — Footer Contact: broken-contact.html -->
-            <li><a href="broken-contact.html">Quick Quote Form</a></li>
-            <!-- BROKEN LINK #17 — Footer: http://localhost:9999/missing -->
-            <li><a href="http://localhost:9999/missing">Support Portal</a></li>
-            <li><a href="contact.html">Office Locations</a></li>
-          </ul>
-        </div>
-
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="portfolio.html">Case studies</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="blog.html">Insights</a></li>
+        </ul>
       </div>
-
-      <div class="footer__bottom">
-        <p class="footer__copy">© 2025 Nexus Consulting Ltd. All rights reserved.</p>
-        <div class="footer__legal">
-          <!-- BROKEN LINK #18 — Footer legal: portfolio-details-999.html -->
-          <a href="portfolio-details-999.html">Privacy Policy</a>
-          <a href="contact.html">Terms of Service</a>
-        </div>
+      <div>
+        <h2>Services</h2>
+        <ul>
+          <li><a href="services.html">Current services</a></li>
+          <li><a href="services-old.html">Legacy services</a></li>
+          <li><a href="undefined-route">Implementation sprint</a></li>
+          <li><a href="contact.html">Consultation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="contact.html">Contact page</a></li>
+          <li><a href="broken-contact.html">Old contact form</a></li>
+          <li><a href="http://localhost:9999/missing" target="_blank" rel="noopener noreferrer">Local support</a></li>
+        </ul>
       </div>
     </div>
   </footer>
-
-  <script src="js/app.js"></script>
 </body>
 </html>

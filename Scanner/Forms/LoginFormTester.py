@@ -6,6 +6,7 @@ from playwright.async_api import Page, Locator
 
 from Scanner.Forms.BaseFormTester import BaseFormTester
 from Scanner.Forms.FormResult import FormResult
+from Scanner.Forms.FormEvidenceCollector import Evidence
 
 
 class LoginFormTester(BaseFormTester):

@@ -9,7 +9,7 @@ from Scanner.Forms.FormExtractor import FormExtractor
 from Scanner.Forms.FormClassifier import FormClassifier
 from Scanner.Forms.StrategyFactory import StrategyFactory
 from Scanner.Forms.FormIssueGenerator import FormIssueGenerator
-from Scanner.Forms.FormEvidenceCollector import FormEvidenceCollector
+from Scanner.Forms.FormEvidenceCollector import Evidence
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ class FormManager:
         self.classifier = FormClassifier()
         self.factory = StrategyFactory()
         self.issue_generator = FormIssueGenerator()
-        self.evidence_collector = FormEvidenceCollector()
+        self.evidence_collector = Evidence
 
     async def process_page_forms(
         self,
@@ -98,19 +98,20 @@ class FormManager:
                 )
 
                 # ---------- evidence ----------
-                if not result.success:
+                """ if not result.success:
 
                     screenshot_path = (
-                        await self.evidence_collector.collect_page_snapshot(
+                        await self.evidence_collector.capture_form_snapshot(
                             page,
-                            form_type
+                            form_type,
+                            "None"
                         )
                     )
 
                     if screenshot_path:
                         result.screenshots.append(
                             screenshot_path
-                        )
+                        ) """
 
                 # ---------- store result ----------
                 page_results.append({

@@ -1,259 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services — Nexus Consulting</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | Northstar Advisory</title>
+  <meta name="description" content="Explore Northstar Advisory services for operations, growth systems, and customer experience improvement.">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/app.js"></script>
 </head>
 <body>
-
-  <header class="navbar" role="banner">
-    <div class="container">
-      <div class="navbar__inner">
-        <a href="index.html" class="navbar__logo">
-          <div class="navbar__logo-mark">N</div>
-          Nexus
-        </a>
-        <nav class="navbar__nav" role="navigation" aria-label="Primary navigation">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="services.html" class="active">Services</a>
-          <!-- BROKEN LINK — Navbar: services-old.html -->
-          <a href="services-old.html">Services (Legacy)</a>
-          <a href="portfolio.html">Portfolio</a>
-          <a href="blog.html">Blog</a>
-          <!-- BROKEN LINK — Navbar: undefined-route -->
-          <a href="undefined-route">Resources</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-        <div class="navbar__cta">
-          <a href="contact.html" class="btn btn-primary">Get a Quote</a>
-        </div>
-        <button class="hamburger" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <div class="page-banner">
-    <div class="container">
-      <h1 class="page-banner__title">Our Services</h1>
-      <div class="page-banner__breadcrumb">
-        <a href="index.html">Home</a><span>/</span><span>Services</span>
-      </div>
-    </div>
-  </div>
-
-  <section class="services-page">
-    <div class="container">
-      <div class="section-label">What We Offer</div>
-      <h2 class="section-title">Comprehensive Consulting Solutions</h2>
-      <p class="section-sub">Every service is tailored to your industry, size, and ambition. We don't do off-the-shelf — we do what works for you.</p>
-
-      <!-- Link to old services page (BROKEN) -->
-      <p style="margin-top:16px; font-size:14px; color:var(--slate-400);">
-        Looking for our legacy service catalogue?
-        <!-- BROKEN LINK — Services page intro: services-old.html -->
-        <a href="services-old.html" style="color:var(--amber-dk);">View the old services page →</a>
-      </p>
-
-      <div class="services-page-grid">
-        <article class="service-detail-card">
-          <div class="service-detail-card__icon">📊</div>
-          <h3 class="service-detail-card__title">Business Strategy</h3>
-          <p class="service-detail-card__desc">We develop actionable strategic plans that align your organisation around a clear vision, competitive positioning, and measurable milestones.</p>
-          <div class="service-detail-card__features">
-            <div class="service-detail-card__feat">Market & Competitive Analysis</div>
-            <div class="service-detail-card__feat">Strategic Roadmap Development</div>
-            <div class="service-detail-card__feat">Organisational Alignment Workshops</div>
-            <div class="service-detail-card__feat">KPI Framework Design</div>
-          </div>
-        </article>
-
-        <article class="service-detail-card">
-          <div class="service-detail-card__icon">💻</div>
-          <h3 class="service-detail-card__title">Digital Transformation</h3>
-          <p class="service-detail-card__desc">From cloud migration to AI integration, we guide your digital journey with a pragmatic, phased approach that minimises disruption.</p>
-          <div class="service-detail-card__features">
-            <div class="service-detail-card__feat">Technology Audit & Roadmap</div>
-            <div class="service-detail-card__feat">Cloud Migration Planning</div>
-            <div class="service-detail-card__feat">Process Automation (RPA / AI)</div>
-            <div class="service-detail-card__feat">Change Management</div>
-          </div>
-        </article>
-
-        <article class="service-detail-card">
-          <div class="service-detail-card__icon">🚀</div>
-          <h3 class="service-detail-card__title">Growth Marketing</h3>
-          <p class="service-detail-card__desc">Performance-driven marketing strategies built on first-party data, rigorous testing, and a deep understanding of your customer journey.</p>
-          <div class="service-detail-card__features">
-            <div class="service-detail-card__feat">Customer Acquisition Strategy</div>
-            <div class="service-detail-card__feat">Conversion Rate Optimisation</div>
-            <div class="service-detail-card__feat">Brand Positioning</div>
-            <div class="service-detail-card__feat">Content & SEO Strategy</div>
-          </div>
-        </article>
-
-        <article class="service-detail-card">
-          <div class="service-detail-card__icon">⚙️</div>
-          <h3 class="service-detail-card__title">Operations Consulting</h3>
-          <p class="service-detail-card__desc">Lean methodologies and bespoke operational frameworks that unlock capacity, reduce costs, and improve quality across your value chain.</p>
-          <div class="service-detail-card__features">
-            <div class="service-detail-card__feat">Operational Audit</div>
-            <div class="service-detail-card__feat">Lean / Six Sigma Implementation</div>
-            <div class="service-detail-card__feat">Supply Chain Optimisation</div>
-            <div class="service-detail-card__feat">Workforce Planning</div>
-          </div>
-        </article>
-
-        <article class="service-detail-card">
-          <div class="service-detail-card__icon">📈</div>
-          <h3 class="service-detail-card__title">Financial Advisory</h3>
-          <p class="service-detail-card__desc">Sophisticated financial analysis and modelling to support investment decisions, M&amp;A activity, and capital structure optimisation.</p>
-          <div class="service-detail-card__features">
-            <div class="service-detail-card__feat">Financial Modelling & Forecasting</div>
-            <div class="service-detail-card__feat">M&amp;A Due Diligence</div>
-            <div class="service-detail-card__feat">Fundraising Support</div>
-            <div class="service-detail-card__feat">Cost Reduction Programmes</div>
-          </div>
-        </article>
-
-        <article class="service-detail-card">
-          <div class="service-detail-card__icon">🌍</div>
-          <h3 class="service-detail-card__title">Market Expansion</h3>
-          <p class="service-detail-card__desc">Enter new geographies with confidence using our market entry frameworks, localisation playbooks, and established partner networks.</p>
-          <div class="service-detail-card__features">
-            <div class="service-detail-card__feat">Market Feasibility Studies</div>
-            <div class="service-detail-card__feat">Entry Mode Selection</div>
-            <div class="service-detail-card__feat">Partner & Distribution Networks</div>
-            <div class="service-detail-card__feat">Regulatory & Compliance Guidance</div>
-          </div>
-        </article>
-      </div>
-
-      <div style="text-align:center; margin-top:64px;">
-        <!-- BROKEN LINK — Services page CTA: products.html -->
-        <p style="font-size:15px; color:var(--slate-600); margin-bottom:16px;">
-          Interested in our product offerings?
-          <a href="products.html" style="color:var(--amber-dk); font-weight:600;">Browse Products →</a>
-        </p>
-        <a href="contact.html" class="btn btn-primary">Request a Proposal</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials mini -->
-  <section class="testimonials" style="padding:72px 0;">
-    <div class="container">
-      <div class="testimonials__head">
-        <div class="section-label">Proof</div>
-        <h2 class="section-title section-title--light">Our Services, Proven in the Field</h2>
-      </div>
-      <div class="testimonials__grid">
-        <article class="testimonial-card">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p class="testimonial-card__quote">"The operations consulting team found €2M in savings we simply didn't know we had. ROI was achieved in the first quarter."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">AF</div>
-            <div>
-              <div class="testimonial-card__name">Amelie Fischer</div>
-              <div class="testimonial-card__role">COO, GreenLeaf GmbH</div>
-            </div>
-          </div>
-        </article>
-        <article class="testimonial-card">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p class="testimonial-card__quote">"Their digital transformation roadmap gave us the confidence to move fast without breaking things. Delivered on time and on budget."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">DC</div>
-            <div>
-              <div class="testimonial-card__name">David Chan</div>
-              <div class="testimonial-card__role">CTO, TechFront</div>
-            </div>
-          </div>
-        </article>
-        <article class="testimonial-card">
-          <div class="testimonial-card__stars">★★★★★</div>
-          <p class="testimonial-card__quote">"Growth marketing results in three months exceeded what we'd managed over three years internally. Exceptional team, exceptional results."</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar">LK</div>
-            <div>
-              <div class="testimonial-card__name">Lena Kowalski</div>
-              <div class="testimonial-card__role">CMO, BrightPath</div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-banner">
-    <div class="container">
-      <h2 class="cta-banner__title">Let's Build Your <span>Growth Story</span></h2>
-      <p class="cta-banner__sub">Book a no-obligation strategy session with our team today.</p>
-      <div class="cta-banner__actions">
-        <a href="contact.html" class="btn btn-primary">Book a Free Session</a>
-        <a href="portfolio.html" class="btn btn-outline">See Our Results</a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__grid">
-        <div>
-          <a href="index.html" class="navbar__logo" style="display:inline-flex;">
-            <div class="navbar__logo-mark">N</div>Nexus
-          </a>
-          <p class="footer__brand-desc">Nexus Consulting is a global strategy and operations firm helping businesses unlock sustainable, measurable growth since 2009.</p>
-          <div class="footer__social">
-            <a href="https://linkedin.com" class="footer__social-link" rel="noopener">in</a>
-            <a href="https://twitter.com" class="footer__social-link" rel="noopener">𝕏</a>
-            <a href="https://facebook.com" class="footer__social-link" rel="noopener">f</a>
-          </div>
-        </div>
-        <div>
-          <div class="footer__col-title">Services</div>
-          <ul class="footer__links">
-            <li><a href="services.html">Business Strategy</a></li>
-            <li><a href="services.html">Digital Transformation</a></li>
-            <li><a href="services.html">Growth Marketing</a></li>
-            <li><a href="services-old.html">Legacy Services</a></li>
-            <li><a href="products.html">Products</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__col-title">Company</div>
-          <ul class="footer__links">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="portfolio.html">Case Studies</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="old-blog.html">Archive Blog</a></li>
-            <li><a href="fake-page.html">Careers</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__col-title">Contact</div>
-          <ul class="footer__links">
-            <li><a href="contact.html">Get in Touch</a></li>
-            <li><a href="broken-contact.html">Quick Quote Form</a></li>
-            <li><a href="http://localhost:9999/missing">Support Portal</a></li>
-            <li><a href="contact.html">Office Locations</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <p class="footer__copy">© 2025 Nexus Consulting Ltd. All rights reserved.</p>
-        <div class="footer__legal">
-          <a href="portfolio-details-999.html">Privacy Policy</a>
-          <a href="contact.html">Terms of Service</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/app.js"></script>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="index.html"><img src="images/logo.png" alt="Northstar Advisory logo" width="44" height="44"><span><strong>Northstar</strong><small>Advisory Group</small></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span class="sr-only">Toggle navigation</span><span></span><span></span><span></span></button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation"><a href="about.html">About</a><a href="services.html" aria-current="page">Services</a><a href="services-old.html">Legacy Services</a><a href="portfolio.html">Portfolio</a><a href="blog.html">Blog</a><a href="contact.html" class="nav-cta">Contact</a></nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"><span aria-hidden="true">◐</span></button>
+  </div></header>
+  <main id="main-content">
+    <section class="page-hero section"><div class="container narrow"><p class="eyebrow">Services</p><h1>Focused support for operations, growth systems, and customer experience.</h1><p>We work with business leaders who need sharper processes, better visibility, and clearer execution across teams.</p></div></section>
+    <section class="section surface-alt"><div class="container card-grid three-up">
+      <article class="card"><h2>Operating model review</h2><p>Assess current workflows, role clarity, and reporting routines to define where execution breaks down.</p><a class="text-link" href="contact.html">Request a review</a></article>
+      <article class="card"><h2>Service delivery redesign</h2><p>Improve handoffs, reduce bottlenecks, and align internal operations with customer expectations.</p><a class="text-link" href="broken-contact.html">Use old enquiry form</a></article>
+      <article class="card"><h2>Growth reporting setup</h2><p>Build practical dashboards and weekly scorecards for leadership reviews and planning cycles.</p><a class="text-link" href="portfolio.html">See related work</a></article>
+    </div></section>
+    <section class="section"><div class="container split-section"><div><h2>Engagement structure</h2><p>Most projects begin with diagnostics, move into roadmap definition, and then transition into implementation support with clear milestones.</p><p>That structure keeps leadership visibility high while allowing teams to change one operating layer at a time.</p></div><div class="card"><h2>Typical outputs</h2><ul class="stack-list"><li>Operational audit findings</li><li>Decision and escalation maps</li><li>Delivery playbooks</li><li>Weekly KPI frameworks</li></ul></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-grid"><div><a class="brand footer-brand" href="index.html"><img src="images/logo.png" alt="Northstar Advisory logo" width="40" height="40"><span><strong>Northstar</strong><small>Advisory Group</small></span></a><p>Helping ambitious businesses improve operational clarity, service delivery, and digital execution.</p></div><div><h2>Company</h2><ul><li><a href="about.html">About</a></li><li><a href="portfolio.html">Case studies</a></li><li><a href="products.html">Products</a></li><li><a href="blog.html">Insights</a></li></ul></div><div><h2>Services</h2><ul><li><a href="services.html">Current services</a></li><li><a href="services-old.html">Legacy services</a></li><li><a href="undefined-route">Implementation sprint</a></li><li><a href="contact.html">Consultation</a></li></ul></div><div><h2>Contact</h2><ul><li><a href="contact.html">Contact page</a></li><li><a href="broken-contact.html">Old contact form</a></li><li><a href="http://localhost:9999/missing" target="_blank" rel="noopener noreferrer">Local support</a></li></ul></div></div></footer>
 </body>
 </html>

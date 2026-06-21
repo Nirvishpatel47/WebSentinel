@@ -15,15 +15,19 @@ class FormEvidenceCollector:
         self.output_dir = output_dir
         os.makedirs(self.output_dir, exist_ok=True)
 
-    async def collect_page_snapshot(self, page: Page, form_type: str) -> Optional[str]:
+    async def capture_form_snapshot(self, form_locator, form_type: str, stage: str):
         """
         Saves a physical binary image file snapshot of the browser frame for reporting proof.
         """
         try:
-            filename = f"{form_type.lower()}_failure_{uuid.uuid4().hex[:8]}.png"
-            file_path = os.path.join(self.output_dir, filename)
-            
-            await page.screenshot(path=file_path, full_page=False)
-            return file_path
+            filename = (f"{form_type.lower()}_{stage}_" f"{uuid.uuid4().hex[:8]}.png")
+
+            filepath = os.path.join(self.output_dir, filename)
+
+            await form_locator.screenshot(path=filepath)
+
+            return filepath
         except Exception as e:
             return None
+
+Evidence = FormEvidenceCollector()

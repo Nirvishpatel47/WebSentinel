@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote — Form Testing Lab</title>
+    <link rel="stylesheet" href="styles.css">
+<base target="_blank">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 12l2 2 4-4"/>
+                <circle cx="12" cy="12" r="10"/>
+            </svg>
+            <span>FormTestingLab</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="contact.html">Contact</a>
+            <a href="quote.html" class="active">Quote</a>
+            <a href="newsletter.html">Newsletter</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <main class="page-main">
+        <div class="container">
+            <h1 class="page-title">Get a Quote</h1>
+            <p class="page-subtitle">This form is intentionally broken</p>
+
+            <section class="form-section">
+                <div class="form-card">
+                    <div class="form-header">
+                        <span class="form-badge badge-broken">Broken</span>
+                        <h2>Project Quote</h2>
+                        <p>The submit button does nothing. No action, no feedback, no data saved.</p>
+                    </div>
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label for="quote-name">Name</label>
+                            <input type="text" id="quote-name" name="name" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-email">Email</label>
+                            <input type="email" id="quote-email" name="email" placeholder="you@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-project">Project Type</label>
+                            <select id="quote-project" name="project">
+                                <option value="">Select a project type</option>
+                                <option value="web">Web Development</option>
+                                <option value="mobile">Mobile App</option>
+                                <option value="design">UI/UX Design</option>
+                                <option value="consulting">Consulting</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="quote-budget">Budget Range</label>
+                            <select id="quote-budget" name="budget">
+                                <option value="">Select budget</option>
+                                <option value="5k">$1,000 – $5,000</option>
+                                <option value="10k">$5,000 – $10,000</option>
+                                <option value="25k">$10,000 – $25,000</option>
+                                <option value="50k">$25,000+</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="broken-btn">Get Quote</button>
+                        <p class="form-hint">Button is type="button" with no click handler.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Form Testing Lab — Built for automation testing</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
