@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Nexus Consulting</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="navbar" role="banner">
+    <div class="container">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo">
+          <div class="navbar__logo-mark">N</div>
+          Nexus
+        </a>
+        <nav class="navbar__nav" role="navigation" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <!-- BROKEN LINK — Navbar: services-old.html -->
+          <a href="services-old.html">Services (Legacy)</a>
+          <a href="portfolio.html" class="active">Portfolio</a>
+          <a href="blog.html">Blog</a>
+          <!-- BROKEN LINK — Navbar: undefined-route -->
+          <a href="undefined-route">Resources</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="navbar__cta">
+          <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+        </div>
+        <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-banner">
+    <div class="container">
+      <h1 class="page-banner__title">Case Studies</h1>
+      <div class="page-banner__breadcrumb">
+        <a href="index.html">Home</a><span>/</span><span>Portfolio</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="portfolio-page">
+    <div class="container">
+      <div class="section-label">Our Work</div>
+      <h2 class="section-title">Results Across Every Industry</h2>
+      <p class="section-sub">Browse our track record of transforming businesses across manufacturing, fintech, sustainability, healthcare, and more.</p>
+
+      <div class="portfolio-filter">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="strategy">Strategy</button>
+        <button class="filter-btn" data-filter="digital">Digital</button>
+        <button class="filter-btn" data-filter="operations">Operations</button>
+        <button class="filter-btn" data-filter="growth">Growth</button>
+      </div>
+
+      <div class="portfolio-full-grid">
+
+        <!-- Card 1 — working -->
+        <article class="portfolio-card" data-cat="operations">
+          <div class="portfolio-card__thumb">🏗️</div>
+          <div class="portfolio-card__body">
+            <div class="portfolio-card__tag">Manufacturing · Operations</div>
+            <h3 class="portfolio-card__title">Acme Corp — Supply Chain Overhaul</h3>
+            <p class="portfolio-card__desc">End-to-end supply chain redesign reducing costs by 28% and lead times by 40% within 18 months of engagement.</p>
+            <a href="portfolio.html" class="portfolio-card__link">Full case study →</a>
+          </div>
+        </article>
+
+        <!-- Card 2 — BROKEN: portfolio-details-999.html -->
+        <article class="portfolio-card" data-cat="digital">
+          <div class="portfolio-card__thumb">🏦</div>
+          <div class="portfolio-card__body">
+            <div class="portfolio-card__tag">Fintech · Digital</div>
+            <h3 class="portfolio-card__title">NovaPay — Digital Payments Launch</h3>
+            <p class="portfolio-card__desc">Guided three-market expansion achieving $12M ARR in year one through our market entry and digital strategy frameworks.</p>
+            <!-- BROKEN LINK — Portfolio page card: portfolio-details-999.html -->
+            <a href="portfolio-details-999.html" class="portfolio-card__link">Full case study →</a>
+          </div>
+        </article>
+
+        <!-- Card 3 — working -->
+        <article class="portfolio-card" data-cat="strategy">
+          <div class="portfolio-card__thumb">🌿</div>
+          <div class="portfolio-card__body">
+            <div class="portfolio-card__tag">Sustainability · Strategy</div>
+            <h3 class="portfolio-card__title">GreenLeaf — ESG Strategy</h3>
+            <p class="portfolio-card__desc">Built a comprehensive ESG framework that attracted $50M in impact investment and cut carbon emissions by 35%.</p>
+            <a href="portfolio.html" class="portfolio-card__link">Full case study →</a>
+          </div>
+        </article>
+
+        <!-- Card 4 — working -->
+        <article class="portfolio-card" data-cat="growth">
+          <div class="portfolio-card__thumb">🛒</div>
+          <div class="portfolio-card__body">
+            <div class="portfolio-card__tag">Retail · Growth</div>
+            <h3 class="portfolio-card__title">BrightPath — Customer Acquisition</h3>
+            <p class="portfolio-card__desc">Redesigned acquisition funnel delivering a 3.4x improvement in customer LTV and 60% reduction in CAC within six months.</p>
+            <a href="portfolio.html" class="portfolio-card__link">Full case study →</a>
+          </div>
+        </article>
+
+        <!-- Card 5 — BROKEN: portfolio-details-999.html (again, natural repeat) -->
+        <article class="portfolio-card" data-cat="digital">
+          <div class="portfolio-card__thumb">🏥</div>
+          <div class="portfolio-card__body">
+            <div class="portfolio-card__tag">Healthcare · Digital</div>
+            <h3 class="portfolio-card__title">MediCare+ — Patient Portal Transformation</h3>
+            <p class="portfolio-card__desc">Designed and launched a patient-facing digital portal serving 200,000 users with 97% uptime and a 4.8-star app rating.</p>
+            <!-- BROKEN LINK — Portfolio page card 5 (repeat): portfolio-details-999.html -->
+            <a href="portfolio-details-999.html" class="portfolio-card__link">Full case study →</a>
+          </div>
+        </article>
+
+        <!-- Card 6 — working -->
+        <article class="portfolio-card" data-cat="operations">
+          <div class="portfolio-card__thumb">✈️</div>
+          <div class="portfolio-card__body">
+            <div class="portfolio-card__tag">Logistics · Operations</div>
+            <h3 class="portfolio-card__title">SwiftFreight — Fleet Optimisation</h3>
+            <p class="portfolio-card__desc">Route optimisation and predictive maintenance programme reducing fuel costs by 22% and vehicle downtime by 31%.</p>
+            <a href="portfolio.html" class="portfolio-card__link">Full case study →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <div style="text-align:center; margin-top:56px;">
+        <p style="font-size:15px; color:var(--slate-600); margin-bottom:20px;">Want to see how we could deliver similar results for your business?</p>
+        <a href="contact.html" class="btn btn-primary">Start a Project</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <h2 class="cta-banner__title">Your Company Could Be Our <span>Next Success Story</span></h2>
+      <p class="cta-banner__sub">Let's explore what's possible together.</p>
+      <div class="cta-banner__actions">
+        <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+        <a href="services.html" class="btn btn-outline">Explore Services</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="navbar__logo" style="display:inline-flex;">
+            <div class="navbar__logo-mark">N</div>Nexus
+          </a>
+          <p class="footer__brand-desc">Nexus Consulting is a global strategy and operations firm helping businesses unlock sustainable, measurable growth since 2009.</p>
+          <div class="footer__social">
+            <a href="https://linkedin.com" class="footer__social-link" rel="noopener">in</a>
+            <a href="https://twitter.com" class="footer__social-link" rel="noopener">𝕏</a>
+            <a href="https://facebook.com" class="footer__social-link" rel="noopener">f</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__col-title">Services</div>
+          <ul class="footer__links">
+            <li><a href="services.html">Business Strategy</a></li>
+            <li><a href="services.html">Digital Transformation</a></li>
+            <li><a href="services.html">Growth Marketing</a></li>
+            <li><a href="services-old.html">Legacy Services</a></li>
+            <li><a href="products.html">Products</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="portfolio.html">Case Studies</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="old-blog.html">Archive Blog</a></li>
+            <li><a href="fake-page.html">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <ul class="footer__links">
+            <li><a href="contact.html">Get in Touch</a></li>
+            <li><a href="broken-contact.html">Quick Quote Form</a></li>
+            <li><a href="http://localhost:9999/missing">Support Portal</a></li>
+            <li><a href="contact.html">Office Locations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2025 Nexus Consulting Ltd. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="portfolio-details-999.html">Privacy Policy</a>
+          <a href="contact.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

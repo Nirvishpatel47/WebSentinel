@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Nexus Consulting</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="navbar" role="banner">
+    <div class="container">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo">
+          <div class="navbar__logo-mark">N</div>
+          Nexus
+        </a>
+        <nav class="navbar__nav" role="navigation" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <!-- BROKEN LINK — Navbar: services-old.html -->
+          <a href="services-old.html">Services (Legacy)</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="blog.html" class="active">Blog</a>
+          <!-- BROKEN LINK — Navbar: undefined-route -->
+          <a href="undefined-route">Resources</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="navbar__cta">
+          <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+        </div>
+        <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-banner">
+    <div class="container">
+      <h1 class="page-banner__title">Insights &amp; Ideas</h1>
+      <div class="page-banner__breadcrumb">
+        <a href="index.html">Home</a><span>/</span><span>Blog</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="blog-page">
+    <div class="container">
+      <div class="blog-page-grid">
+
+        <!-- Main articles -->
+        <div class="blog-list">
+
+          <!-- Article 1 — working -->
+          <article class="blog-list-card">
+            <div class="blog-list-card__thumb">📰</div>
+            <div class="blog-list-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__cat">Strategy</span>
+                <span class="blog-card__date">June 12, 2025</span>
+              </div>
+              <h2 class="blog-list-card__title">
+                <a href="blog.html">5 Signs Your Business Strategy Needs a Reset</a>
+              </h2>
+              <p class="blog-list-card__excerpt">Stagnant growth, rising churn, and reactive decision-making are all warning signs. Here's how to diagnose and fix them before it's too late.</p>
+              <a href="blog.html" class="blog-card__read">Continue reading →</a>
+            </div>
+          </article>
+
+          <!-- Article 2 — BROKEN: old-blog.html (blog card #2) -->
+          <article class="blog-list-card">
+            <div class="blog-list-card__thumb">🤖</div>
+            <div class="blog-list-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__cat">Technology</span>
+                <span class="blog-card__date">May 28, 2025</span>
+              </div>
+              <h2 class="blog-list-card__title">
+                <!-- BROKEN LINK — Blog page card #2: old-blog.html -->
+                <a href="old-blog.html">AI in the Boardroom: Hype vs. Reality in 2025</a>
+              </h2>
+              <p class="blog-list-card__excerpt">We surveyed 150 C-suite executives on their AI adoption plans. The results were surprising — and a little sobering. Read the full findings.</p>
+              <!-- BROKEN LINK — Blog card #2 CTA: old-blog.html -->
+              <a href="old-blog.html" class="blog-card__read">Continue reading →</a>
+            </div>
+          </article>
+
+          <!-- Article 3 — working -->
+          <article class="blog-list-card">
+            <div class="blog-list-card__thumb">🌐</div>
+            <div class="blog-list-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__cat">Growth</span>
+                <span class="blog-card__date">May 14, 2025</span>
+              </div>
+              <h2 class="blog-list-card__title">
+                <a href="blog.html">Emerging Markets in 2025: Where Smart Money Is Moving</a>
+              </h2>
+              <p class="blog-list-card__excerpt">From Southeast Asia to West Africa, we map the highest-potential markets for B2B expansion and what you need to know before entering.</p>
+              <!-- BROKEN LINK — Blog author: http://localhost:9999/missing -->
+              <p style="font-size:12px; color:var(--slate-400); margin-bottom:8px;">
+                By <a href="http://localhost:9999/missing" style="color:var(--amber-dk);">Dr. Priya Nair</a>
+              </p>
+              <a href="blog.html" class="blog-card__read">Continue reading →</a>
+            </div>
+          </article>
+
+          <!-- Article 4 — working -->
+          <article class="blog-list-card">
+            <div class="blog-list-card__thumb">💰</div>
+            <div class="blog-list-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__cat">Finance</span>
+                <span class="blog-card__date">April 30, 2025</span>
+              </div>
+              <h2 class="blog-list-card__title">
+                <a href="blog.html">How to Build a Financial Model Investors Actually Trust</a>
+              </h2>
+              <p class="blog-list-card__excerpt">Poorly built financial models are one of the top reasons deals fall through in due diligence. Here's how to get it right.</p>
+              <a href="blog.html" class="blog-card__read">Continue reading →</a>
+            </div>
+          </article>
+
+          <!-- Article 5 — BROKEN: old-blog.html (natural repeat for older archive) -->
+          <article class="blog-list-card">
+            <div class="blog-list-card__thumb">🔄</div>
+            <div class="blog-list-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__cat">Operations</span>
+                <span class="blog-card__date">March 18, 2025</span>
+              </div>
+              <h2 class="blog-list-card__title">
+                <!-- BROKEN LINK — Blog page (archive link): old-blog.html -->
+                <a href="old-blog.html">Lean Transformation: Lessons from the Factory Floor</a>
+              </h2>
+              <p class="blog-list-card__excerpt">Three real-world lean transformation stories — what worked, what failed, and what every operations leader can learn from the experience.</p>
+              <a href="old-blog.html" class="blog-card__read">Continue reading →</a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+          <div class="sidebar-widget">
+            <div class="sidebar-widget__title">Popular Topics</div>
+            <div class="sidebar-tags">
+              <span class="sidebar-tag">Strategy</span>
+              <span class="sidebar-tag">Digital</span>
+              <span class="sidebar-tag">Operations</span>
+              <span class="sidebar-tag">Growth</span>
+              <span class="sidebar-tag">Finance</span>
+              <span class="sidebar-tag">Leadership</span>
+              <span class="sidebar-tag">M&amp;A</span>
+              <span class="sidebar-tag">ESG</span>
+              <span class="sidebar-tag">AI</span>
+            </div>
+          </div>
+
+          <div class="sidebar-widget">
+            <div class="sidebar-widget__title">Recent Posts</div>
+            <div class="sidebar-recent">
+              <div class="sidebar-recent-item">
+                <div class="sidebar-recent-icon">📰</div>
+                <div>
+                  <div class="sidebar-recent-title"><a href="blog.html">5 Signs Your Business Strategy Needs a Reset</a></div>
+                  <div class="sidebar-recent-date">June 12, 2025</div>
+                </div>
+              </div>
+              <div class="sidebar-recent-item">
+                <div class="sidebar-recent-icon">🤖</div>
+                <div>
+                  <!-- BROKEN LINK — Sidebar recent: old-blog.html -->
+                  <div class="sidebar-recent-title"><a href="old-blog.html">AI in the Boardroom: Hype vs. Reality</a></div>
+                  <div class="sidebar-recent-date">May 28, 2025</div>
+                </div>
+              </div>
+              <div class="sidebar-recent-item">
+                <div class="sidebar-recent-icon">🌐</div>
+                <div>
+                  <div class="sidebar-recent-title"><a href="blog.html">Emerging Markets in 2025</a></div>
+                  <div class="sidebar-recent-date">May 14, 2025</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-widget">
+            <div class="sidebar-widget__title">Subscribe to Insights</div>
+            <p style="font-size:14px; color:var(--slate-600); margin-bottom:16px;">Get our latest thinking delivered to your inbox every fortnight.</p>
+            <!-- BROKEN LINK — Sidebar newsletter CTA: fake-page.html -->
+            <a href="fake-page.html" class="btn btn-ghost" style="width:100%; justify-content:center;">Subscribe Free →</a>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <h2 class="cta-banner__title">Want Expert Advice <span>Tailored to You?</span></h2>
+      <p class="cta-banner__sub">Our consultants are ready to help. Book your free session today.</p>
+      <div class="cta-banner__actions">
+        <a href="contact.html" class="btn btn-primary">Book a Consultation</a>
+        <a href="portfolio.html" class="btn btn-outline">View Case Studies</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="navbar__logo" style="display:inline-flex;">
+            <div class="navbar__logo-mark">N</div>Nexus
+          </a>
+          <p class="footer__brand-desc">Nexus Consulting is a global strategy and operations firm helping businesses unlock sustainable, measurable growth since 2009.</p>
+          <div class="footer__social">
+            <a href="https://linkedin.com" class="footer__social-link" rel="noopener">in</a>
+            <a href="https://twitter.com" class="footer__social-link" rel="noopener">𝕏</a>
+            <a href="https://facebook.com" class="footer__social-link" rel="noopener">f</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer__col-title">Services</div>
+          <ul class="footer__links">
+            <li><a href="services.html">Business Strategy</a></li>
+            <li><a href="services.html">Digital Transformation</a></li>
+            <li><a href="services.html">Growth Marketing</a></li>
+            <li><a href="services-old.html">Legacy Services</a></li>
+            <li><a href="products.html">Products</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="portfolio.html">Case Studies</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="old-blog.html">Archive Blog</a></li>
+            <li><a href="fake-page.html">Careers</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <ul class="footer__links">
+            <li><a href="contact.html">Get in Touch</a></li>
+            <li><a href="broken-contact.html">Quick Quote Form</a></li>
+            <li><a href="http://localhost:9999/missing">Support Portal</a></li>
+            <li><a href="contact.html">Office Locations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2025 Nexus Consulting Ltd. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="portfolio-details-999.html">Privacy Policy</a>
+          <a href="contact.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

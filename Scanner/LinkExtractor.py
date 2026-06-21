@@ -54,6 +54,7 @@ class LinkExtractor:
         external = set()
         nofollow = set()
 
+        page_canonical = None
         if raw_elements["canonical"]:
             page_canonical = self.canonicalize(urljoin(current_url, raw_elements["canonical"]))
 
@@ -86,7 +87,7 @@ if __name__ == "__main__":
     import asyncio
 
     from playwright.async_api import async_playwright, Page
-    TARGET_URL = "https://spreadme.institute/"
+    TARGET_URL = "http://127.0.0.1:5501/TESTING/Website-5/contact.html"
     
     async def main():
         async with async_playwright() as p:
