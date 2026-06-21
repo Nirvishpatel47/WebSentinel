@@ -13,43 +13,39 @@ class FormClassifier:
         """
         action_lower = action.lower()
         
-        # Aggregate structural counts to detect field distribution patterns
         field_types = [f.get("type", "") for f in fields]
         field_names = [f.get("name", "").lower() for f in fields]
         field_ids = [f.get("id", "").lower() for f in fields]
         placeholders = [f.get("placeholder", "").lower() for f in fields]
-        
-        # Create a unified string list to look for keyword matches
-        text_pool = field_names + field_ids + placeholders + [action_lower]
 
-        # 1. SEARCH Classification Rule
-        if any(x in text_pool for x in ["search", "q", "query", "term"]) or "search" in action_lower:
+        if ("textarea" in field_types and any("email" in x for x in field_names)):
+            return "CONTACT"
+        
+        labels = [f.get("label", "").lower() for f in fields]
+
+        text_blob = " ".join(field_names + field_ids + placeholders + labels + [action_lower])
+
+        if any(x in text_blob for x in ["search", "query", "term"]) or "search" in action_lower:
             if "password" not in field_types:
                 return "SEARCH"
 
-        # 2. LOGIN / AUTH Classification Rule
-        if "password" in field_types or any(x in text_pool for x in ["login", "signin", "auth", "credential"]):
+        if "password" in field_types or any(x in text_blob for x in ["login", "signin", "auth", "credential"]):
             return "LOGIN"
 
-        # 3. NEWSLETTER Classification Rule
-        if len(fields) <= 3 and any(x in text_pool for x in ["newsletter", "subscribe", "sub", "signup"]):
+        if len(fields) <= 3 and any(x in text_blob for x in ["newsletter", "subscribe", "sub", "signup"]):
             if "email" in field_types or any("email" in n for n in field_names):
                 return "NEWSLETTER"
 
-        # 4. BOOKING / RESERVATION Classification Rule
         booking_keywords = ["booking", "reserve", "reservation", "date", "checkin", "checkout", "appointment"]
-        if any(x in n for x in booking_keywords for n in text_pool) or "date" in field_types:
+        if any(x in n for x in booking_keywords for n in text_blob) or "date" in field_types:
             return "BOOKING"
 
-        # 5. QUOTE / PRICING Classification Rule
         quote_keywords = ["quote", "estimate", "pricing", "budget", "calculator", "company"]
-        if any(x in n for x in quote_keywords for n in text_pool):
+        if any(x in n for x in quote_keywords for n in text_blob):
             return "QUOTE"
 
-        # 6. CONTACT Classification Rule
         contact_keywords = ["contact", "support", "message", "feedback", "inquiry", "subject"]
-        if any(x in n for x in contact_keywords for n in text_pool) or "textarea" in field_types:
+        if any(x in n for x in contact_keywords for n in text_blob) or "textarea" in field_types:
             return "CONTACT"
 
-        # Fallthrough State
         return "UNKNOWN"

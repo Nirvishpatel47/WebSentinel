@@ -16,18 +16,6 @@ Output:
     List[DiscoveredForm]
 
 
-FormFieldExtractor.py
----------------------
-Responsibility:
-    Extract fields from a form.
-
-Input:
-    HTML form element
-
-Output:
-    List[Field]
-
-
 FormClassifier.py
 -----------------
 Responsibility:

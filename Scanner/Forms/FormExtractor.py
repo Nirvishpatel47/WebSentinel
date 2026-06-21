@@ -46,59 +46,94 @@ class FormExtractor:
 
     async def extract_forms(self, page: Page) -> List[Dict]:
         """
-        Your exact, highly reliable JavaScript DOM extraction logic.
+        Responsibility:
+            Discover forms and extract structural properties.
+
+        Does NOT:
+            - classify forms
+            - submit forms
+            - test forms
+            - generate issues
         """
+
         return await page.evaluate("""
         () => {
             const extractedForms = [];
-            
-            // 1. Process explicit standard HTML forms
-            const standardForms = [...document.querySelectorAll('form')];
-            const processedInputs = new Set();
 
-            standardForms.forEach(f => {
-                const inputElements = [...f.querySelectorAll('input, select, textarea, button')];
-                inputElements.forEach(i => processedInputs.add(i));
+            function getLabel(element) {
+                return (
+                    element.labels?.[0]?.innerText?.trim() ||
+                    element.getAttribute('placeholder') ||
+                    element.getAttribute('aria-label') ||
+                    ''
+                );
+            }
+
+            function extractField(element) {
+                return {
+                    tag: element.tagName.toLowerCase(),
+                    type: element.getAttribute('type') || element.tagName.toLowerCase(),
+                    name: element.getAttribute('name') || '',
+                    id: element.id || '',
+                    className: element.className || '',
+                    placeholder: element.getAttribute('placeholder') || '',
+                    label: getLabel(element),
+                    required: element.hasAttribute('required'),
+                    value: element.value || element.getAttribute('value') || '',
+                    options:
+                        element.tagName.toLowerCase() === 'select'
+                            ? [...element.options].map(o => o.value)
+                            : []
+                };
+            }
+
+            // --------------------------
+            // Standard forms
+            // --------------------------
+            const processedElements = new Set();
+
+            document.querySelectorAll('form').forEach(form => {
+
+                const controls = [
+                    ...form.querySelectorAll(
+                        'input, textarea, select, button'
+                    )
+                ];
+
+                controls.forEach(el => processedElements.add(el));
 
                 extractedForms.push({
-                    type: 'standard_form',
-                    action: f.getAttribute('action') || '',
-                    method: (f.getAttribute('method') || 'GET').toUpperCase(),
-                    inputs: inputElements.map(i => ({
-                        tag: i.tagName.toLowerCase(),
-                        type: i.getAttribute('type') || i.tagName.toLowerCase(),
-                        name: i.getAttribute('name') || i.getAttribute('id') || '',
-                        required: i.hasAttribute('required'),
-                        value: i.value || i.getAttribute('value') || '',
-                        options: i.tagName.toLowerCase() === 'select' ? [...i.options].map(o => o.value) : []
-                    }))
+                    form_kind: 'standard_form',
+                    action: form.getAttribute('action') || '',
+                    method: (form.getAttribute('method') || 'GET').toUpperCase(),
+                    fields: controls.map(extractField)
                 });
             });
 
-            // 2. Process loose, standalone inputs common in modern SPAs (React/Vue/Angular)
-            const allInputs = [...document.querySelectorAll('input, select, textarea')];
-            const looseInputs = allInputs.filter(i => !processedInputs.has(i));
 
-            if (looseInputs.length > 0) {
+            // --------------------------
+            // Loose SPA controls
+            // --------------------------
+            const looseControls = [
+                ...document.querySelectorAll(
+                    'input, textarea, select, button'
+                )
+            ].filter(el => !processedElements.has(el));
+
+            if (looseControls.length > 0) {
+
                 extractedForms.push({
-                    type: 'javascript_loose_form',
+                    form_kind: 'javascript_loose_form',
                     action: window.location.href,
                     method: 'DYNAMIC_JS',
-                    inputs: looseInputs.map(i => ({
-                        tag: i.tagName.toLowerCase(),
-                        type: i.getAttribute('type') || i.tagName.toLowerCase(),
-                        name: i.getAttribute('name') || i.getAttribute('id') || '',
-                        required: i.hasAttribute('required'),
-                        value: i.value || i.getAttribute('value') || '',
-                        options: i.tagName.toLowerCase() === 'select' ? [...i.options].map(o => o.value) : []
-                    }))
+                    fields: looseControls.map(extractField)
                 });
+
             }
 
             return extractedForms;
         }
         """)
-
 if __name__ == "__main__":
     async def test_form_extractor():
         TARGET_URL = "http://127.0.0.1:5500/tests/Website-5/contact.html"
@@ -115,8 +150,8 @@ if __name__ == "__main__":
             locators = await extractor.locate_forms(page)
             data_spec = await extractor.extract_forms(page)
             
-            print(f"-> Locators Count (For FormManager): {len(locators)}")
-            print(f"-> Extracted Data Specs (For Logging): {len(data_spec)}")
+            print(locators)
+            print("\n\n\n\n\n" , data_spec)
                     
             await browser.close()
     asyncio.run(test_form_extractor())

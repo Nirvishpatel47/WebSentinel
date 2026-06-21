@@ -6,7 +6,6 @@ from typing import List, Dict, Any
 
 # Core component pipelines dependencies mapping matching your modular architecture
 from Scanner.Forms.FormExtractor import FormExtractor
-from Scanner.Forms.FormFieldExtractor import FormFieldExtractor
 from Scanner.Forms.FormClassifier import FormClassifier
 from Scanner.Forms.StrategyFactory import StrategyFactory
 from Scanner.Forms.FormResult import FormResult
@@ -22,7 +21,6 @@ class FormManager:
     """
     def __init__(self):
         self.extractor = FormExtractor()
-        self.field_extractor = FormFieldExtractor()
         self.classifier = FormClassifier()
         self.issue_generator = FormIssueGenerator()
         self.evidence_collector = FormEvidenceCollector()
