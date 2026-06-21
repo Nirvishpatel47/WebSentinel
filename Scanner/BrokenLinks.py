@@ -29,7 +29,6 @@ class BrokenLinkValidator:
             while True:
                 url = await queue.get()
                 res = await self._probe(client, url)
-                # Map tracking fields back from historical schema
                 res["found_on"] = resource_map[url]["found_on"]
                 res["resource_type"] = resource_map[url]["resource_type"]
                 results.append(res)
