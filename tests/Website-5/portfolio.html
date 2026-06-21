@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS • Work &amp; Portfolio | Digital Agency</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">NEXUS</a>
+      
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li class="dropdown">
+          <a href="services.html">Services ▾</a>
+          <div class="dropdown-content">
+            <a href="services.html">All Services</a>
+            <a href="/services-old.html">Legacy Services (2023)</a>
+            <a href="services.html#web">Web Development</a>
+          </div>
+        </li>
+        <li><a href="portfolio.html">Work</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <button id="login-btn" class="btn btn-ghost">Client Login</button>
+        <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+        
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PORTFOLIO HERO -->
+  <section class="hero" style="min-height:55vh; padding-top:7rem;">
+    <div class="container" style="text-align:center;">
+      <div class="badge" style="margin-bottom:1rem;">SELECTED WORK 2019—2026</div>
+      <h1 style="margin-bottom:1rem;">Work that defines categories.</h1>
+      <p style="max-width:580px; margin:0 auto; font-size:1.15rem;">A curated selection of projects where strategy, design, and engineering came together to create lasting impact.</p>
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <section class="section" style="padding-top:1rem; padding-bottom:2rem;">
+    <div class="container">
+      <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="fintech">Fintech</button>
+        <button class="filter-btn" data-filter="health">Health</button>
+        <button class="filter-btn" data-filter="saas">SaaS</button>
+        <button class="filter-btn" data-filter="consumer">Consumer</button>
+      </div>
+      
+      <!-- PORTFOLIO GRID -->
+      <div class="portfolio-grid">
+        <!-- Project 1 -->
+        <div class="card portfolio-item" data-category="fintech">
+          <img src="https://picsum.photos/id/1015/400/240" alt="Aether Pay dashboard interface" class="card-img">
+          <div>
+            <span class="badge">FINTECH • 2025</span>
+            <h3 style="margin:1rem 0 0.5rem;">Aether Pay</h3>
+            <p style="font-size:0.95rem;">Modern treasury infrastructure for global startups. 3x faster reconciliation, $240M processed in first year.</p>
+          </div>
+          <div class="card-footer">
+            <a href="portfolio.html" class="btn btn-ghost" style="padding:0.4rem 0;">View Case Study →</a>
+          </div>
+        </div>
+        
+        <!-- Project 2 - broken image -->
+        <div class="card portfolio-item" data-category="health">
+          <!-- BROKEN IMAGE already counted, using another for variety -->
+          <img src="https://picsum.photos/id/201/400/240" alt="Vital patient experience platform" class="card-img">
+          <div>
+            <span class="badge">HEALTH • 2024</span>
+            <h3 style="margin:1rem 0 0.5rem;">Vital Health</h3>
+            <p style="font-size:0.95rem;">Complete patient &amp; clinician experience redesign. 41% increase in appointment adherence.</p>
+          </div>
+          <div class="card-footer">
+            <!-- Broken link -->
+            <a href="/portfolio-details-999.html" class="btn btn-ghost" style="padding:0.4rem 0;">View Case Study →</a>
+          </div>
+        </div>
+        
+        <!-- Project 3 -->
+        <div class="card portfolio-item" data-category="saas">
+          <img src="https://picsum.photos/id/251/400/240" alt="Loop async collaboration platform" class="card-img">
+          <div>
+            <span class="badge">SAAS • 2025</span>
+            <h3 style="margin:1rem 0 0.5rem;">Loop OS</h3>
+            <p style="font-size:0.95rem;">Async-first collaboration platform. 40,000+ teams, $18M ARR in 18 months post-launch.</p>
+          </div>
+          <div class="card-footer">
+            <a href="portfolio.html" class="btn btn-ghost" style="padding:0.4rem 0;">View Case Study →</a>
+          </div>
+        </div>
+        
+        <!-- Project 4 - broken image -->
+        <div class="card portfolio-item" data-category="consumer">
+          <!-- BROKEN IMAGE -->
+          <img src="https://thisimagedoesnotexist.xyz/img.png" alt="Nourish consumer wellness app" class="card-img">
+          <div>
+            <span class="badge">CONSUMER • 2023</span>
+            <h3 style="margin:1rem 0 0.5rem;">Nourish</h3>
+            <p style="font-size:0.95rem;">Personalized nutrition platform. 2.1M users, 4.8★ App Store rating, acquired in 2024.</p>
+          </div>
+          <div class="card-footer">
+            <a href="portfolio.html" class="btn btn-ghost" style="padding:0.4rem 0;">View Case Study →</a>
+          </div>
+        </div>
+        
+        <!-- Project 5 -->
+        <div class="card portfolio-item" data-category="fintech">
+          <img src="https://picsum.photos/id/180/400/240" alt="Ledger financial infrastructure" class="card-img">
+          <div>
+            <span class="badge">FINTECH • 2024</span>
+            <h3 style="margin:1rem 0 0.5rem;">Ledger OS</h3>
+            <p style="font-size:0.95rem;">Embedded finance infrastructure for marketplaces. $1.2B transaction volume in year one.</p>
+          </div>
+          <div class="card-footer">
+            <a href="portfolio.html" class="btn btn-ghost" style="padding:0.4rem 0;">View Case Study →</a>
+          </div>
+        </div>
+        
+        <!-- Project 6 - broken image + broken link -->
+        <div class="card portfolio-item" data-category="saas">
+          <!-- BROKEN IMAGE -->
+          <img src="http://localhost:3000/invalid.jpg" alt="Forge developer tooling platform" class="card-img">
+          <div>
+            <span class="badge">SAAS • 2025</span>
+            <h3 style="margin:1rem 0 0.5rem;">Forge DevTools</h3>
+            <p style="font-size:0.95rem;">Next-generation developer experience platform. Used by 18 of the top 50 YC companies.</p>
+          </div>
+          <div class="card-footer">
+            <!-- Another broken link -->
+            <a href="fake-page.html" class="btn btn-ghost" style="padding:0.4rem 0;">View Case Study →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid container">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:1rem;">NEXUS</div>
+        <p style="font-size:0.9rem; max-width:260px;">Strategic digital agency crafting exceptional products since 2018.</p>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#team">Team</a></li>
+          <li><a href="/undefined-route">Careers</a></li>
+          <li><a href="contact.html">Press</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Work</h4>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="portfolio.html">Case Studies</a></li>
+          <li><a href="http://localhost:9999/missing">Process</a></li>
+          <li><a href="services.html">Capabilities</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#twitter">Twitter / X</a></li>
+          <li><a href="#linkedin">LinkedIn</a></li>
+          <li><a href="broken-link-contactus.html">Support Portal</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom container">
+      <div>© 2026 NEXUS Digital. All rights reserved.</div>
+      <div style="display:flex; gap:1.5rem;">
+        <a href="#">Privacy</a>
+        <a href="#">Legal</a>
+        <a href="#">Status</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div id="login-modal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h2 style="margin-bottom:0.5rem;">Client Portal</h2>
+      <p style="color:#94a3b8; margin-bottom:2rem;">Sign in to access project dashboards and files.</p>
+      
+      <form>
+        <div class="form-group">
+          <label for="login-email">Work Email</label>
+          <input type="email" id="login-email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
+        </div>
+        <div class="success-message" style="margin-top:1rem;"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
